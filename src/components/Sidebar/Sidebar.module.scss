@@ -1,0 +1,72 @@
+.Sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #FFFBE7;
+    padding: 8px;
+}
+
+.list {
+    padding: 22px;
+}
+
+.item {
+    margin-bottom: 12px;
+}
+
+.link {
+    font-size: 22px;
+    color: #F55353;
+    font-family: sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 200ms linear;
+    &:hover {
+        color: #FEB139;
+    }
+}
+
+.friends {
+    background-color: #FF8C32;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.friendsBox {
+    display: flex;
+    gap: 10px;
+}
+
+.friend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 31%;
+    text-align: center;
+}
+
+.title {
+    color: #143F6B;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.name {
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.empty {
+    font-size: 20px;
+    font-family: sans-serif;
+    margin: 1em 0;
+}
