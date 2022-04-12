@@ -1,9 +1,22 @@
+import { authApi } from "../api/api";
+
 const SET_AUTH = "SET AUTH";
+const TOGGLE_FETCHING = "TOGGLE FETCHING"
+// SetAuth AC
 let setAuthAC = (profile) => ({type: SET_AUTH, profile});
+let toggleFetchingAC = (isFetching) => ({type: TOGGLE_FETCHING, isFetching})
+
 
 // SetAuth Thunk
 export let setAuthThunk = (dispatch)=> {
-    dispatch(setAuthAC({id: 22543, email: "edvaa@mail.ru", login: "edk001"}))
+    dispatch(toggleFetchingAC(true));
+    authApi.auth().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthAC(data.data))
+        }
+        dispatch(toggleFetchingAC(false));
+    })
+    
 }
 
 
@@ -16,6 +29,7 @@ let initialState = {
         login: null,
     },
     isAuth: false,
+    isFetching: false,
 }
 
 // Reducer
@@ -26,6 +40,11 @@ let authReducer = (state = initialState, action)=> {
                 ...state,
                 isAuth: true,
                 profile: action.profile,
+            }
+        case TOGGLE_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching,
             }
         default:
             return state;

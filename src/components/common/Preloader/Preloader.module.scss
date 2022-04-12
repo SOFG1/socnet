@@ -1,0 +1,20 @@
+.Preloader {
+    text-align: center;
+}
+
+.circle {
+    height: 50px;
+    width: 50px;
+    border-right: 1px solid #000;
+    border-radius: 50%;
+    animation: rotate 900ms linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
