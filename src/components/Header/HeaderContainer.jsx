@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setAuth: (profile) => {
+    setAuth: () => {
       dispatch(setAuthThunk);
     },
   };

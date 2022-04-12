@@ -1,5 +1,6 @@
 .Preloader {
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .circle {
@@ -8,6 +9,7 @@
     border-right: 1px solid #000;
     border-radius: 50%;
     animation: rotate 900ms linear infinite;
+    margin: 0 auto;
 }
 
 @keyframes rotate {

@@ -19,3 +19,9 @@ export const usersApi = {
         return instance.get(`users?count=${count}&friend=true`).then(res => res.data.items);
     }
 }
+
+export const profileApi = {
+    getProfile: (id)=> {
+        return instance.get(`profile/${id}`).then(res => res.data);
+    }
+}

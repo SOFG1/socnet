@@ -1,10 +1,10 @@
 import { authApi } from "../api/api";
 
 const SET_AUTH = "SET AUTH";
-const TOGGLE_FETCHING = "TOGGLE FETCHING"
+const TOGGLE_AUTH_FETCHING = "TOGGLE AUTH FETCHING"
 // SetAuth AC
-let setAuthAC = (profile) => ({type: SET_AUTH, profile});
-let toggleFetchingAC = (isFetching) => ({type: TOGGLE_FETCHING, isFetching})
+let setAuthAC = (profile, isAuth) => ({type: SET_AUTH, profile, isAuth});
+let toggleFetchingAC = (isFetching) => ({type: TOGGLE_AUTH_FETCHING, isFetching})
 
 
 // SetAuth Thunk
@@ -12,7 +12,10 @@ export let setAuthThunk = (dispatch)=> {
     dispatch(toggleFetchingAC(true));
     authApi.auth().then(data => {
         if (data.resultCode === 0) {
-            dispatch(setAuthAC(data.data))
+            dispatch(setAuthAC(data.data, true));
+        }
+        if (data.resultCode === 1) {
+            dispatch(setAuthAC({id: null, email: null, login: null}, false));
         }
         dispatch(toggleFetchingAC(false));
     })
@@ -28,7 +31,7 @@ let initialState = {
         email: null,
         login: null,
     },
-    isAuth: false,
+    isAuth: null,
     isFetching: false,
 }
 
@@ -38,10 +41,10 @@ let authReducer = (state = initialState, action)=> {
         case SET_AUTH:
             return {
                 ...state,
-                isAuth: true,
+                isAuth: action.isAuth,
                 profile: action.profile,
             }
-        case TOGGLE_FETCHING:
+        case TOGGLE_AUTH_FETCHING:
             return {
                 ...state,
                 isFetching: action.isFetching,
