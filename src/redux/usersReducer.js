@@ -1,42 +1,43 @@
-let initialState = {
-    friends: [    {
-        "name": "Fixator_03",
-        "id": 23097,
-        "uniqueUrlName": null,
-        "photos": {
-          "small": "https://social-network.samuraijs.com/activecontent/images/users/23097/user-small.jpg?v=1",
-          "large": "https://social-network.samuraijs.com/activecontent/images/users/23097/user.jpg?v=1"
-        },
-        "status": "sdfsdfsd",
-        "followed": true
-      },
-      {
-        "name": "alopwer",
-        "id": 6032,
-        "uniqueUrlName": null,
-        "photos": {
-          "small": "https://social-network.samuraijs.com/activecontent/images/users/6032/user-small.jpg?v=1",
-          "large": "https://social-network.samuraijs.com/activecontent/images/users/6032/user.jpg?v=1"
-        },
-        "status": "qwertyadsaaaa",
-        "followed": true
-      },
-      {
-        "name": "ViktoriaDegt",
-        "id": 23043,
-        "uniqueUrlName": null,
-        "photos": {
-          "small": null,
-          "large": null
-        },
-        "status": null,
-        "followed": true
-      }
-    ]
+import { usersApi } from "../api/api";
+
+
+const SET_FRIENDS = "SET FRIENDS";
+const TOGGLE_FRIENDS_FETCHING = "TOGGLE FRIENDS FETCHING";
+
+//AC
+export const setFriendsAC = (friends)=> ({type: SET_FRIENDS, friends});
+export const toggleFriendsFetchingAC = (isFetching)=> ({type: TOGGLE_FRIENDS_FETCHING, isFetching})
+
+
+// Set Friends Thunk
+export let setFriendsThunk = (dispatch)=> {
+    dispatch(toggleFriendsFetchingAC(true))
+    usersApi.getFriends(3).then(friends => {
+        dispatch(setFriendsAC(friends))
+        dispatch(toggleFriendsFetchingAC(false))
+    })
 }
 
+
+//State
+let initialState = {
+    friends: [],
+    fetchingFriends: false,
+}
+
+//Reducer
 let usersReducer = (state = initialState, action)=> {
     switch(action.type) {
+        case SET_FRIENDS:
+            return {
+                ...state,
+                friends: action.friends,
+            }
+        case TOGGLE_FRIENDS_FETCHING:
+            return {
+                ...state,
+                fetchingFriends: action.isFetching,
+            }
         default:
             return state;
     }

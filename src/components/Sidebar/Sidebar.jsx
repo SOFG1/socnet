@@ -1,6 +1,7 @@
 import s from "./Sidebar.module.scss";
 import { Link } from "react-router-dom";
 import Friend from "./Friend";
+import Preloader from "../common/Preloader/Preloader";
 
 const Sidebar = (props) => {
   return (
@@ -48,13 +49,17 @@ const Sidebar = (props) => {
       {props.isAuth && (
         <div className={s.friends}>
           <h4 className={s.title}>Friends</h4>
-          {props.friends.length < 1 ? (
+          {(props.friends.length < 1 && !props.isFetching)? (
             <p className={s.empty}>You don't have friends yet :(</p>
           ) : null}
           <div className={s.friendsBox}>
-            {props.friends.map((friend) => (
-              <Friend friend={friend} key={friend.id} />
-            ))}
+            {props.isFetching ? (
+              <Preloader isFetching={props.isFetching}/>
+            ) : (
+              props.friends.map((friend) => (
+                <Friend friend={friend} key={friend.id} />
+              ))
+            )}
           </div>
         </div>
       )}

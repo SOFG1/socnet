@@ -13,3 +13,9 @@ export const authApi = {
         return instance.get('auth/me').then(res => res.data);
     }
 }
+
+export const usersApi = {
+    getFriends: (count)=> {
+        return instance.get(`users?count=${count}&friend=true`).then(res => res.data.items);
+    }
+}
