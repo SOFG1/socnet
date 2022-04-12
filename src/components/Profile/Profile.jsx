@@ -1,0 +1,24 @@
+import s from './Profile.module.scss';
+import avatar from '../../assets/avatar.png';
+
+const Profile = (props)=> {
+    const contacts = [];
+    for(let contact in props.profile.contacts) {
+        contacts.push( props.profile.contacts[contact] && <p className={s.contact} key={contact}>{contact}: <span>{props.profile.contacts[contact]}</span></p>);
+    }
+    return (
+        <div className={s.user}>
+            <img src={props.profile.photos.large ? props.profile.photos.large : avatar} alt="User Avatar" className={s.avatar} />
+
+            <div className={s.data}>
+                <h1 className={s.name}>{props.profile.fullName}</h1>
+                <p className={s.about}>{props.profile.aboutMe}</p>
+                {props.profile.lookingForAJob && <p className={s.job}>Looking for a job</p>}
+                {contacts}
+            </div>
+        </div>
+    )
+}
+
+export default Profile;
+

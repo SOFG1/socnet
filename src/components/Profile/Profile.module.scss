@@ -1,0 +1,50 @@
+.Profile {
+    padding: 20px;
+    background-color: #FAFDD6;
+}
+
+.user {
+    display: flex;
+    gap: 30px;
+}
+
+.avatar {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgb(0, 25, 254);
+    margin-bottom: 10px;
+}
+
+.about {
+    font-family: sans-serif;
+    margin-bottom: 15px;
+}
+
+.job {
+    color: green;
+    font-weight: 800;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-shadow: 1px 1px 2px rgb(110, 255, 58);
+    margin-bottom: 20px;
+}
+
+.contact {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: sans-serif;
+    color: #B20600;
+    margin-bottom: 12px;
+    span {
+        font-size: 20px;
+    color: #247881;
+
+    }
+}
