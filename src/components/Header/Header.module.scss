@@ -1,7 +1,47 @@
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #FFFBE7;
-    padding: 15px;
-    .logo {
-        height: 50px;
-    }
+    padding: 15px 40px 15px 15px;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+    object-fit: contain;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.login {
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fb8947;
+}
+
+.userName {
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fd3318;
+}
+
+.email {
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 800;
+    color: #00be23;
+}
+
+.id {
+    font-family: sans-serif;
 }
