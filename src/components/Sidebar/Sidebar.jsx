@@ -60,9 +60,9 @@ const Sidebar = (props) => {
               <Preloader isFetching={props.isFetching}/>
             ) : (
               <>
-              <Friend friend={props.friends[0]} key={props.friends[0].id} />
-              <Friend friend={props.friends[1]} key={props.friends[1].id} />
-              <Friend friend={props.friends[2]} key={props.friends[2].id} />
+              {props.friends[0] && <Friend friend={props.friends[0]} key={props.friends[0].id} />}
+              {props.friends[1] && <Friend friend={props.friends[1]} key={props.friends[1].id} />}
+              {props.friends[2] && <Friend friend={props.friends[2]} key={props.friends[2].id} />}
               </>
             )}
           </div>

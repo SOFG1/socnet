@@ -6,6 +6,7 @@ const SET_STATUS = "SET STATUS";
 const TOGGLE_PROF_FETCHING = "TOGGLE PROF FETCHING";
 const ADD_POST = "ADD POST";
 const LIKE_POST = "LIKE POST";
+const SEND_MESSAGE = "SEND MESSAGE";
 
 export const setProfileAC = (profile) => ({ type: SET_PROFILE, profile });
 export const toggleFetchingAC = (isFetching) => ({
@@ -15,6 +16,7 @@ export const toggleFetchingAC = (isFetching) => ({
 export const setStatusAC = (status) => ({ type: SET_STATUS, status });
 export const addPostAC = (text) => ({ type: ADD_POST, text });
 export const likePostAC = (id) => ({ type: LIKE_POST, id });
+export const sendMessageAC = (text) => ({ type: SEND_MESSAGE, text });
 
 //Set Profile Thunk
 export const setProfileThunk = (id) => (dispatch) => {
@@ -37,15 +39,23 @@ export const changeStatusThunk = (status) => (dispatch) => {
 };
 
 //Add Post Thunk
-
 export const addPostThunk = (text) => (dispatch) => {
   dispatch(addPostAC(text));
-  dispatch(change("posts", "post", "", false));
+  dispatch(change("posts", "post", ""));
   dispatch(untouch("posts", "post"));
 };
 
+//Send Message Thunk
+
+export const sendMessageThunk = (text)=> (dispatch)=> {
+  dispatch(sendMessageAC(text));
+  dispatch(change("messages", "message", ""));
+  dispatch(untouch("messages", "message"));
+}
+
 let initialState = {
   profile: null,
+  isFetching: true,
   status: "My Status",
   posts: [
     {
@@ -73,7 +83,33 @@ let initialState = {
       likedByMe: false,
     },
   ],
-  isFetching: true,
+  messages: [
+    {
+      id: 0,
+      text: "Hi how are you ?",
+      date: "17:00",
+    },
+    {
+      id: 1,
+      text: "I'm fine, you ?",
+      date: "17:01",
+    },
+    {
+      id: 2,
+      text: "What are you doing ?",
+      date: "17:03",
+    },
+    {
+      id: 3,
+      text: "I'm working now",
+      date: "17:05",
+    },
+    {
+      id: 4,
+      text: "Ok. Good luck",
+      date: "17:06",
+    },
+  ],
 };
 
 let profileReducer = (state = initialState, action) => {
@@ -110,16 +146,27 @@ let profileReducer = (state = initialState, action) => {
       let index = posts.findIndex((post) => post.id === action.id);
       let post = { ...state.posts[index] };
       if (post.likedByMe) {
-        post.likes--
+        post.likes--;
       }
       if (!post.likedByMe) {
-        post.likes++
+        post.likes++;
       }
-      post.likedByMe = !post.likedByMe
+      post.likedByMe = !post.likedByMe;
       posts.splice(index, 1, post);
       return {
         ...state,
         posts: [...posts],
+      };
+    case SEND_MESSAGE:
+      let time = new Date();
+      let message = {
+        text: action.text,
+        id: state.messages.length + 1,
+        date: time.toLocaleString("en-US").slice(-11, -6),
+      };
+      return {
+        ...state,
+        messages: [...state.messages, message],
       };
     default:
       return state;

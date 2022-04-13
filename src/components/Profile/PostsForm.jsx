@@ -15,7 +15,6 @@ const PostsForm = (props) => {
         name="post"
         component={Textarea}
         validate={[textValidator500]}
-        type="text"
       />
       <button className={s.btn} type="submit">
         Add Post
