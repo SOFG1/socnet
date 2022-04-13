@@ -12,12 +12,11 @@ export const toggleFriendsFetchingAC = (isFetching)=> ({type: TOGGLE_FRIENDS_FET
 // Set Friends Thunk
 export let setFriendsThunk = (dispatch)=> {
     dispatch(toggleFriendsFetchingAC(true))
-    usersApi.getFriends(3).then(friends => {
+    usersApi.getFriends(5).then(friends => {
         dispatch(setFriendsAC(friends))
         dispatch(toggleFriendsFetchingAC(false))
     })
 }
-
 
 //State
 let initialState = {

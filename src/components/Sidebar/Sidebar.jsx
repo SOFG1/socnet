@@ -4,6 +4,7 @@ import Friend from "./Friend";
 import Preloader from "../common/Preloader/Preloader";
 
 const Sidebar = (props) => {
+
   return (
     <div className={s.Sidebar}>
       <ul className={s.list}>
@@ -47,18 +48,22 @@ const Sidebar = (props) => {
       </ul>
 
       {props.isAuth && (
+
         <div className={s.friends}>
           <h4 className={s.title}>Friends</h4>
           {(props.friends.length < 1 && !props.isFetching)? (
             <p className={s.empty}>You don't have friends yet :(</p>
           ) : null}
+
           <div className={s.friendsBox}>
             {props.isFetching ? (
               <Preloader isFetching={props.isFetching}/>
             ) : (
-              props.friends.map((friend) => (
-                <Friend friend={friend} key={friend.id} />
-              ))
+              <>
+              <Friend friend={props.friends[0]} key={props.friends[0].id} />
+              <Friend friend={props.friends[1]} key={props.friends[1].id} />
+              <Friend friend={props.friends[2]} key={props.friends[2].id} />
+              </>
             )}
           </div>
         </div>
