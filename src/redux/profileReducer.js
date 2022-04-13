@@ -10,14 +10,11 @@ export const setStatusAC = (status)=> ({type: SET_STATUS, status});
 //Set Profile Thunk
 export const setProfileThunk = (id)=> (dispatch) => {
   dispatch(toggleFetchingAC(true));
-  //Setting profile
-  profileApi.getProfile(id).then(profile => {
-    dispatch(setProfileAC(profile));
+  // Getting profile data and status from API
+  Promise.all([profileApi.getProfile(id), profileApi.getStatus(id)]).then(res => {
     dispatch(toggleFetchingAC(false));
-  })
-  // Setting status
-  profileApi.getStatus(id).then(status => {
-    dispatch(setStatusAC(status));
+    dispatch(setProfileAC(res[0]));
+    dispatch(setStatusAC(res[1]));
   })
 }
 
