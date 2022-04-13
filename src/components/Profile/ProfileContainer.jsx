@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Profile from "./Profile";
 import withRedirect from "../../hoc/withAuth";
 import { compose } from "redux";
-import { setProfileThunk } from "../../redux/profileReducer";
+import { setProfileThunk, changeStatusThunk } from "../../redux/profileReducer";
 import Preloader from '../common/Preloader/Preloader'
 
 class ProfileContainer extends React.Component {
@@ -20,7 +20,7 @@ class ProfileContainer extends React.Component {
     return (
       <div className={s.Profile}>
         {this.props.isFetching && <Preloader isFetching={this.props.isFetching} />}
-        {this.props.profile && <Profile profile={this.props.profile} />}
+        {this.props.profile && <Profile profile={this.props.profile} status={this.props.status} changeStatus={this.props.changeStatus}/>}
       </div>
     );
   }
@@ -29,6 +29,7 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
   return {
     profile: state.profile.profile,
+    status: state.profile.status,
     posts: state.profile.posts,
     myId: state.auth.profile.id,
     isFetching: state.profile.isFetching,
@@ -40,6 +41,9 @@ let mapDispatchToProps = (dispatch) => {
     setProfile: (id) => {
       dispatch(setProfileThunk(id));
     },
+    changeStatus: (status)=> {
+      dispatch(changeStatusThunk(status))
+    }
   };
 };
 

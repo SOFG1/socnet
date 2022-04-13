@@ -1,5 +1,6 @@
 import s from './Profile.module.scss';
 import avatar from '../../assets/avatar.png';
+import Status from '../common/Status/Status';
 
 const Profile = (props)=> {
     const contacts = [];
@@ -9,9 +10,9 @@ const Profile = (props)=> {
     return (
         <div className={s.user}>
             <img src={props.profile.photos.large ? props.profile.photos.large : avatar} alt="User Avatar" className={s.avatar} />
-
             <div className={s.data}>
                 <h1 className={s.name}>{props.profile.fullName}</h1>
+                <Status status={props.status} readOnly={false} changeStatus={props.changeStatus} />
                 <p className={s.about}>{props.profile.aboutMe}</p>
                 {props.profile.lookingForAJob && <p className={s.job}>Looking for a job</p>}
                 {contacts}
