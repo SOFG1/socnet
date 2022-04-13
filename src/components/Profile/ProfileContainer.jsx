@@ -2,10 +2,11 @@ import React from "react";
 import s from "./Profile.module.scss";
 import { connect } from "react-redux";
 import Profile from "./Profile";
+import Posts from "./Posts";
 import withRedirect from "../../hoc/withAuth";
 import { compose } from "redux";
-import { setProfileThunk, changeStatusThunk } from "../../redux/profileReducer";
-import Preloader from '../common/Preloader/Preloader'
+import { setProfileThunk, changeStatusThunk, addPostThunk, likePostAC } from "../../redux/profileReducer";
+import Preloader from '../common/Preloader/Preloader';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class ProfileContainer extends React.Component {
       <div className={s.Profile}>
         {this.props.isFetching && <Preloader isFetching={this.props.isFetching} />}
         {this.props.profile && <Profile profile={this.props.profile} status={this.props.status} changeStatus={this.props.changeStatus}/>}
+        <Posts profile={this.props.profile} posts={this.props.posts} addPost={this.props.addPost} likePost={this.props.likePost} />
       </div>
     );
   }
@@ -43,6 +45,12 @@ let mapDispatchToProps = (dispatch) => {
     },
     changeStatus: (status)=> {
       dispatch(changeStatusThunk(status))
+    },
+    addPost: (form)=> {
+      dispatch(addPostThunk(form.post))
+    },
+    likePost: (id)=> {
+      dispatch(likePostAC(id))
     }
   };
 };

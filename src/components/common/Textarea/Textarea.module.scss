@@ -1,0 +1,13 @@
+.container {
+    position: relative;
+}
+
+.error {
+    position: absolute;
+    right: 25px;
+    bottom: 20px;
+    color: red;
+    font-weight: 700;
+    pointer-events: none;
+    background-color: #fff;
+}

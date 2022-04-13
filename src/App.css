@@ -49,11 +49,24 @@ table {
 
 .Wrapper {
   display: grid;
-  min-height: 100vh;
+  height: 100vh;
   grid-template-columns: 350px 1fr;
   grid-template-rows: 120px 1fr;
+  overflow-y: hidden;
 }
 
 .Wrapper header {
   grid-column: span 2;
+}
+
+.Wrapper main {
+	height: 100%;
+	max-height: 100%;
+	overflow-y: auto;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
 }

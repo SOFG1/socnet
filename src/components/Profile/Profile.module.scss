@@ -3,9 +3,12 @@
     background-color: #FAFDD6;
 }
 
+//My Profile
+
 .user {
     display: flex;
     gap: 30px;
+    margin-bottom: 40px;
 }
 
 .avatar {
@@ -47,4 +50,99 @@
     color: #247881;
 
     }
+}
+
+// Posts
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: sans-serif;
+    color: #ff3434;
+    margin-bottom: 15px;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.textarea {
+    width: 100%;
+    resize: none;
+    min-height: 130px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    color: #FF5F00;
+    font-size: 16px;
+    padding: 8px 20px;
+    background-color: #F6F54D;
+    border: 0;
+    border-radius: 7px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: sans-serif;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px red;
+    transition: 150ms linear;
+    &:hover,
+    &:active {
+        color: #247881;
+        background-color: white;
+        box-shadow: 1px 1px 3px greenyellow;
+    }
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    background-color: #E4E9BE;
+    padding: 25px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0px 3px red;
+    margin-bottom: 25px;
+}
+
+.postAvatar {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.text {
+    font-family: sans-serif;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.postBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.likeBtn {
+    border: 0;
+    font-size: 18px;
+    padding: 8px 16px;
+    font-weight:700;
+    color: rgb(253, 91, 118);
+    cursor: pointer;
+    transition: 150ms linear;
+    &:hover {
+        color: #fff;
+        background-color: rgb(255, 88, 116);
+    }
+}
+
+.likes {
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(255, 8, 50);
 }
