@@ -13,6 +13,7 @@ import {
 } from "../../redux/profileReducer";
 import Preloader from "../common/Preloader/Preloader";
 import withUserId from "../../hoc/withUserId";
+import { Routes, Route } from "react-router-dom";
 
 class ProfileContainer extends React.Component {
   constructor(props) {
@@ -55,12 +56,17 @@ class ProfileContainer extends React.Component {
           />
         )}
 
-        <Posts
+
+
+        <Routes>
+          <Route path="/" element={        <Posts
           profile={this.props.profile}
           posts={this.props.posts}
           addPost={this.props.addPost}
           likePost={this.props.likePost}
-        />
+        />}/>
+        </Routes>
+
       </div>
     );
   }

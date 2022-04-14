@@ -22,6 +22,30 @@ export let setFriendsThunk = (dispatch)=> {
 let initialState = {
     friends: [],
     fetchingFriends: false,
+    fetchingUsers: false,
+    numberOfPages: 17,
+    totalCount: 0,
+    curentPage: 9,
+    users: [ {
+        "name": "Shubert",
+        "id": 2,
+        "photos": {
+          "small": null,
+          "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+        },
+        "status": null,
+        "followed": true
+      },
+      {
+        "name": "Hacker",
+        "id": 3,
+        "photos": {
+          "small": null,
+          "large": null
+        },
+        "status": null,
+        "followed": false
+      }],
 }
 
 //Reducer

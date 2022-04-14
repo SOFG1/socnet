@@ -55,7 +55,7 @@ export const sendMessageThunk = (text)=> (dispatch)=> {
 
 let initialState = {
   profile: null,
-  isFetching: true,
+  isFetching: false,
   status: "",
   posts: [
     {

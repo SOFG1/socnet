@@ -20,9 +20,9 @@ class Status extends React.Component {
   }
   onChange(e) {
     this.setState({
-       status: e.target.value,
-       error: !statusValidator(e.target.value),
-      });
+      status: e.target.value,
+      error: !statusValidator(e.target.value),
+    });
   }
   toggleEdit() {
     if (!this.props.readOnly) this.setState({ editMode: !this.state.editMode });
@@ -34,12 +34,19 @@ class Status extends React.Component {
       this.toggleEdit();
     }
     if (!statusValidator(e.target.value)) {
-      this.setState({error: true})
+      this.setState({ error: true });
     }
   }
   render() {
     return (
-      <div className={s.status}>
+      (this.props.status || !this.props.readOnly) &&
+      
+      <div
+        className={
+          this.props.readOnly ? s.statusBox : `${s.statusBox} ${s.editable}`
+        }
+        onDoubleClick={this.toggleEdit}
+      >
         {this.state.editMode ? (
           <input
             type="text"
@@ -49,12 +56,19 @@ class Status extends React.Component {
             autoFocus
           />
         ) : (
-          <p onDoubleClick={this.toggleEdit} className={s.status}>
+          <p className={s.status}>
             {this.state.status}
-            {this.state.status.length === 0 && !this.props.readOnly && <span className={s.empty}>Click to set the status...</span>}
+            {this.state.status.length === 0 && !this.props.readOnly && (
+              <span className={s.empty}>Click to set the status...</span>
+            )}
           </p>
         )}
-        {this.state.error && <p className={s.error}>Status must container letters or numbers and not exceed 300 characters</p>}
+        {this.state.error && (
+          <p className={s.error}>
+            Status must container letters or numbers and not exceed 300
+            characters
+          </p>
+        )}
       </div>
     );
   }

@@ -4,6 +4,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<ProfileContainer />} />
           <Route path="/profile/*" element={<ProfileContainer />} />
           <Route path="/messages/*" element={<MessagesContainer />} />
+          <Route path="/users/*" element={<UsersContainer />} />
         </Routes>
       </main>
     </div>
