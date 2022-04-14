@@ -27,16 +27,16 @@ class ProfileContainer extends React.Component {
   }
   // Check does profile need to update or not
   updateProfile() {
-    if (this.props.userId === "" && !this.props.profile && this.props.myId) {
+    if (!this.props.userId && !this.props.profile && this.props.myId) {
       this.props.setProfile(this.props.myId);
     }
-    if (this.props.userId === "" && this.props.profile && this.props.profile.userId !== this.props.myId && this.props.myId) {
+    if (!this.props.userId && this.props.profile && this.props.profile.userId !== this.props.myId && this.props.myId) {
       this.props.setProfile(this.props.myId);
     }
-    if (this.props.userId !== "" && !this.props.profile) {
+    if (this.props.userId && !this.props.profile) {
       this.props.setProfile(this.props.userId);
     }
-    if (this.props.userId !== "" && this.props.profile && this.props.profile.userId !== this.props.userId) {
+    if (this.props.userId && this.props.profile && this.props.profile.userId !== this.props.userId) {
       this.props.setProfile(this.props.userId);
     }
   }
