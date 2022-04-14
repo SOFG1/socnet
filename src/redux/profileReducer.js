@@ -56,7 +56,7 @@ export const sendMessageThunk = (text)=> (dispatch)=> {
 let initialState = {
   profile: null,
   isFetching: true,
-  status: "My Status",
+  status: "",
   posts: [
     {
       id: 0,
@@ -66,7 +66,7 @@ let initialState = {
     },
     {
       id: 1,
-      text: "I gonna be a person like Elon Musk",
+      text: "I'm going to be a person like Elon Musk",
       likes: 100,
       likedByMe: false,
     },
@@ -127,7 +127,7 @@ let profileReducer = (state = initialState, action) => {
     case SET_STATUS:
       return {
         ...state,
-        status: action.status,
+        status: action.status ? action.status : "",
       };
     case ADD_POST:
       return {

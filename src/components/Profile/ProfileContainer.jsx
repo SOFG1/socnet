@@ -5,24 +5,62 @@ import Profile from "./Profile";
 import Posts from "./Posts";
 import withRedirect from "../../hoc/withAuth";
 import { compose } from "redux";
-import { setProfileThunk, changeStatusThunk, addPostThunk, likePostAC } from "../../redux/profileReducer";
-import Preloader from '../common/Preloader/Preloader';
+import {
+  setProfileThunk,
+  changeStatusThunk,
+  addPostThunk,
+  likePostAC,
+} from "../../redux/profileReducer";
+import Preloader from "../common/Preloader/Preloader";
+import withUserId from "../../hoc/withUserId";
 
 class ProfileContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.updateProfile = this.updateProfile.bind(this);
+  }
   componentDidMount() {
-    if (!this.props.profile && this.props.myId)
-      this.props.setProfile(this.props.myId);
+    this.updateProfile();
   }
   componentDidUpdate() {
-    if (!this.props.profile && this.props.myId)
+    this.updateProfile();
+  }
+  // Check does profile need to update or not
+  updateProfile() {
+    if (this.props.userId === "" && !this.props.profile && this.props.myId) {
       this.props.setProfile(this.props.myId);
+    }
+    if (this.props.userId === "" && this.props.profile && this.props.profile.userId !== this.props.myId && this.props.myId) {
+      this.props.setProfile(this.props.myId);
+    }
+    if (this.props.userId !== "" && !this.props.profile) {
+      this.props.setProfile(this.props.userId);
+    }
+    if (this.props.userId !== "" && this.props.profile && this.props.profile.userId !== this.props.userId) {
+      this.props.setProfile(this.props.userId);
+    }
   }
   render() {
     return (
       <div className={s.Profile}>
-        {this.props.isFetching && <Preloader isFetching={this.props.isFetching} />}
-        {this.props.profile && <Profile profile={this.props.profile} status={this.props.status} changeStatus={this.props.changeStatus}/>}
-        <Posts profile={this.props.profile} posts={this.props.posts} addPost={this.props.addPost} likePost={this.props.likePost} />
+        {this.props.isFetching && (
+          <Preloader isFetching={this.props.isFetching} />
+        )}
+        {this.props.profile && (
+          <Profile
+            myId={this.props.myId}
+            profile={this.props.profile}
+            status={this.props.status}
+            changeStatus={this.props.changeStatus}
+          />
+        )}
+
+        <Posts
+          profile={this.props.profile}
+          posts={this.props.posts}
+          addPost={this.props.addPost}
+          likePost={this.props.likePost}
+        />
       </div>
     );
   }
@@ -43,19 +81,20 @@ let mapDispatchToProps = (dispatch) => {
     setProfile: (id) => {
       dispatch(setProfileThunk(id));
     },
-    changeStatus: (status)=> {
-      dispatch(changeStatusThunk(status))
+    changeStatus: (status) => {
+      dispatch(changeStatusThunk(status));
     },
-    addPost: (form)=> {
-      dispatch(addPostThunk(form.post))
+    addPost: (form) => {
+      dispatch(addPostThunk(form.post));
     },
-    likePost: (id)=> {
-      dispatch(likePostAC(id))
-    }
+    likePost: (id) => {
+      dispatch(likePostAC(id));
+    },
   };
 };
 
 export default compose(
   withRedirect,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
+  withUserId
 )(ProfileContainer);

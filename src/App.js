@@ -13,7 +13,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<ProfileContainer />} />
-          <Route path="/profile" element={<ProfileContainer />} />
+          <Route path="/profile/*" element={<ProfileContainer />} />
           <Route path="/messages/*" element={<MessagesContainer />} />
         </Routes>
       </main>
