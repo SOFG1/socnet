@@ -1,6 +1,6 @@
 .Users {
     background-color: #F0FFC2;
-    height: 100%;
+    min-height: 100%;
     padding: 20px;
 }
 
@@ -108,4 +108,8 @@
 
 .id {
     font-family: sans-serif;
+}
+
+.link {
+    text-decoration: none;
 }

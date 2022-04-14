@@ -7,19 +7,23 @@ const TOGGLE_PROF_FETCHING = "TOGGLE PROF FETCHING";
 const ADD_POST = "ADD POST";
 const LIKE_POST = "LIKE POST";
 const SEND_MESSAGE = "SEND MESSAGE";
+const DELETE_PROFILE = "DELETE PROFILE";
 
-export const setProfileAC = (profile) => ({ type: SET_PROFILE, profile });
-export const toggleFetchingAC = (isFetching) => ({
+export const setProfileAC = profile => ({ type: SET_PROFILE, profile });
+export const toggleFetchingAC = isFetching => ({
   type: TOGGLE_PROF_FETCHING,
   isFetching,
 });
-export const setStatusAC = (status) => ({ type: SET_STATUS, status });
-export const addPostAC = (text) => ({ type: ADD_POST, text });
-export const likePostAC = (id) => ({ type: LIKE_POST, id });
-export const sendMessageAC = (text) => ({ type: SEND_MESSAGE, text });
+export const setStatusAC = status => ({ type: SET_STATUS, status });
+export const addPostAC = text => ({ type: ADD_POST, text });
+export const likePostAC = id => ({ type: LIKE_POST, id });
+export const sendMessageAC = text => ({ type: SEND_MESSAGE, text });
+export const deleteProfileAC = ()=> ({type: DELETE_PROFILE})
 
 //Set Profile Thunk
-export const setProfileThunk = (id) => (dispatch) => {
+export const setProfileThunk = id => dispatch => {
+  //Deleting previous profile data
+  dispatch(deleteProfileAC())
   dispatch(toggleFetchingAC(true));
   // Getting profile data and status from API
   Promise.all([profileApi.getProfile(id), profileApi.getStatus(id)]).then(
@@ -32,14 +36,14 @@ export const setProfileThunk = (id) => (dispatch) => {
 };
 
 //Change Status Thunk
-export const changeStatusThunk = (status) => (dispatch) => {
+export const changeStatusThunk = status => dispatch => {
   profileApi.setStatus(status).then((code) => {
     if (code === 0) dispatch(setStatusAC(status));
   });
 };
 
 //Add Post Thunk
-export const addPostThunk = (text) => (dispatch) => {
+export const addPostThunk = text => dispatch => {
   dispatch(addPostAC(text));
   dispatch(change("posts", "post", ""));
   dispatch(untouch("posts", "post"));
@@ -47,7 +51,7 @@ export const addPostThunk = (text) => (dispatch) => {
 
 //Send Message Thunk
 
-export const sendMessageThunk = (text)=> (dispatch)=> {
+export const sendMessageThunk = text => dispatch => {
   dispatch(sendMessageAC(text));
   dispatch(change("messages", "message", ""));
   dispatch(untouch("messages", "message"));
@@ -168,6 +172,11 @@ let profileReducer = (state = initialState, action) => {
         ...state,
         messages: [...state.messages, message],
       };
+    case DELETE_PROFILE:
+      return {
+        ...state,
+        profile: null,
+      }
     default:
       return state;
   }

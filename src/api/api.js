@@ -17,6 +17,9 @@ export const authApi = {
 export const usersApi = {
     getFriends: (count)=> {
         return instance.get(`users?count=${count}&friend=true`).then(res => res.data.items);
+    },
+    getUsers: (page, count)=> {
+        return instance.get(`users?count=${count}&page=${page}`).then(res => res.data);
     }
 }
 
