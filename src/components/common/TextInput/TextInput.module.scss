@@ -1,0 +1,14 @@
+.box {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.error {
+    position: absolute;
+    white-space: nowrap;
+    left: 105%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: red;
+    font-family: sans-serif;
+}

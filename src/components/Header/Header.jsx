@@ -25,7 +25,7 @@ const Header = (props) => {
           {props.profile && <p className={s.id}>{props.profile.id}</p>}
           {!props.isAuth && (
             <Link className={s.login} to="login">
-              Login
+              Log in
             </Link>
           )}
         </div>

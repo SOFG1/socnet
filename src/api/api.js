@@ -11,6 +11,9 @@ let instance = axios.create({
 export const authApi = {
     auth: ()=> {
         return instance.get('auth/me').then(res => res.data);
+    },
+    login: (data)=> {
+        return instance.post('auth/login',data)
     }
 }
 

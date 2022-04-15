@@ -53,6 +53,7 @@ table {
   grid-template-columns: 350px 1fr;
   grid-template-rows: 120px 1fr;
   overflow-y: hidden;
+  font-family: sans-serif;
 }
 
 .Wrapper header {

@@ -69,19 +69,21 @@ class ProfileContainer extends React.Component {
           />
         )}
 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Posts
-                profile={this.props.profile}
-                posts={this.props.posts}
-                addPost={this.props.addPost}
-                likePost={this.props.likePost}
-              />
-            }
-          />
-        </Routes>
+        {this.props.profile && (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Posts
+                  profile={this.props.profile}
+                  posts={this.props.posts}
+                  addPost={this.props.addPost}
+                  likePost={this.props.likePost}
+                />
+              }
+            />
+          </Routes>
+        )}
       </div>
     );
   }
