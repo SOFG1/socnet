@@ -1,12 +1,12 @@
 import s from "./Messages.module.scss";
 import avatar from "../../assets/avatar.png";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MessagesForm from "./MessagesForm";
 
 const Messages = (props) => {
   return (
     <div className={s.MessagesPage}>
-      <h1 className={s.title}>Messages</h1>
+      <h1 className={s.title}>Friends: </h1>
       <div className={s.box}>
         <ul className={s.friends}>
           {props.friends.length === 0 ? (
@@ -14,12 +14,10 @@ const Messages = (props) => {
           ) : (
             props.friends.map((friend) => {
               return (
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? `${s.friend} ${s.active}` : s.friend
-                  }
+                <Link
+                  className={s.friend}
                   key={friend.id}
-                  to={`/messages/${friend.id}`}
+                  to={`/profile/${friend.id}`}
                 >
                   <img
                     src={friend.photos.small ? friend.photos.small : avatar}
@@ -27,7 +25,7 @@ const Messages = (props) => {
                     className={s.avatar}
                   />
                   <p className={s.name}>{friend.name}</p>
-                </NavLink>
+                </Link>
               );
             })
           )}
@@ -37,7 +35,7 @@ const Messages = (props) => {
             return (
               <div className={s.message} key={message.id}>
                 <p className={s.messageText}>{message.text}</p>
-                <div>
+                <div className={s.messageBox}>
                   <span className={s.messageDate}>{message.date}</span>
                 </div>
               </div>

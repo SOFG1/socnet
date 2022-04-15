@@ -4,18 +4,16 @@ import { connect } from "react-redux";
 import withId from "../../hoc/withId";
 import { compose } from "redux";
 import { Navigate } from "react-router-dom";
-import { setUsersThunk } from "../../redux/usersReducer";
+import { setUsersThunk, followThunk, unfollowThunk } from "../../redux/usersReducer";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-      console.log(this.props.urlId);
-     this.props.urlId && this.props.setUsers(this.props.urlId, this.props.defaultCount);
+     this.props.urlId && this.props.urlId !== this.props.current && this.props.setUsers(this.props.urlId, this.props.defaultCount);
   }
   componentDidUpdate() {
-    this.props.urlId !== this.props.current && this.props.setUsers(this.props.urlId, this.props.defaultCount)
+    this.props.urlId && this.props.urlId !== this.props.current && this.props.setUsers(this.props.urlId, this.props.defaultCount)
   }
   render() {
-      console.log(this.props.current)
     return this.props.urlId ? (
       <Users {...this.props} />
     ) : (
@@ -32,6 +30,7 @@ let mapStateToProps = (state) => {
     current: state.users.curentPage,
     defaultPage: state.users.defaultPage,
     defaultCount: state.users.defaultCount,
+    disabled: state.users.disabledFollow
   };
 };
 
@@ -39,6 +38,12 @@ let mapDispatchToProps = (dispatch) => {
   return {
     setUsers: (page, count) => {
       dispatch(setUsersThunk(page, count));
+    },
+    followUser: (id)=> {
+      dispatch(followThunk(id))
+    },
+    unfollowUser: (id)=> {
+      dispatch(unfollowThunk(id))
     },
   };
 };

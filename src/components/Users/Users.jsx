@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Users = (props) => {
   let pages = paginator(props.pages, props.current);
-
+  console.log(props)
   return (
     <div className={s.Users}>
       <h1 className={s.title}>Users</h1>
@@ -34,7 +34,7 @@ const Users = (props) => {
       <div className={s.usersList}>
         {props.users.map((user) => {
           return (
-            <div className={s.user} key={user.id} >
+            <div className={s.user} key={user.id}>
               <div className={s.left}>
                 <Link to={`/profile/${user.id}`} className={s.link}>
                   <img
@@ -43,9 +43,19 @@ const Users = (props) => {
                     className={s.avatar}
                   />
                 </Link>
-                <button className={s.btn}>
-                  {user.followed ? "unfollow" : "follow"}
-                </button>
+                {user.followed ? (
+                  <button
+                    onClick={() => props.unfollowUser(user.id)}
+                    className={s.btn}
+                    disabled={props.disabled.includes(user.id)}
+                  >Unfollow</button>
+                ) : (
+                  <button
+                    onClick={() => props.followUser(user.id)}
+                    disabled={props.disabled.includes(user.id)}
+                    className={s.btn}
+                  >Follow</button>
+                )}
               </div>
               <div className={s.right}>
                 <Link to={`/profile/${user.id}`} className={s.link}>

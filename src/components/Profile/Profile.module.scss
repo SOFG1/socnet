@@ -12,10 +12,16 @@
     margin-bottom: 40px;
 }
 
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
 .avatar {
     height: 300px;
     width: 300px;
     object-fit: cover;
+    margin-bottom: 25px;
 }
 
 .name {

@@ -34,3 +34,15 @@ export const profileApi = {
         return instance.put(`profile/status`, {status}).then(res => res.data.resultCode)
     }
 }
+
+export const followApi = {
+    followUser: (id)=> {
+        return instance.post(`follow/${id}`, {}).then(res => res.data.resultCode);
+    },
+    unfollowUser: (id)=> {
+        return instance.delete(`follow/${id}`).then(res => res.data.resultCode);
+    },
+    userFollowed: (id)=> {
+        return instance.get(`follow/${id}`).then(res => res.data.resultCode);
+    }
+}

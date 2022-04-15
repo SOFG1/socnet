@@ -23,10 +23,12 @@
     max-height: 100%;
     overflow-y: auto;
     height: calc(100vh - 205px);
+    flex-shrink: 0;
 }
 
 .messages {
     flex-grow: 1;
+    flex-shrink: 1;
     padding: 5px;
 }
 
@@ -40,6 +42,7 @@
     align-items: center;
     margin-bottom: 15px;
     cursor: pointer;
+    text-decoration: none;
     transition: 100ms linear;
     &:hover,
     &.active {
@@ -59,7 +62,7 @@
     font-family: sans-serif;
     font-weight: 700;
     font-size: 18px;
-    color: rgb(27, 34, 169);
+    color: rgb(29, 29, 29);
 }
 
 .message {
@@ -72,10 +75,12 @@
     background-color: #ffb8cd;
     margin-bottom: 15px;
     box-shadow: 1px 1px 2px rgb(61, 61, 61);
+    word-break: break-all;
 }
 
-.messageTime {
-    margin-right: 20px;
+.messageDate {
+    margin-left: 20px;
+    white-space: nowrap;
 }
 
 .MessagesForm {
