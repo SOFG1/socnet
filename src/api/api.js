@@ -42,7 +42,7 @@ export const followApi = {
     unfollowUser: (id)=> {
         return instance.delete(`follow/${id}`).then(res => res.data.resultCode);
     },
-    userFollowed: (id)=> {
-        return instance.get(`follow/${id}`).then(res => res.data.resultCode);
+    getFollowed: (id)=> {
+        return instance.get(`follow/${id}`).then(res => res.data);
     }
 }

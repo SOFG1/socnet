@@ -155,3 +155,28 @@
     font-weight: 700;
     color: rgb(255, 8, 50);
 }
+
+.followbtn {
+    padding: 5px 10px;
+    font-family: sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px;
+    border: 0;
+    background-color: #FCD900;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgba(#000, .6);
+    transition: 100ms linear ;
+    &:hover,
+    &:active {
+        color: #F0FFC2;
+        background-color: rgb(255, 27, 27);
+    }
+    &:hover:disabled,
+    &:active:disabled {
+        cursor: inherit;
+        color: rgba(#000, .3);
+        background-color: #FCD900;
+    }
+}

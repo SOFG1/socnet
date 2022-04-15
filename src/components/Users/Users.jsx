@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const Users = (props) => {
   let pages = paginator(props.pages, props.current);
-  console.log(props);
   return (
     <div className={s.Users}>
       <h1 className={s.title}>Users</h1>

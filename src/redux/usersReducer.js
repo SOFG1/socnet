@@ -114,8 +114,9 @@ let usersReducer = (state = initialState, action) => {
       break;
     case FOLLOW_USER:
       const index = state.users.findIndex((user) => user.id === action.id);
-      const users = [...state.users];
-      users[index].followed = !users[index].followed;
+      let users = [...state.users, ];
+      const user = {...users[index], followed: !users[index].followed}
+      users.splice(index,1,user);
       return {
         ...state,
         users,

@@ -21,11 +21,33 @@ const Profile = (props) => {
           alt="User Avatar"
           className={s.avatar}
         />
+        { (
+          props.myId !== props.profile.userId &&
+          props.profile.followed &&
+          <button
+            onClick={() => props.unfollowUser(props.profile.userId)}
+            className={s.followbtn}
+            disabled={props.followDisabled}
+          >
+            Unfollow
+          </button>
+        )}
+        { (
+          props.myId !== props.profile.userId &&
+          !props.profile.followed &&
+          <button
+            onClick={() => props.followUser(props.profile.userId)}
+            disabled={props.followDisabled}
+            className={s.followbtn}
+          >
+            Follow
+          </button>
+        )}
       </div>
       <div className={s.right}>
         <h1 className={s.name}>{props.profile.fullName}</h1>
         <Status
-          status={props.status}
+          status={props.profile.status}
           readOnly={props.myId !== props.profile.userId}
           changeStatus={props.changeStatus}
         />
