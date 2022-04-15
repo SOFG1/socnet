@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Users = (props) => {
   let pages = paginator(props.pages, props.current);
-  console.log(props)
+  console.log(props);
   return (
     <div className={s.Users}>
       <h1 className={s.title}>Users</h1>
@@ -43,18 +43,23 @@ const Users = (props) => {
                     className={s.avatar}
                   />
                 </Link>
-                {user.followed ? (
+                {user.followed && props.isAuth && (
                   <button
                     onClick={() => props.unfollowUser(user.id)}
                     className={s.btn}
                     disabled={props.disabled.includes(user.id)}
-                  >Unfollow</button>
-                ) : (
+                  >
+                    Unfollow
+                  </button>
+                )}
+                {!user.followed && props.isAuth && (
                   <button
                     onClick={() => props.followUser(user.id)}
                     disabled={props.disabled.includes(user.id)}
                     className={s.btn}
-                  >Follow</button>
+                  >
+                    Follow
+                  </button>
                 )}
               </div>
               <div className={s.right}>

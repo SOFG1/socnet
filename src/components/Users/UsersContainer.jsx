@@ -30,7 +30,8 @@ let mapStateToProps = (state) => {
     current: state.users.curentPage,
     defaultPage: state.users.defaultPage,
     defaultCount: state.users.defaultCount,
-    disabled: state.users.disabledFollow
+    disabled: state.users.disabledFollow,
+    isAuth: state.auth.isAuth,
   };
 };
 
