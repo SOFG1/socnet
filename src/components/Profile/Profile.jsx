@@ -34,7 +34,7 @@ const Profile = (props) => {
         )}
         { (
           props.myId !== props.profile.userId &&
-          !props.profile.followed &&
+          props.profile.followed === false &&
           <button
             onClick={() => props.followUser(props.profile.userId)}
             disabled={props.followDisabled}

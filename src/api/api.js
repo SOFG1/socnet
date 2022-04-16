@@ -46,6 +46,8 @@ export const followApi = {
         return instance.delete(`follow/${id}`).then(res => res.data.resultCode);
     },
     getFollowed: (id)=> {
-        return instance.get(`follow/${id}`).then(res => res.data);
+        return instance.get(`follow/${id}`)
+        .then(res => res.data)
+        .catch(e => {})
     }
 }

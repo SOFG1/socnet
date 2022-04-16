@@ -51,6 +51,9 @@ class ProfileContainer extends React.Component {
     ) {
       this.props.setProfile(this.props.urlId);
     }
+    if (!this.props.isAuth && this.props.urlId && !this.props.profile) {
+      this.props.setProfile(this.props.urlId);
+    }
   }
   render() {
     return (
@@ -123,7 +126,7 @@ let mapDispatchToProps = (dispatch) => {
 };
 
 export default compose(
+  withId,
   withRedirect,
   connect(mapStateToProps, mapDispatchToProps),
-  withId
 )(ProfileContainer);

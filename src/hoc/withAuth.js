@@ -6,7 +6,7 @@ const withAuth = (Component)=> {
     class withRedirect extends React.Component {
         render() {
             console.log(this.props)
-            if (this.props.isAuth === false) {
+            if (this.props.isAuth === false && this.props.uesrId) {
                 return <Navigate to="/login" />
             }
             return(
