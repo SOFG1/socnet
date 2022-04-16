@@ -7,7 +7,6 @@ import {loginThunk} from '../../redux/authReducer'
 
 class LoginContainer extends React.Component {
     render() {
-        console.log(this.props)
         return this.props.auth.isAuth ? <Navigate to="/" /> :<Login {...this.props} />
     }
 }

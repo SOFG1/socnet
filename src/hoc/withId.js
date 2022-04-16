@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 const withId = (Component) => {
     const WithId = (props)=> {
         let id = useParams()['*'];
-        if (id) id = parseInt(id, 10);
+        id = id ? parseInt(id, 10) : null
         return <Component {...props} urlId={id} />;
     }
     return WithId;
