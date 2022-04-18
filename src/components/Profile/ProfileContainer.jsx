@@ -18,18 +18,7 @@ import withId from "../../hoc/withId";
 import { Routes, Route } from "react-router-dom";
 
 class ProfileContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.updateProfile = this.updateProfile.bind(this);
-  }
   componentDidMount() {
-    this.updateProfile();
-  }
-  componentDidUpdate() {
-    this.updateProfile();
-  }
-  // Check does profile need to update or not
-  updateProfile() {
     if (!this.props.urlId && !this.props.profile && this.props.myId) {
       this.props.setProfile(this.props.myId);
     }
@@ -52,6 +41,32 @@ class ProfileContainer extends React.Component {
       this.props.setProfile(this.props.urlId);
     }
     if (!this.props.isAuth && this.props.urlId && !this.props.profile) {
+      this.props.setProfile(this.props.urlId);
+    }
+  }
+  componentDidUpdate() {
+    if (!this.props.urlId && !this.props.profile && this.props.myId) {
+      this.props.setProfile(this.props.myId);
+    }
+    if (
+      !this.props.urlId &&
+      this.props.profile &&
+      this.props.profile.userId !== this.props.myId &&
+      this.props.myId
+    ) {
+      this.props.setProfile(this.props.myId);
+    }
+    if (this.props.urlId && !this.props.profile && this.props.isAuth) {
+      this.props.setProfile(this.props.urlId);
+    }
+    if (
+      this.props.urlId &&
+      this.props.profile &&
+      this.props.profile.userId !== this.props.urlId
+    ) {
+      this.props.setProfile(this.props.urlId);
+    }
+    if (this.props.isAuth === false && this.props.urlId && !this.props.profile) {
       this.props.setProfile(this.props.urlId);
     }
   }

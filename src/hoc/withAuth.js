@@ -5,7 +5,6 @@ import { Navigate } from "react-router-dom";
 const withAuth = (Component)=> {
     class withRedirect extends React.Component {
         render() {
-            console.log(this.props)
             if (this.props.isAuth === false && this.props.urlId === null) {
                 return <Navigate to="/login" />
             }
