@@ -28,10 +28,13 @@ class Status extends React.Component {
     if (!this.props.readOnly) this.setState({ editMode: !this.state.editMode });
   }
   onBlur(e) {
-    if (statusValidator(e.target.value)) {
+    const valid = statusValidator(e.target.value);
+    if (valid) {
       this.setState({ status: this.props.status });
-      this.props.changeStatus(e.target.value);
       this.toggleEdit();
+    }
+    if (this.props.status !== this.state.status && valid) {
+      this.props.changeStatus(e.target.value);
     }
     if (!statusValidator(e.target.value)) {
       this.setState({ error: true });

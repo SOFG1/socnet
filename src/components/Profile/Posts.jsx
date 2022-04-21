@@ -1,36 +1,29 @@
 import React from "react";
 import s from "./Profile.module.scss";
-import avatar from "../../assets/avatar.png";
 import PostsForm from "./PostsForm";
+import Post from './Post'
 
-const Posts = (props) => {
+class Posts extends React.Component {
 
-  return (
-    <div className={s.Posts}>
-      <h2 className={s.title}>MyPosts</h2>
-    <PostsForm onSubmit={props.addPost} />
-      {props.posts.map((post) => {
-        return (
-          <div className={s.post} key={post.id}>
-            <img
-              src={
-                props.profile && props.profile.photos.small
-                  ? props.profile.photos.small
-                  : avatar
-              }
-              alt="user avatar"
-              className={s.postAvatar}
-            />
-            <p className={s.text}>{post.text}</p>
-            <div className={s.postBox}>
-              <button onClick={()=> props.likePost(post.id)} className={s.likeBtn}>Like</button>
-              <p className={s.likes}>{post.likes} Likes</p>
-            </div>
-          </div>
-        );
-      }).reverse()}
-    </div>
-  );
+  componentDidUpdate() {
+    console.log('updated')
+  }
+  
+  render() {
+    return (
+      <div className={s.Posts}>
+        <h2 className={s.title}>MyPosts</h2>
+        <PostsForm onSubmit={this.props.addPost} />
+        {this.props.posts
+          .map((post) => {
+            return (
+              <Post key={post.id} post={post} likePost={this.props.likePost} />
+            );
+          })
+          .reverse()}
+      </div>
+    );
+  }
 };
 
-export default (Posts);
+export default Posts;
