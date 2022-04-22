@@ -14,7 +14,6 @@ import {
   unfollowUserThunk as unfollowUser,
 } from "../../redux/profileReducer";
 import Preloader from "../common/Preloader/Preloader";
-import withId from "../../hoc/withId";
 import { useParams } from "react-router-dom";
 
 const ProfilContainer = (props)=> {

@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import Users from "./Users";
 import { connect } from "react-redux";
-import withId from "../../hoc/withId";
 import { compose } from "redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { setUsersThunk as setUsers, followThunk as followUser, unfollowThunk as unfollowUser } from "../../redux/usersReducer";
 import { getCurrent, getPages } from "../../utilites/selectors";
 
 const UsersContainer = (props)=> {
+  const urlId = parseInt(useParams()['*'], 10);
   useEffect(()=> {
-    props.urlId && props.urlId !== props.current && props.setUsers(props.urlId, props.defaultCount)
+    urlId && urlId !== props.current && props.setUsers(urlId, props.defaultCount)
   })
-    return props.urlId ? (
+    return urlId ? (
       <Users {...props} />
     ) : (
       !props.current ? <Navigate to={`/users/${props.defaultPage}`} /> : <Navigate to={`/users/${props.current}`} />
@@ -34,11 +34,8 @@ let mapStateToProps = (state) => {
 };
 
 
-export default compose(
-  connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     setUsers,
     followUser,
     unfollowUser
-  }),
-  withId
-)(UsersContainer);
+  })(UsersContainer);
