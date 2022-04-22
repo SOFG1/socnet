@@ -1,15 +1,15 @@
 import { profileApi, followApi } from "../api/api";
 import { change, untouch } from "redux-form";
 
-const SET_PROFILE = "SET PROFILE";
-const SET_STATUS = "SET STATUS";
-const TOGGLE_PROF_FETCHING = "TOGGLE PROF FETCHING";
-const ADD_POST = "ADD POST";
-const LIKE_POST = "LIKE POST";
-const SEND_MESSAGE = "SEND MESSAGE";
-const DELETE_PROFILE = "DELETE PROFILE";
-const FOLLOW_DISABLE = "FOLLOW DISABLE";
-const FOLLOW_PROFILE = "FOLLOW PROFILE";
+const SET_PROFILE = "profile/SET PROFILE";
+const SET_STATUS = "profile/SET STATUS";
+const TOGGLE_PROF_FETCHING = "profile/TOGGLE PROF FETCHING";
+const ADD_POST = "profile/ADD POST";
+const LIKE_POST = "profile/LIKE POST";
+const SEND_MESSAGE = "profile/SEND MESSAGE";
+const DELETE_PROFILE = "profile/DELETE PROFILE";
+const FOLLOW_DISABLE = "profile/FOLLOW DISABLE";
+const FOLLOW_PROFILE = "profile/FOLLOW PROFILE";
 
 export const setProfileAC = (profile) => ({ type: SET_PROFILE, profile });
 export const toggleFetchingAC = (isFetching) => ({
@@ -25,28 +25,26 @@ export const followDisableAC = () => ({ type: FOLLOW_DISABLE });
 export const followProfileAC = () => ({ type: FOLLOW_PROFILE });
 
 //Set Profile Thunk
-export const setProfileThunk = (id) => (dispatch) => {
+export const setProfileThunk = (id) => async (dispatch) => {
   dispatch(deleteProfileAC());
   dispatch(toggleFetchingAC(true));
-  Promise.all([
+  const res = await Promise.all([
     profileApi.getProfile(id),
     profileApi.getStatus(id),
     followApi.getFollowed(id),
-  ]).then((res) => {
-    let profile = res[0];
-    profile.status = res[1];
-    profile.followed = res[2];
-    dispatch(setProfileAC(profile));
-    dispatch(setStatusAC(res[1]));
-    dispatch(toggleFetchingAC(false));
-  });
+  ])
+  let profile = res[0];
+  profile.status = res[1];
+  profile.followed = res[2];
+  dispatch(setProfileAC(profile));
+  dispatch(setStatusAC(res[1]));
+  dispatch(toggleFetchingAC(false));
 };
 
 //Change Status Thunk
-export const changeStatusThunk = (status) => (dispatch) => {
-  profileApi.setStatus(status).then((code) => {
-    if (code === 0) dispatch(setStatusAC(status));
-  });
+export const changeStatusThunk = (status) => async (dispatch) => {
+  const code = await profileApi.setStatus(status)
+  if (code === 0) dispatch(setStatusAC(status));
 };
 
 //Add Post Thunk
@@ -63,26 +61,26 @@ export const sendMessageThunk = (text) => (dispatch) => {
   dispatch(untouch("messages", "message"));
 };
 
+
+// Needs refactoring
+
+const followingFlow = async (id, apiMethod, dispatch)=> {
+  dispatch(followDisableAC());
+  const code = await apiMethod(id)
+  if (code === 0) {
+    dispatch(followProfileAC());
+    dispatch(followDisableAC());
+  }
+}
+
 //Follow User Thunk
 export const followUserThunk = (id) => (dispatch) => {
-  dispatch(followDisableAC());
-  followApi.followUser(id).then((code) => {
-    if (code === 0) {
-      dispatch(followProfileAC());
-      dispatch(followDisableAC());
-    }
-  });
+  followingFlow(id, followApi.followUser, dispatch)
 };
 
 //Unfollow User Thunk
 export const unfollowUserThunk = (id) => (dispatch) => {
-  dispatch(followDisableAC());
-  followApi.unfollowUser(id).then((code) => {
-    if (code === 0) {
-      dispatch(followProfileAC());
-      dispatch(followDisableAC());
-    }
-  });
+  followingFlow(id, followApi.unfollowUser, dispatch)
 };
 
 let initialState = {

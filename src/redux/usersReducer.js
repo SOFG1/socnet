@@ -1,11 +1,11 @@
 import { usersApi, followApi } from "../api/api";
 
-const SET_FRIENDS = "SET FRIENDS";
-const SET_USERS = "SET USERS";
-const TOGGLE_FRIENDS_FETCHING = "TOGGLE FRIENDS FETCHING";
-const TOGGLE_USERS_FETCHING = "TOGGLE USERS FETCHING";
-const FOLLOW_CONDITION = "FOLLOW CONDITION";
-const FOLLOW_USER = "FOLLOW USER";
+const SET_FRIENDS = "users/SET FRIENDS";
+const SET_USERS = "users/SET USERS";
+const TOGGLE_FRIENDS_FETCHING = "users/TOGGLE FRIENDS FETCHING";
+const TOGGLE_USERS_FETCHING = "users/TOGGLE USERS FETCHING";
+const FOLLOW_CONDITION = "users/FOLLOW CONDITION";
+const FOLLOW_USER = "users/FOLLOW USER";
 
 //Action Creators
 export const setFriendsAC = (friends) => ({ type: SET_FRIENDS, friends });
@@ -22,39 +22,35 @@ export const followConditionAC = (id) => ({ type: FOLLOW_CONDITION, id });
 export const followUserAC = (id) => ({ type: FOLLOW_USER, id });
 
 // Set Friends Thunk
-export let setFriendsThunk = ()=> (dispatch) => {
+export let setFriendsThunk = ()=> async (dispatch) => {
   dispatch(toggleFriendsFetchingAC(true));
-  usersApi.getFriends(20).then((friends) => {
-    dispatch(setFriendsAC(friends));
-    dispatch(toggleFriendsFetchingAC(false));
-  });
+  const friends = await usersApi.getFriends(20)
+  dispatch(setFriendsAC(friends));
+  dispatch(toggleFriendsFetchingAC(false));
 };
 
 // Set Users Thunk
-export let setUsersThunk = (page, count) => (dispatch) => {
+export let setUsersThunk = (page, count) => async (dispatch) => {
   dispatch(toggleUsersFetchingAC(true));
-  usersApi.getUsers(page, count).then((data) => {
-    dispatch(setUsersAC({ ...data, page }));
-    dispatch(toggleUsersFetchingAC(false));
-  });
+  const data = await usersApi.getUsers(page, count)
+  dispatch(setUsersAC({ ...data, page }));
+  dispatch(toggleUsersFetchingAC(false));
 };
 
 // Follow Thunk
-export let followThunk = (id) => (dispatch) => {
+export let followThunk = (id) => async (dispatch) => {
   dispatch(followConditionAC(id));
   dispatch(followUserAC(id));
-  followApi.followUser(id).then((code) => {
-    if (code === 0) dispatch(followConditionAC(id));
-  });
+  const code = await followApi.followUser(id);
+  if (code === 0) dispatch(followConditionAC(id));
 };
 
 // Unfollow Thunk
-export let unfollowThunk = (id) => (dispatch) => {
+export let unfollowThunk = (id) => async (dispatch) => {
   dispatch(followConditionAC(id));
   dispatch(followUserAC(id));
-  followApi.unfollowUser(id).then((code) => {
-    if (code === 0) dispatch(followConditionAC(id));
-  });
+  const code = await followApi.unfollowUser(id);
+  if (code === 0) dispatch(followConditionAC(id));
 };
 
 let initialState = {

@@ -1,10 +1,10 @@
 import { authApi } from "../api/api";
 import { change, untouch, stopSubmit } from "redux-form";
 
-const SET_AUTH = "SET AUTH";
-const TOGGLE_AUTH_FETCHING = "TOGGLE AUTH FETCHING";
-const TOGGLE_LOGIN_BUTTON = "TOGGLE LOGIN BUTTON";
-const TOGGLE_LOGOUT = "TOGGLE LOGOUT";
+const SET_AUTH = "auth/SET AUTH";
+const TOGGLE_AUTH_FETCHING = "auth/TOGGLE AUTH FETCHING";
+const TOGGLE_LOGIN_BUTTON = "auth/TOGGLE LOGIN BUTTON";
+const TOGGLE_LOGOUT = "auth/TOGGLE LOGOUT";
 // SetAuth AC
 let setAuthAC = (profile, isAuth) => ({ type: SET_AUTH, profile, isAuth });
 let toggleFetchingAC = (isFetching) => ({
@@ -15,43 +15,41 @@ let toggleButtonAC = () => ({ type: TOGGLE_LOGIN_BUTTON });
 let toggleLogOutAC = (disabled) => ({ type: TOGGLE_LOGOUT, disabled });
 
 // SetAuth Thunk
-export let setAuthThunk = () => (dispatch) => {
+export let setAuthThunk = () => async (dispatch) => {
   dispatch(toggleFetchingAC(true));
-  return authApi.auth().then((data) => {
-    if (data.resultCode === 0) {
-      dispatch(setAuthAC(data.data, true));
-    }
-    if (data.resultCode === 1) {
-      dispatch(setAuthAC({ id: null, email: null, login: null }, false));
-    }
-    dispatch(toggleFetchingAC(false));
-  });
+  const data = await authApi.auth()
+  if (data.resultCode === 0) {
+    dispatch(setAuthAC(data.data, true));
+  }
+  if (data.resultCode === 1) {
+    dispatch(setAuthAC({ id: null, email: null, login: null }, false));
+  }
+  dispatch(toggleFetchingAC(false));
 };
 
 //Login Thunk
-export const loginThunk = (data) => (dispatch) => {
+export const loginThunk = (data) => async (dispatch) => {
   dispatch(toggleButtonAC());
   dispatch(change("login", "email", ""));
   dispatch(change("login", "password", ""));
   dispatch(untouch("login", "email"));
   dispatch(untouch("login", "password"));
-  authApi.login(data).then((res) => {
-    if (res.data.resultCode !== 0) {
-      dispatch(
-        stopSubmit("login", {
-          _error:
-            res.data.messages.length > 0
-              ? res.data.messages[0]
-              : "Authentification error",
-        })
-      );
-      dispatch(toggleButtonAC());
-    }
-    if (res.data.resultCode === 0) {
-      dispatch(toggleButtonAC());
-      dispatch(setAuthThunk());
-    }
-  });
+  const res = await authApi.login(data)
+  if (res.data.resultCode !== 0) {
+    dispatch(
+      stopSubmit("login", {
+        _error:
+          res.data.messages.length > 0
+            ? res.data.messages[0]
+            : "Authentification error",
+      })
+    );
+    dispatch(toggleButtonAC());
+  }
+  if (res.data.resultCode === 0) {
+    dispatch(toggleButtonAC());
+    dispatch(setAuthThunk());
+  }
 };
 
 //Logout Thunk
