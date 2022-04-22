@@ -22,8 +22,8 @@ export const textValidator = (maxLength) => (text) => {
 export const authValidator = (login) => {
   if (login && login.length < 4)
     return { code: 2, message: "Min length is 4 characters !" };
-  if (login && login.length > 20)
-    return { code: 3, message: "Max length is 20 characters !" };
+  if (login && login.length > 35)
+    return { code: 3, message: "Max length is 35 characters !" };
   if (login && !/[a-zA-Z]/.test(login))
     return { code: 1, message: "Value must contain letters !" };
   if (!login) return { code: 0, message: "This field is required" };

@@ -1,10 +1,9 @@
 import { authApi } from "../api/api";
-import { change, untouch } from "redux-form";
+import { change, untouch, stopSubmit } from "redux-form";
 
 const SET_AUTH = "SET AUTH";
 const TOGGLE_AUTH_FETCHING = "TOGGLE AUTH FETCHING";
 const TOGGLE_LOGIN_BUTTON = "TOGGLE LOGIN BUTTON";
-const TOGGLE_NOT_FOUND = "TOGGLE NOT FOUND";
 const TOGGLE_LOGOUT = "TOGGLE LOGOUT";
 // SetAuth AC
 let setAuthAC = (profile, isAuth) => ({ type: SET_AUTH, profile, isAuth });
@@ -13,7 +12,6 @@ let toggleFetchingAC = (isFetching) => ({
   isFetching,
 });
 let toggleButtonAC = () => ({ type: TOGGLE_LOGIN_BUTTON });
-let toggleNotFoundAC = (isFound) => ({ type: TOGGLE_NOT_FOUND, isFound });
 let toggleLogOutAC = (disabled) => ({ type: TOGGLE_LOGOUT, disabled });
 
 // SetAuth Thunk
@@ -38,12 +36,17 @@ export const loginThunk = (data) => (dispatch) => {
   dispatch(untouch("login", "email"));
   dispatch(untouch("login", "password"));
   authApi.login(data).then((res) => {
-    if (res.data.resultCode === 1) {
-      dispatch(toggleNotFoundAC(true));
+    if (res.data.resultCode !== 0) {
+      dispatch(
+        stopSubmit("login", {
+          _error:
+            res.data.messages.length > 0
+              ? res.data.messages[0]
+              : "Authentification error",
+        }))
       dispatch(toggleButtonAC());
     }
     if (res.data.resultCode === 0) {
-      dispatch(toggleNotFoundAC(false));
       dispatch(toggleButtonAC());
       dispatch(setAuthThunk());
     }
@@ -69,7 +72,6 @@ let initialState = {
   },
   isAuth: null,
   isFetching: false,
-  userNotFound: false,
   buttonDisabled: false,
   logoutDisabled: false,
 };
@@ -92,11 +94,6 @@ let authReducer = (state = initialState, action) => {
       return {
         ...state,
         buttonDisabled: !state.buttonDisabled,
-      };
-    case TOGGLE_NOT_FOUND:
-      return {
-        ...state,
-        userNotFound: action.isFound,
       };
     case TOGGLE_LOGOUT:
       return {
