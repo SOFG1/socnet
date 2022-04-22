@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Profile.module.scss";
 import { connect } from "react-redux";
 import Profile from "./Profile";
@@ -15,88 +15,44 @@ import {
 } from "../../redux/profileReducer";
 import Preloader from "../common/Preloader/Preloader";
 import withId from "../../hoc/withId";
+import { useParams } from "react-router-dom";
 
-class ProfileContainer extends React.Component {
-  componentDidMount() {
-    if (!this.props.urlId && !this.props.profile && this.props.myId) {
-      this.props.setProfile(this.props.myId);
+const ProfilContainer = (props)=> {
+  const urlId = parseInt(useParams()['*'], 10);
+  useEffect(()=> {
+    let notSameProfile = !props.profile || props.profile.userId !== (urlId || props.myId)
+    if (notSameProfile && (urlId || props.myId) ) {
+      props.setProfile(urlId || props.myId);
     }
-    if (
-      !this.props.urlId &&
-      this.props.profile &&
-      this.props.profile.userId !== this.props.myId &&
-      this.props.myId
-    ) {
-      this.props.setProfile(this.props.myId);
-    }
-    if (this.props.urlId && !this.props.profile && this.props.isAuth) {
-      this.props.setProfile(this.props.urlId);
-    }
-    if (
-      this.props.urlId &&
-      this.props.profile &&
-      this.props.profile.userId !== this.props.urlId
-    ) {
-      this.props.setProfile(this.props.urlId);
-    }
-    if (!this.props.isAuth && this.props.urlId && !this.props.profile) {
-      this.props.setProfile(this.props.urlId);
-    }
-  }
-  componentDidUpdate() {
-    if (!this.props.urlId && !this.props.profile && this.props.myId) {
-      this.props.setProfile(this.props.myId);
-    }
-    if (
-      !this.props.urlId &&
-      this.props.profile &&
-      this.props.profile.userId !== this.props.myId &&
-      this.props.myId
-    ) {
-      this.props.setProfile(this.props.myId);
-    }
-    if (this.props.urlId && !this.props.profile && this.props.isAuth) {
-      this.props.setProfile(this.props.urlId);
-    }
-    if (
-      this.props.urlId &&
-      this.props.profile &&
-      this.props.profile.userId !== this.props.urlId
-    ) {
-      this.props.setProfile(this.props.urlId);
-    }
-    if (this.props.isAuth === false && this.props.urlId && !this.props.profile) {
-      this.props.setProfile(this.props.urlId);
-    }
-  }
-  render() {
-    return (
-      <div className={s.Profile}>
-        {this.props.isFetching && (
-          <Preloader isFetching={this.props.isFetching} />
-        )}
-        {this.props.profile && (
-          <Profile
-            myId={this.props.myId}
-            profile={this.props.profile}
-            changeStatus={this.props.changeStatus}
-            followUser={this.props.followUser}
-            unfollowUser={this.props.unfollowUser}
-            followDisabled={this.props.followDisabled}
-          />
-        )}
+  }, [props.myId, urlId])
+  return (
+    <div className={s.Profile}>
+      {props.isFetching && (
+        <Preloader isFetching={props.isFetching} />
+      )}
+      {props.profile && (
+        <Profile
+          myId={props.myId}
+          profile={props.profile}
+          changeStatus={props.changeStatus}
+          followUser={props.followUser}
+          unfollowUser={props.unfollowUser}
+          followDisabled={props.followDisabled}
+        />
+      )}
 
-        {this.props.profile && !this.props.urlId && (
-                <Posts
-                  posts={this.props.posts}
-                  addPost={this.props.addPost}
-                  likePost={this.props.likePost}
-                />
-        )}
-      </div>
-    );
-  }
+      {props.profile && !props.urlId && (
+              <Posts
+                posts={props.posts}
+                addPost={props.addPost}
+                likePost={props.likePost}
+              />
+      )}
+    </div>
+  );
 }
+
+
 
 let mapStateToProps = (state) => {
   return {
@@ -112,7 +68,6 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-  withId,
   withRedirect,
   connect(mapStateToProps, {setProfile, changeStatus, addPost, likePost, followUser, unfollowUser}),
-)(ProfileContainer);
+)(ProfilContainer);
