@@ -15,7 +15,6 @@ import {initThunk} from './redux/appReducer';
 import Initializer from './components/common/Initializer/Initializer'
 
 function App(props) {
-  console.log(props)
   useEffect(()=> {
       props.initThunk();
   }, []);

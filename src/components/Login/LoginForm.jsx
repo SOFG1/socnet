@@ -4,7 +4,6 @@ import TextInput from "../common/TextInput/TextInput";
 import { authValidator, emailValidator } from "../../utilites/validators";
 
 const LoginForm = (props)=> {
-    console.log(props)
     const {handleSubmit} = props
     return (
         <form onSubmit={handleSubmit} className={s.form}>

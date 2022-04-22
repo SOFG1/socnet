@@ -5,13 +5,12 @@ import avatar from "../../assets/avatar.png";
 import { Link } from "react-router-dom";
 
 const Users = (props) => {
-  let pages = paginator(props.pages, props.current);
   return (
     <div className={s.Users}>
       <h1 className={s.title}>Users</h1>
       <Preloader isFetching={props.isFetching} />
       <div className={s.pagination}>
-        {pages.map((page, index) => {
+      {props.pages.map((page, index) => {
           return page ? (
             <Link
               to={`/users/${page}`}

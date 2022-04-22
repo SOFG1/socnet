@@ -1,33 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Users from "./Users";
 import { connect } from "react-redux";
 import withId from "../../hoc/withId";
 import { compose } from "redux";
 import { Navigate } from "react-router-dom";
 import { setUsersThunk as setUsers, followThunk as followUser, unfollowThunk as unfollowUser } from "../../redux/usersReducer";
+import { getCurrent, getPages } from "../../utilites/selectors";
 
-class UsersContainer extends React.Component {
-  componentDidMount() {
-     this.props.urlId && this.props.urlId !== this.props.current && this.props.setUsers(this.props.urlId, this.props.defaultCount);
-  }
-  componentDidUpdate() {
-    this.props.urlId && this.props.urlId !== this.props.current && this.props.setUsers(this.props.urlId, this.props.defaultCount)
-  }
-  render() {
-    return this.props.urlId ? (
-      <Users {...this.props} />
+const UsersContainer = (props)=> {
+  useEffect(()=> {
+    props.urlId && props.urlId !== props.current && props.setUsers(props.urlId, props.defaultCount)
+  })
+    return props.urlId ? (
+      <Users {...props} />
     ) : (
-      !this.props.current ? <Navigate to={`/users/${this.props.defaultPage}`} /> : <Navigate to={`/users/${this.props.current}`} />
+      !props.current ? <Navigate to={`/users/${props.defaultPage}`} /> : <Navigate to={`/users/${props.current}`} />
     );
-  }
+  
 }
 
 let mapStateToProps = (state) => {
   return {
     users: state.users.users,
-    pages: state.users.numberOfPages,
+    pages: getPages(state),
+    numberOfPages: state.users.numberOfPages,
     isFetching: state.users.fetchingUsers,
-    current: state.users.curentPage,
+    current: getCurrent(state),
     defaultPage: state.users.defaultPage,
     defaultCount: state.users.defaultCount,
     disabled: state.users.disabledFollow,

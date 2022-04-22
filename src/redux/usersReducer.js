@@ -64,7 +64,7 @@ let initialState = {
   defaultPage: 1,
   numberOfPages: 0,
   totalCount: 0,
-  curentPage: null,
+  currentPage: null,
   friends: [],
   users: [],
   disabledFollow: [],
@@ -93,7 +93,7 @@ let usersReducer = (state = initialState, action) => {
         users: action.data.items,
         numberOfPages: Math.ceil(action.data.totalCount / state.defaultCount),
         totalCount: action.data.totalCount,
-        curentPage: action.data.page,
+        currentPage: action.data.page,
       };
     case FOLLOW_CONDITION:
       if (!state.disabledFollow.includes(action.id)) {

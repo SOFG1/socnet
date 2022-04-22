@@ -1,3 +1,5 @@
+
+
 const paginator = (total, current) => {
   const pages = [];
   // Normal 52
