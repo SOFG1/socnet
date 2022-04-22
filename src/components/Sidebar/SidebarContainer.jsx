@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { connect } from "react-redux";
 import { setFriendsThunk as setFriends } from "../../redux/usersReducer";
 
-class SidebarContainer extends React.Component {
-    componentDidMount() {
-        this.props.setFriends()
-    }
-    render() {
-        return <Sidebar isAuth={this.props.isAuth} friends={this.props.friends} isFetching={this.props.isFetching}/>
-    }
+const SidebarContainer = (props)=> {
+        useEffect(()=> {
+            props.setFriends()
+        },[])
+        return <Sidebar isAuth={props.isAuth} friends={props.friends} isFetching={props.isFetching}/>
 }
 
 let mapStateToProps = (state)=> {
