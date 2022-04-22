@@ -3,9 +3,9 @@ import { statusValidator } from "../../../utilites/validators";
 import s from "./Status.module.scss";
 
 const Status = (props)=> {
-  const [status, setStatus] = useState(null);
-  const {editMode, setEditMode} = useState(false);
-  const {error, setError} = useState(false);
+  const [status, setStatus] = useState('');
+  const [editMode, setEditMode] = useState(false);
+  const [error, setError] = useState(false);
   useEffect(()=> {
     setStatus(props.status)
   }, [props])
@@ -14,7 +14,9 @@ const Status = (props)=> {
     setError(!statusValidator(e.target.value));
   }
   let toggleEdit = ()=> {
-    if (!props.readOnly) setEditMode(mode => !mode);
+    if (!props.readOnly) {
+      setEditMode(mode => !mode)
+    }
   }
   let onBlur = (e)=> {
     const valid = statusValidator(e.target.value);
