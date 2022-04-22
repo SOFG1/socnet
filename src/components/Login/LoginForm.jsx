@@ -1,7 +1,7 @@
 import { reduxForm, Field } from "redux-form";
 import s from './Login.module.scss';
 import TextInput from "../common/TextInput/TextInput";
-import { authValidator } from "../../utilites/validators";
+import { authValidator, emailValidator } from "../../utilites/validators";
 
 const LoginForm = (props)=> {
     const {handleSubmit} = props
@@ -9,7 +9,7 @@ const LoginForm = (props)=> {
         <form onSubmit={handleSubmit} className={s.form}>
             <h1 className={s.title}>Log in</h1>
             {props.auth.userNotFound && <p className={s.notFound}>User not found !</p>}
-            <Field className={s.input} validate={[authValidator]} component={TextInput} name="email" placeholder="Your email..." type="text" />
+            <Field className={s.input} validate={[authValidator, emailValidator]} component={TextInput} name="email" placeholder="Your email..." type="text" />
             <Field className={s.input} validate={[authValidator]} component={TextInput} name="password" placeholder="Your password..." type="password"/>
             <div className={s.checkbox}>
                 <Field className={s.remember} component="input" name="rememberMe" id="remember" type="checkbox"/>
