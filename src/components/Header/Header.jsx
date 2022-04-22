@@ -19,10 +19,8 @@ const Header = (props) => {
               {props.profile.login}
             </Link>
           )}
-          {props.profile && (
-            <p className={s.email}>{props.profile.email}</p>
-          )}
           {props.profile && <p className={s.id}>{props.profile.id}</p>}
+          {props.profile && props.isAuth && <button onClick={props.logOut} className={s.logout} disabled={props.logoutDisabled}>Logout</button>}
           {!props.isAuth && (
             <Link className={s.login} to="login">
               Log in
