@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import withId from "../../hoc/withId";
 import { compose } from "redux";
 import { Navigate } from "react-router-dom";
-import { setUsersThunk, followThunk, unfollowThunk } from "../../redux/usersReducer";
+import { setUsersThunk as setUsers, followThunk as followUser, unfollowThunk as unfollowUser } from "../../redux/usersReducer";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -35,21 +35,12 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    setUsers: (page, count) => {
-      dispatch(setUsersThunk(page, count));
-    },
-    followUser: (id)=> {
-      dispatch(followThunk(id))
-    },
-    unfollowUser: (id)=> {
-      dispatch(unfollowThunk(id))
-    },
-  };
-};
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, {
+    setUsers,
+    followUser,
+    unfollowUser
+  }),
   withId
 )(UsersContainer);

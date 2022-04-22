@@ -22,7 +22,7 @@ export const followConditionAC = (id) => ({ type: FOLLOW_CONDITION, id });
 export const followUserAC = (id) => ({ type: FOLLOW_USER, id });
 
 // Set Friends Thunk
-export let setFriendsThunk = (dispatch) => {
+export let setFriendsThunk = ()=> (dispatch) => {
   dispatch(toggleFriendsFetchingAC(true));
   usersApi.getFriends(20).then((friends) => {
     dispatch(setFriendsAC(friends));

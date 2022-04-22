@@ -7,7 +7,7 @@ const Posts = React.memo((props)=> {
   return (
     <div className={s.Posts}>
       <h2 className={s.title}>MyPosts</h2>
-      <PostsForm onSubmit={props.addPost} />
+      <PostsForm onSubmit={(data)=> props.addPost(data.post)} />
       {props.posts
         .map((post) => {
           return (

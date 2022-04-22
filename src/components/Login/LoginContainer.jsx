@@ -2,7 +2,7 @@ import React from "react";
 import Login from "./Login";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
-import {loginThunk} from '../../redux/authReducer'
+import {loginThunk as login} from '../../redux/authReducer'
 
 
 class LoginContainer extends React.Component {
@@ -17,12 +17,6 @@ let mapStateToProps = (state)=> {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        login: (data)=> {
-            dispatch(loginThunk(data));
-        }
-    };
-  };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+
+export default connect(mapStateToProps, {login})(LoginContainer);

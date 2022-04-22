@@ -6,12 +6,12 @@ import Posts from "./Posts";
 import withRedirect from "../../hoc/withAuth";
 import { compose } from "redux";
 import {
-  setProfileThunk,
-  changeStatusThunk,
-  addPostThunk,
-  likePostAC,
-  followUserThunk,
-  unfollowUserThunk,
+  setProfileThunk as setProfile,
+  changeStatusThunk as changeStatus,
+  addPostThunk as addPost,
+  likePostAC as likePost,
+  followUserThunk as followUser,
+  unfollowUserThunk as unfollowUser,
 } from "../../redux/profileReducer";
 import Preloader from "../common/Preloader/Preloader";
 import withId from "../../hoc/withId";
@@ -108,31 +108,11 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    setProfile: (id) => {
-      dispatch(setProfileThunk(id));
-    },
-    changeStatus: (status) => {
-      dispatch(changeStatusThunk(status));
-    },
-    addPost: (form) => {
-      dispatch(addPostThunk(form.post));
-    },
-    likePost: (id) => {
-      dispatch(likePostAC(id));
-    },
-    followUser: (id) => {
-      dispatch(followUserThunk(id));
-    },
-    unfollowUser: (id) => {
-      dispatch(unfollowUserThunk(id));
-    },
-  };
-};
+
+
 
 export default compose(
   withId,
   withRedirect,
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, {setProfile, changeStatus, addPost, likePost, followUser, unfollowUser}),
 )(ProfileContainer);

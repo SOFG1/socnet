@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 import { connect } from "react-redux";
-import { setFriendsThunk } from "../../redux/usersReducer";
+import { setFriendsThunk as setFriends } from "../../redux/usersReducer";
 
 class SidebarContainer extends React.Component {
     componentDidMount() {
@@ -20,12 +20,6 @@ let mapStateToProps = (state)=> {
     })
 }
 
-let mapDispatchToProps = (dispatch)=> {
-    return {
-        setFriends: ()=> {
-            dispatch(setFriendsThunk)
-        }
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarContainer)
+
+export default connect(mapStateToProps, {setFriends})(SidebarContainer)

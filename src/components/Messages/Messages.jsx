@@ -41,7 +41,7 @@ const Messages = (props) => {
               </div>
             );
           })}
-          <MessagesForm onSubmit={props.sendMessage} />
+          <MessagesForm onSubmit={(data)=> props.sendMessage(data.message)} />
         </div>
       </div>
     </div>

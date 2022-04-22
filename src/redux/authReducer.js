@@ -56,6 +56,7 @@ export const logOutThunk = () => async (dispatch) => {
   const code = await authApi.logOut()
   if (code === 0) {
     dispatch(setAuthThunk())
+    dispatch(toggleLogOutAC(false))
   }
 };
 

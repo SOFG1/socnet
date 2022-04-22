@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import withRedirect from "../../hoc/withAuth";
 import Messages from "./Messages";
-import {sendMessageThunk} from '../../redux/profileReducer'
+import {sendMessageThunk as sendMessage} from '../../redux/profileReducer'
 
 class MessagesContainer extends React.Component {
     render() {
@@ -20,13 +20,6 @@ let mapStateToProps = (state)=> {
     }
 }
 
-let mapDispatchToProps = (dispatch)=> {
-    return {
-        sendMessage: (submit)=> {
-            dispatch(sendMessageThunk(submit.message))
-        }
-    }
-}
 
 
-export default compose(withRedirect, connect(mapStateToProps, mapDispatchToProps))(MessagesContainer)
+export default compose(withRedirect, connect(mapStateToProps, {sendMessage}))(MessagesContainer)
