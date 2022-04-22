@@ -17,7 +17,7 @@ let toggleLogOutAC = (disabled) => ({ type: TOGGLE_LOGOUT, disabled });
 // SetAuth Thunk
 export let setAuthThunk = () => (dispatch) => {
   dispatch(toggleFetchingAC(true));
-  authApi.auth().then((data) => {
+  return authApi.auth().then((data) => {
     if (data.resultCode === 0) {
       dispatch(setAuthAC(data.data, true));
     }
@@ -43,7 +43,8 @@ export const loginThunk = (data) => (dispatch) => {
             res.data.messages.length > 0
               ? res.data.messages[0]
               : "Authentification error",
-        }))
+        })
+      );
       dispatch(toggleButtonAC());
     }
     if (res.data.resultCode === 0) {
@@ -55,11 +56,11 @@ export const loginThunk = (data) => (dispatch) => {
 
 //Logout Thunk
 export const logOutThunk = () => async (dispatch) => {
-  dispatch(toggleLogOutAC(true))
-  const code = await authApi.logOut()
+  dispatch(toggleLogOutAC(true));
+  const code = await authApi.logOut();
   if (code === 0) {
-    dispatch(setAuthThunk())
-    dispatch(toggleLogOutAC(false))
+    dispatch(setAuthThunk());
+    dispatch(toggleLogOutAC(false));
   }
 };
 

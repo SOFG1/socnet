@@ -9,10 +9,19 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import LoginContainer from "./components/Login/LoginContainer";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import {initThunk} from './redux/appReducer';
+import Initializer from './components/common/Initializer/Initializer'
 
-function App() {
+function App(props) {
+  console.log(props)
+  useEffect(()=> {
+      props.initThunk();
+  }, []);
   return (
-    <div className="Wrapper">
+    props.isInit ? (
+      <div className="Wrapper">
       <HeaderContainer />
       <SidebarContainer />
       <main>
@@ -28,7 +37,17 @@ function App() {
         </Routes>
       </main>
     </div>
+    ) : (
+      <Initializer />
+    )
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    authData: state.auth,
+    isInit: state.app.isInit,
+  };
+};
+
+export default connect(mapStateToProps, {initThunk})(App);

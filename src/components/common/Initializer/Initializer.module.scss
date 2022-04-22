@@ -1,0 +1,26 @@
+.Initializer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .circle {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        border-right: 5px solid rgb(0, 132, 255);
+        animation: rotate infinite 800ms linear;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
