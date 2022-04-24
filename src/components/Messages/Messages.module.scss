@@ -1,19 +1,11 @@
-.MessagesPage {
-    padding: 20px;
+.Messages {
+    padding: 20px 30px 0;
     background-color: #FFF7BC;
 }
 
-.title {
-    font-size: 28px;
-    font-weight: 700;
-    font-family: sans-serif;
-    color: #ff3434;
-    margin-bottom: 15px;
-}
 
 .box {
     display: flex;
-    padding: 0 25px;
     gap: 40px;
 }
 
@@ -115,5 +107,35 @@
     &:active {
         color: red;
         background-color: #fff;
+    }
+}
+
+
+@media screen and (max-width: 770px) {
+    .box {
+        flex-direction: column;
+    }
+    .friends {
+        display: flex;
+        height: auto;
+        gap: 13px;
+        margin: 0 -27px;
+    }
+    .friend {
+        padding: 7px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .box {
+        gap: 20px;
+    }
+    .avatar {
+        height: 35px;
+        width: 35px;
+    }
+    .name {
+        font-size: 16px;
     }
 }

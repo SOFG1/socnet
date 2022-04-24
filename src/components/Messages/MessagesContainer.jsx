@@ -21,5 +21,4 @@ let mapStateToProps = (state)=> {
 }
 
 
-
 export default compose(withRedirect, connect(mapStateToProps, {sendMessage}))(MessagesContainer)

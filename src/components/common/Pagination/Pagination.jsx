@@ -1,9 +1,9 @@
-import s from "./Users.module.scss";
+import s from "./Pagination.module.scss";
 import { Link } from "react-router-dom";
 
 const Pagination = ({ pages, ...props }) => {
   return (
-    <div className={s.pagination}>
+    <div className={s.Pagination}>
       {pages.map((page, index) => {
         return page ? (
           <Link

@@ -1,10 +1,11 @@
 .Users {
     background-color: #F0FFC2;
     min-height: 100%;
-    padding: 20px;
+    padding: 20px 30px;
 }
 
 .title {
+    text-align: center;
     font-size: 28px;
     font-weight: 700;
     font-family: sans-serif;
@@ -12,39 +13,6 @@
     margin-bottom: 30px;
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    max-width: 330px;
-    margin: 0 auto 50px;
-}
-
-.page {
-    color: #ff5121;
-    font-size: 24px;
-    font-weight: 700;
-    font-family: sans-serif;
-    padding:0 7px;
-    margin:0 5px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: opacity 200ms linear;
-    &.active {
-        color: green;    }
-    &.active:hover,
-    &.active:active {
-        opacity: 1;
-    }
-    &:hover,
-    &:active {
-        opacity: .7;
-    }
-}
-
-.dots {
-    pointer-events: none;
-}
 
 .user {
     display: flex;
@@ -104,6 +72,7 @@
     font-family: sans-serif;
     font-weight: 700;
     margin: 1em 0;
+    word-break: break-all;
 }
 
 .id {
@@ -112,4 +81,30 @@
 
 .link {
     text-decoration: none;
+}
+
+
+@media screen and (max-width: 720px) {
+    .user {
+        padding: 12px;
+    }
+    .avatar {
+        height: 130px;
+        width: 130px;
+    }
+    .name {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .avatar {
+        height: 100px;
+        width: 100px;
+        margin: 0 10px 10px;
+    }
+    .name {
+        font-size: 20px;
+        margin: 10px 0;
+    }
 }

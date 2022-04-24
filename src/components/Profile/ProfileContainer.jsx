@@ -40,7 +40,7 @@ const ProfilContainer = (props)=> {
         />
       )}
 
-      {props.profile && !props.urlId && (
+      {props.profile && !urlId && (
               <Posts
                 posts={props.posts}
                 addPost={props.addPost}

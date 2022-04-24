@@ -1,9 +1,15 @@
 .header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #FFFBE7;
     padding: 15px 40px 15px 15px;
+    min-height: 93px;
 }
 
 .logo {
@@ -53,4 +59,11 @@
     text-align-last: left;
     background-color: transparent;
     cursor: pointer;
+}
+
+@media screen and (max-width: 620px) {
+    .logo {
+        height: 45px;
+        width: 45px;
+    }
 }

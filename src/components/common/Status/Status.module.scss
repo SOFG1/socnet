@@ -18,8 +18,8 @@
 }
 
 .statusBox.editable {
-    cursor: pointer;
-  }
+  cursor: pointer;
+}
 
 .status {
   color: red;
@@ -35,4 +35,16 @@
 
 .empty {
   color: gray;
+}
+
+@media screen and (max-width: 620px) {
+  .statusBox {
+    padding-right: 13px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .statusBox {
+    margin-bottom: 5px;
+  }
 }

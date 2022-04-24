@@ -1,7 +1,6 @@
 import s from "./Users.module.scss";
 import Preloader from "../common/Preloader/Preloader";
-import { Link } from "react-router-dom";
-import Pagination from "./Pagination";
+import Pagination from "../common/Pagination/Pagination";
 import User from "./User";
 
 const Users = (props) => {

@@ -11,19 +11,18 @@ import Music from "./components/Music/Music";
 import LoginContainer from "./components/Login/LoginContainer";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import {initThunk} from './redux/appReducer';
-import Initializer from './components/common/Initializer/Initializer'
+import { initThunk, toggleSidebarAC as toggleSidebar } from "./redux/appReducer";
+import Initializer from "./components/common/Initializer/Initializer";
 
 function App(props) {
-  useEffect(()=> {
-      props.initThunk();
+  useEffect(() => {
+    props.initThunk();
   }, []);
-  return (
-    props.isInit ? (
-      <div className="Wrapper">
+  return props.isInit ? (
+    <div className="App">
       <HeaderContainer />
       <SidebarContainer />
-      <main>
+      <div className={props.sidebar ? "content" : "content opened"} onClick={()=> props.toggleSidebar(false)}>
         <Routes>
           <Route path="/" element={<ProfileContainer />} />
           <Route path="/profile/*" element={<ProfileContainer />} />
@@ -34,11 +33,10 @@ function App(props) {
           <Route path="/settings/*" element={<Settings />} />
           <Route path="/login/*" element={<LoginContainer />} />
         </Routes>
-      </main>
+      </div>
     </div>
-    ) : (
-      <Initializer />
-    )
+  ) : (
+    <Initializer />
   );
 }
 
@@ -46,7 +44,8 @@ const mapStateToProps = (state) => {
   return {
     authData: state.auth,
     isInit: state.app.isInit,
+    sidebar: state.app.sidebarOpened,
   };
 };
 
-export default connect(mapStateToProps, {initThunk})(App);
+export default connect(mapStateToProps, { initThunk, toggleSidebar })(App);

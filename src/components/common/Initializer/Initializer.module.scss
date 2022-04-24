@@ -24,3 +24,10 @@
         transform: rotate(360deg);
     }
 }
+
+@media screen and (max-width: 500px) {
+    .Initializer .circle {
+        height: 100px;
+        width: 100px;
+    }
+}

@@ -6,11 +6,11 @@ import Preloader from "../common/Preloader/Preloader";
 const Sidebar = (props) => {
 
   return (
-    <div className={s.Sidebar}>
+    <div className={props.sideBar ? s.Sidebar : `${s.Sidebar} ${s.opened}`}>
       <ul className={s.list}>
         {props.isAuth && (
           <li className={s.item}>
-            <Link className={s.link} to="profile">
+            <Link className={s.link} to="profile" onClick={()=> props.toggleSidebar(false)}>
               Profile
             </Link>
           </li>
@@ -18,29 +18,29 @@ const Sidebar = (props) => {
 
         {props.isAuth && (
           <li className={s.item}>
-            <Link className={s.link} to="messages">
+            <Link className={s.link} to="messages" onClick={()=> props.toggleSidebar(false)}>
               Messages
             </Link>
           </li>
         )}
         <li className={s.item}>
-          <Link className={s.link} to="users">
+          <Link className={s.link} to="users" onClick={()=> props.toggleSidebar(false)}>
             Users
           </Link>
         </li>
         <li className={s.item}>
-          <Link className={s.link} to="music">
+          <Link className={s.link} to="music" onClick={()=> props.toggleSidebar(false)}>
             Music
           </Link>
         </li>
         <li className={s.item}>
-          <Link className={s.link} to="news">
+          <Link className={s.link} to="news" onClick={()=> props.toggleSidebar(false)}>
             News
           </Link>
         </li>
         {props.isAuth && (
           <li className={s.item}>
-            <Link className={s.link} to="settings">
+            <Link className={s.link} to="settings" onClick={()=> props.toggleSidebar(false)}>
               Settings
             </Link>
           </li>
@@ -68,6 +68,7 @@ const Sidebar = (props) => {
           </div>
         </div>
       )}
+      <button onClick={()=> props.toggleSidebar(!props.sideBar)} className={s.trigger}>{props.sideBar ? '<' : '>'}</button>
     </div>
   );
 };

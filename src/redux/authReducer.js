@@ -1,10 +1,11 @@
 import { authApi } from "../api/api";
-import { change, untouch, stopSubmit } from "redux-form";
+import { change, untouch } from "redux-form";
 
 const SET_AUTH = "auth/SET AUTH";
 const TOGGLE_AUTH_FETCHING = "auth/TOGGLE AUTH FETCHING";
 const TOGGLE_LOGIN_BUTTON = "auth/TOGGLE LOGIN BUTTON";
 const TOGGLE_LOGOUT = "auth/TOGGLE LOGOUT";
+const SET_ERROR = "auth/SET_ERROR";
 // SetAuth AC
 let setAuthAC = (profile, isAuth) => ({ type: SET_AUTH, profile, isAuth });
 let toggleFetchingAC = (isFetching) => ({
@@ -13,11 +14,12 @@ let toggleFetchingAC = (isFetching) => ({
 });
 let toggleButtonAC = () => ({ type: TOGGLE_LOGIN_BUTTON });
 let toggleLogOutAC = (disabled) => ({ type: TOGGLE_LOGOUT, disabled });
+let setErrorAC = (error)=> ({type: SET_ERROR, error});
 
 // SetAuth Thunk
 export let setAuthThunk = () => async (dispatch) => {
   dispatch(toggleFetchingAC(true));
-  const data = await authApi.auth()
+  const data = await authApi.auth();
   if (data.resultCode === 0) {
     dispatch(setAuthAC(data.data, true));
   }
@@ -30,25 +32,19 @@ export let setAuthThunk = () => async (dispatch) => {
 //Login Thunk
 export const loginThunk = (data) => async (dispatch) => {
   dispatch(toggleButtonAC());
-  dispatch(change("login", "email", ""));
   dispatch(change("login", "password", ""));
   dispatch(untouch("login", "email"));
   dispatch(untouch("login", "password"));
-  const res = await authApi.login(data)
+  const res = await authApi.login(data);
   if (res.data.resultCode !== 0) {
-    dispatch(
-      stopSubmit("login", {
-        _error:
-          res.data.messages.length > 0
-            ? res.data.messages[0]
-            : "Authentification error",
-      })
-    );
     dispatch(toggleButtonAC());
+    dispatch(setErrorAC(res.data.messages ? res.data.messages[0] : "Something went wrong"))
   }
   if (res.data.resultCode === 0) {
+    dispatch(change("login", "email", ""));
     dispatch(toggleButtonAC());
     dispatch(setAuthThunk());
+    dispatch(setErrorAC(null));
   }
 };
 
@@ -73,6 +69,7 @@ let initialState = {
   isFetching: false,
   buttonDisabled: false,
   logoutDisabled: false,
+  submitError: null,
 };
 
 // Reducer
@@ -99,6 +96,11 @@ let authReducer = (state = initialState, action) => {
         ...state,
         logoutDisabled: action.disabled,
       };
+      case SET_ERROR:
+        return {
+          ...state,
+          submitError: action.error,
+        }
     default:
       return state;
   }

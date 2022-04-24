@@ -1,182 +1,207 @@
 .Profile {
-    padding: 20px;
-    background-color: #FAFDD6;
-    min-height: 100%;
+  padding: 20px 30px;
+  background-color: #fafdd6;
+  min-height: 100%;
 }
 
 //My Profile
 
 .user {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 40px;
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
 }
 
 .left {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .avatar {
-    height: 300px;
-    width: 300px;
-    object-fit: cover;
-    margin-bottom: 25px;
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  margin-bottom: 25px;
 }
 
 .name {
-    font-size: 30px;
-    font-family: sans-serif;
-    font-weight: 700;
-    text-shadow: 1px 1px 2px rgb(0, 25, 254);
-    margin-bottom: 20px;
+  font-size: 30px;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgb(0, 25, 254);
+  margin-bottom: 20px;
 }
 
 .about {
-    font-family: sans-serif;
-    margin-bottom: 15px;
+  font-family: sans-serif;
+  margin-bottom: 15px;
 }
 
 .job {
-    color: green;
-    font-weight: 800;
-    font-size: 18px;
-    font-family: sans-serif;
-    text-shadow: 1px 1px 2px rgb(110, 255, 58);
-    margin-bottom: 20px;
+  color: green;
+  font-weight: 800;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-shadow: 1px 1px 2px rgb(110, 255, 58);
+  margin-bottom: 20px;
 }
 
 .contact {
-    font-size: 18px;
-    font-weight: 700;
-    font-family: sans-serif;
-    color: #B20600;
-    margin-bottom: 12px;
-    span {
-        font-size: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: sans-serif;
+  color: #b20600;
+  margin-bottom: 12px;
+  span {
+    word-break: break-all;
+    font-size: 20px;
     color: #247881;
-
-    }
+  }
 }
 
 // Posts
 
 .title {
-    font-size: 28px;
-    font-weight: 700;
-    font-family: sans-serif;
-    color: #ff3434;
-    margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 700;
+  font-family: sans-serif;
+  color: #ff3434;
+  margin-bottom: 15px;
 }
 
 .form {
-    margin-bottom: 20px;
-    div {
-        margin-bottom: 10px;
-    }
+  margin-bottom: 20px;
+  div {
+    margin-bottom: 10px;
+  }
 }
 
 .textarea {
-    width: 100%;
-    resize: none;
-    min-height: 130px;
-    border-radius: 10px;
-    padding: 10px;
+  width: 100%;
+  resize: none;
+  min-height: 130px;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .btn {
-    color: #FF5F00;
-    font-size: 16px;
-    padding: 8px 20px;
-    background-color: #F6F54D;
-    border: 0;
-    border-radius: 7px;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-family: sans-serif;
-    cursor: pointer;
-    box-shadow: 1px 1px 3px red;
-    transition: 150ms linear;
-    &:hover,
-    &:active {
-        color: #247881;
-        background-color: white;
-        box-shadow: 1px 1px 3px greenyellow;
-    }
+  color: #ff5f00;
+  font-size: 16px;
+  padding: 8px 20px;
+  background-color: #f6f54d;
+  border: 0;
+  border-radius: 7px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: sans-serif;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px red;
+  transition: 150ms linear;
+  &:hover,
+  &:active {
+    color: #247881;
+    background-color: white;
+    box-shadow: 1px 1px 3px greenyellow;
+  }
 }
 
 .post {
-    display: flex;
-    flex-direction: column;
-    background-color: #E4E9BE;
-    padding: 25px 10px;
-    border-radius: 10px;
-    box-shadow: 0 0px 3px red;
-    margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  background-color: #e4e9be;
+  padding: 25px 10px;
+  border-radius: 10px;
+  box-shadow: 0 0px 3px red;
+  margin-bottom: 25px;
 }
 
 .postAvatar {
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
 .text {
-    font-family: sans-serif;
-    font-weight: 500;
-    margin-bottom: 20px;
+  font-family: sans-serif;
+  font-weight: 500;
+  margin-bottom: 20px;
 }
 
 .postBox {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .likeBtn {
-    border: 0;
-    font-size: 18px;
-    padding: 8px 16px;
-    font-weight:700;
-    color: rgb(253, 91, 118);
-    cursor: pointer;
-    transition: 150ms linear;
-    &:hover {
-        color: #fff;
-        background-color: rgb(255, 88, 116);
-    }
+  border: 0;
+  font-size: 18px;
+  padding: 8px 16px;
+  font-weight: 700;
+  color: rgb(253, 91, 118);
+  cursor: pointer;
+  transition: 150ms linear;
+  &:hover {
+    color: #fff;
+    background-color: rgb(255, 88, 116);
+  }
 }
 
 .likes {
-    font-family: sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: rgb(255, 8, 50);
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(255, 8, 50);
 }
 
 .followbtn {
-    padding: 5px 10px;
-    font-family: sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 16px;
-    border: 0;
-    background-color: #FCD900;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 0 3px rgba(#000, .6);
-    transition: 100ms linear ;
-    &:hover,
-    &:active {
-        color: #F0FFC2;
-        background-color: rgb(255, 27, 27);
-    }
-    &:hover:disabled,
-    &:active:disabled {
-        cursor: inherit;
-        color: rgba(#000, .3);
-        background-color: #FCD900;
-    }
+  padding: 5px 10px;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  border: 0;
+  background-color: #fcd900;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 0 3px rgba(#000, 0.6);
+  transition: 100ms linear;
+  &:hover,
+  &:active {
+    color: #f0ffc2;
+    background-color: rgb(255, 27, 27);
+  }
+  &:hover:disabled,
+  &:active:disabled {
+    cursor: inherit;
+    color: rgba(#000, 0.3);
+    background-color: #fcd900;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .avatar {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .user {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .avatar {
+    margin-bottom: 10px;
+  }
+  .name {
+    text-align: center;
+  }
+  .post {
+    padding: 7px;
+  }
 }

@@ -5,8 +5,7 @@ import MessagesForm from "./MessagesForm";
 
 const Messages = (props) => {
   return (
-    <div className={s.MessagesPage}>
-      <h1 className={s.title}>Friends: </h1>
+    <div className={s.Messages}>
       <div className={s.box}>
         <ul className={s.friends}>
           {props.friends.length === 0 ? (
