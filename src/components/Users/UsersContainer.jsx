@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import Users from "./Users";
 import { connect } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { setUsersThunk as setUsers, followThunk as followUser, unfollowThunk as unfollowUser } from "../../redux/usersReducer";
 import { getCurrent} from "../../redux/users-selectors";
 
 const UsersContainer = (props)=> {
+  let changePage = useNavigate()
   const urlId = parseInt(useParams()['*'], 10);
   useEffect(()=> {
     urlId && urlId !== props.current && props.setUsers(urlId, props.defaultCount)
   })
     return urlId ? (
-      <Users {...props} />
+      <Users {...props} toPage={(page)=> changePage(`${page}`)} />
     ) : (
       !props.current ? <Navigate to={`/users/${props.defaultPage}`} /> : <Navigate to={`/users/${props.current}`} />
     );

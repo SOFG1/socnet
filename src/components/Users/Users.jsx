@@ -8,7 +8,7 @@ const Users = (props) => {
     <div className={s.Users}>
       <h1 className={s.title}>Users</h1>
       <Preloader isFetching={props.isFetching} />
-      <Pagination numberOfPages={props.numberOfPages} currentPage={props.current}/>
+      <Pagination numberOfPages={props.numberOfPages} currentPage={props.current} changePage={props.toPage}/>
 
       <div className={s.usersList}>
         {props.users.map((user) => {

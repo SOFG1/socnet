@@ -56,7 +56,7 @@ export let unfollowThunk = (id) => async (dispatch) => {
 let initialState = {
   fetchingFriends: false,
   fetchingUsers: false,
-  defaultCount: 20,
+  defaultCount: 60,
   defaultPage: 1,
   numberOfPages: 0,
   totalCount: 0,
