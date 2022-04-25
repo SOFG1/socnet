@@ -1,20 +1,18 @@
 .Sidebar {
     position: fixed;
     left: 0;
-    top: 113px;
     bottom: 0;
+    z-index: 1;
+    top: 113px;
     width: 320px;
     z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #FFFBE7;
-    transition: 300ms linear;
+    transition: 300ms ease-in;
     padding:8px;
     max-width: 90%;
-    &.opened {
-        transform: translateX(-100%);
-    }
 }
 
 .list {
@@ -110,11 +108,20 @@
 }
 
 @media screen and (min-width: 1150px) {
-    .Sidebar.opened {
-        transform: translateX(0);
-    }
     .trigger {
         display: none;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .Sidebar {
+        position: fixed;
+        left: 0;
+        top: 113px;
+        bottom: 0;
+    }
+    &.opened {
+        transform: translateX(-100%);
     }
 }
 

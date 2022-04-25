@@ -10,8 +10,12 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import Initializer from "./components/common/Initializer/Initializer";
 // Pages
-const ProfileContainer = lazy(() => import("./components/Profile/ProfileContainer"));
-const MessagesContainer = lazy(() => import("./components/Messages/MessagesContainer"));
+const ProfileContainer = lazy(() =>
+  import("./components/Profile/ProfileContainer")
+);
+const MessagesContainer = lazy(() =>
+  import("./components/Messages/MessagesContainer")
+);
 const UsersContainer = lazy(() => import("./components/Users/UsersContainer"));
 const News = lazy(() => import("./components/News/News"));
 const Settings = lazy(() => import("./components/Settings/Settings"));
@@ -26,10 +30,7 @@ function App(props) {
     <div className="App">
       <HeaderContainer />
       <SidebarContainer />
-      <div
-        className={props.sidebar ? "content" : "content opened"}
-        onClick={() => props.toggleSidebar(false)}
-      >
+      <div className="content" onClick={() => props.toggleSidebar(false)}>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<ProfileContainer />} />
