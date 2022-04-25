@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import Users from "./Users";
 import { connect } from "react-redux";
-import { compose } from "redux";
 import { Navigate, useParams } from "react-router-dom";
 import { setUsersThunk as setUsers, followThunk as followUser, unfollowThunk as unfollowUser } from "../../redux/usersReducer";
-import { getCurrent, getPages } from "../../utilites/selectors";
+import { getCurrent} from "../../redux/users-selectors";
 
 const UsersContainer = (props)=> {
   const urlId = parseInt(useParams()['*'], 10);
@@ -22,7 +21,6 @@ const UsersContainer = (props)=> {
 let mapStateToProps = (state) => {
   return {
     users: state.users.users,
-    pages: getPages(state),
     numberOfPages: state.users.numberOfPages,
     isFetching: state.users.fetchingUsers,
     current: getCurrent(state),

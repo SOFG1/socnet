@@ -59,7 +59,7 @@ test("4'th post's likes should be incremented", () => {
         id: 4,
         text: "Ok. Good luck",
         date: "17:06",
-      },
+      }, 
     ],
   };
 

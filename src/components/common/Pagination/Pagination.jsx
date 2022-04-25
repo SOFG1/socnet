@@ -1,7 +1,10 @@
 import s from "./Pagination.module.scss";
 import { Link } from "react-router-dom";
+import paginator from "../../../utilites/paginator";
 
-const Pagination = ({ pages, ...props }) => {
+const Pagination = ({ numberOfPages, currentPage }) => {
+  let pages = paginator(currentPage, numberOfPages);
+
   return (
     <div className={s.Pagination}>
       {pages.map((page, index) => {
@@ -10,7 +13,7 @@ const Pagination = ({ pages, ...props }) => {
             to={`/users/${page}`}
             key={page}
             className={
-              page === props.current ? `${s.page} ${s.active}` : s.page
+              page === currentPage ? `${s.page} ${s.active}` : s.page
             }
           >
             {page}
