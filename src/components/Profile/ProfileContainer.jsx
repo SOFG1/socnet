@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Profile from "./Profile";
 import Posts from "./Posts";
 import withRedirect from "../../hoc/withAuth";
-import withErrorBoundary from "../../hoc/withErrorBoundary";
 import { compose } from "redux";
 import {
   setProfileThunk as setProfile,
@@ -16,20 +15,20 @@ import {
 } from "../../redux/profileReducer";
 import Preloader from "../common/Preloader/Preloader";
 import { useParams } from "react-router-dom";
+import ErrorBoundary from "../common/ErrorBoundary/ErrorBoundary";
 
-const ProfilContainer = (props)=> {
-  const urlId = parseInt(useParams()['*'], 10);
-  useEffect(()=> {
-    let notSameProfile = !props.profile || props.profile.userId !== (urlId || props.myId)
-    if (notSameProfile && (urlId || props.myId) ) {
+const ProfilContainer = (props) => {
+  const urlId = parseInt(useParams()["*"], 10);
+  useEffect(() => {
+    let notSameProfile =
+      !props.profile || props.profile.userId !== (urlId || props.myId);
+    if (notSameProfile && (urlId || props.myId)) {
       props.setProfile(urlId || props.myId);
     }
-  }, [props.myId, urlId])
+  }, [props.myId, urlId]);
   return (
     <div className={s.Profile}>
-      {props.isFetching && (
-        <Preloader isFetching={props.isFetching} />
-      )}
+      {props.isFetching && <Preloader isFetching={props.isFetching} />}
       {props.profile && (
         <Profile
           myId={props.myId}
@@ -42,17 +41,17 @@ const ProfilContainer = (props)=> {
       )}
 
       {props.profile && !urlId && (
-              <Posts
-                posts={props.posts} // error here
-                addPost={props.addPost}
-                likePost={props.likePost}
-              />
+        <ErrorBoundary>
+          <Posts
+            posts={props.posts} // error here
+            addPost={props.addPost}
+            likePost={props.likePost}
+          />
+        </ErrorBoundary>
       )}
     </div>
   );
-}
-
-
+};
 
 let mapStateToProps = (state) => {
   return {
@@ -64,11 +63,14 @@ let mapStateToProps = (state) => {
   };
 };
 
-
-
-
 export default compose(
   withRedirect,
-  connect(mapStateToProps, {setProfile, changeStatus, addPost, likePost, followUser, unfollowUser}),
-  withErrorBoundary,
+  connect(mapStateToProps, {
+    setProfile,
+    changeStatus,
+    addPost,
+    likePost,
+    followUser,
+    unfollowUser,
+  })
 )(ProfilContainer);
