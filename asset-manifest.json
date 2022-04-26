@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/socnet/static/css/main.09f2efe7.css",
-    "main.js": "/socnet/static/js/main.8431ad16.js",
+    "main.js": "/socnet/static/js/main.2a65e758.js",
     "static/css/848.96d5ddb7.chunk.css": "/socnet/static/css/848.96d5ddb7.chunk.css",
     "static/js/848.06ee89dc.chunk.js": "/socnet/static/js/848.06ee89dc.chunk.js",
     "static/css/778.2fc08eea.chunk.css": "/socnet/static/css/778.2fc08eea.chunk.css",
@@ -18,7 +18,7 @@
     "static/media/header-logo.svg": "/socnet/static/media/header-logo.5e4795bafa023770c3cb93fb118c4e2b.svg",
     "index.html": "/socnet/index.html",
     "main.09f2efe7.css.map": "/socnet/static/css/main.09f2efe7.css.map",
-    "main.8431ad16.js.map": "/socnet/static/js/main.8431ad16.js.map",
+    "main.2a65e758.js.map": "/socnet/static/js/main.2a65e758.js.map",
     "848.96d5ddb7.chunk.css.map": "/socnet/static/css/848.96d5ddb7.chunk.css.map",
     "848.06ee89dc.chunk.js.map": "/socnet/static/js/848.06ee89dc.chunk.js.map",
     "778.2fc08eea.chunk.css.map": "/socnet/static/css/778.2fc08eea.chunk.css.map",
@@ -35,6 +35,6 @@
   },
   "entrypoints": [
     "static/css/main.09f2efe7.css",
-    "static/js/main.8431ad16.js"
+    "static/js/main.2a65e758.js"
   ]
 }
