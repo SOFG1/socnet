@@ -12,3 +12,11 @@
     color: red;
     font-family: sans-serif;
 }
+
+@media screen and (max-width: 620px) {
+    .error {
+        position: static;
+        transform: translate(0);
+        margin: 5px 0;
+    }
+}
