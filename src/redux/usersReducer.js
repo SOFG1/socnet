@@ -1,6 +1,6 @@
 import { usersApi, followApi } from "../api/api";
 
-const SET_FRIENDS = "users/SET FRIENDS";
+const SET_FRIENDS = "users/SET FRIENDS"; 
 const SET_USERS = "users/SET USERS";
 const TOGGLE_FRIENDS_FETCHING = "users/TOGGLE FRIENDS FETCHING";
 const TOGGLE_USERS_FETCHING = "users/TOGGLE USERS FETCHING";

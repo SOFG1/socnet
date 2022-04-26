@@ -3,7 +3,6 @@ import { likePostAC } from "./profileReducer";
 
 test("4'th post's likes should be incremented", () => {
   //Initial data
-
   let initialState = {
     profile: null,
     isFetching: false,
@@ -62,9 +61,11 @@ test("4'th post's likes should be incremented", () => {
       }, 
     ],
   };
-
   let action = likePostAC(3);
 
+
+
+  
   //Result data
   let newPost = profileReducer(initialState, action).posts.find(post => post.id === 3)
   let oldPost = initialState.posts.find(post => post.id === 3);

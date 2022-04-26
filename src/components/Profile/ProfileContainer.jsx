@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import s from "./Profile.module.scss";
 import { connect } from "react-redux";
 import Profile from "./Profile";
 import Posts from "./Posts";
 import withRedirect from "../../hoc/withAuth";
+import withErrorBoundary from "../../hoc/withErrorBoundary";
 import { compose } from "redux";
 import {
   setProfileThunk as setProfile,
@@ -42,7 +43,7 @@ const ProfilContainer = (props)=> {
 
       {props.profile && !urlId && (
               <Posts
-                posts={props.posts}
+                posts={props.posts} // error here
                 addPost={props.addPost}
                 likePost={props.likePost}
               />
@@ -69,4 +70,5 @@ let mapStateToProps = (state) => {
 export default compose(
   withRedirect,
   connect(mapStateToProps, {setProfile, changeStatus, addPost, likePost, followUser, unfollowUser}),
+  withErrorBoundary,
 )(ProfilContainer);
