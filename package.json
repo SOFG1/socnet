@@ -2,6 +2,7 @@
   "name": "socnet",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sofg1.github.io/socnet/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
@@ -13,7 +14,6 @@
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
-    "react-test-renderer": "^18.0.0",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-form": "^8.3.8",
@@ -25,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
