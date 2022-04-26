@@ -1,20 +1,13 @@
 .Messages {
     padding: 20px 30px 0;
     background-color: #FFF7BC;
-}
-
-
-.box {
     display: flex;
     gap: 40px;
 }
 
+
 .friends {
     padding: 10px;
-    height: 100%;
-    max-height: 100%;
-    overflow-y: auto;
-    height: calc(100vh - 205px);
     flex-shrink: 0;
 }
 
@@ -112,12 +105,13 @@
 
 
 @media screen and (max-width: 770px) {
-    .box {
+    .Messages {
         flex-direction: column;
     }
     .friends {
         display: flex;
         height: auto;
+        overflow-x: auto;
         gap: 13px;
         margin: 0 -27px;
     }

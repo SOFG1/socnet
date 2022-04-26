@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import Initializer from "./components/common/Initializer/Initializer";
+import Preloader from "./components/common/Preloader/Preloader";
 // Pages
 const ProfileContainer = lazy(() =>
   import("./components/Profile/ProfileContainer")
@@ -22,6 +23,7 @@ const Settings = lazy(() => import("./components/Settings/Settings"));
 const Music = lazy(() => import("./components/Music/Music"));
 const LoginContainer = lazy(() => import("./components/Login/LoginContainer"));
 
+
 function App(props) {
   useEffect(() => {
     props.initThunk();
@@ -31,7 +33,7 @@ function App(props) {
       <HeaderContainer />
       <SidebarContainer />
       <div className="content" onClick={() => props.toggleSidebar(false)}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Preloader isFetching={true} />}>
           <Routes>
             <Route path="/" element={<ProfileContainer />} />
             <Route path="/profile/*" element={<ProfileContainer />} />

@@ -25,13 +25,16 @@
 
 .link {
     font-size: 22px;
-    color: #F55353;
+    color: #fd6666;
     font-family: sans-serif;
     font-weight: 700;
     text-decoration: none;
     transition: color 200ms linear;
     &:hover {
         color: #FEB139;
+    }
+    &.active {
+        color: red;
     }
 }
 

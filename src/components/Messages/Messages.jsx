@@ -6,7 +6,6 @@ import MessagesForm from "./MessagesForm";
 const Messages = (props) => {
   return (
     <div className={s.Messages}>
-      <div className={s.box}>
         <ul className={s.friends}>
           {props.friends.length === 0 ? (
             <p className={s.empty}>You don't have friends yet</p>
@@ -43,7 +42,6 @@ const Messages = (props) => {
           <MessagesForm onSubmit={(data)=> props.sendMessage(data.message)} />
         </div>
       </div>
-    </div>
   );
 };
 

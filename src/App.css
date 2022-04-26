@@ -139,19 +139,25 @@ table {
 }
 
 .content {
-	padding-top: 113px;
-	padding-left: 300px;
-    transition: 300ms ease-in;
+  padding-top: 113px;
+  padding-left: 320px;
+  transition: 300ms ease-in;
+  min-height: 100vh;
+  display: flex;
+}
+
+.content > div {
+  width: 100%;
 }
 
 @media screen and (max-width: 1150px) {
-	.content {
-		padding-left: 0;
-	}
+  .content {
+    padding-left: 0;
+  }
 }
 
 @media screen and (max-width: 620px) {
-	.content {
-		padding-top: 93px;
-	}
+  .content {
+    padding-top: 93px;
+  }
 }

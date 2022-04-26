@@ -1,5 +1,7 @@
 import { authApi } from "../api/api";
 import { change, untouch } from "redux-form";
+import { setFriendsAC } from "./usersReducer";
+import { setProfileAC } from "./profileReducer";
 
 const SET_AUTH = "auth/SET AUTH";
 const TOGGLE_AUTH_FETCHING = "auth/TOGGLE AUTH FETCHING";
@@ -54,6 +56,8 @@ export const logOutThunk = () => async (dispatch) => {
   const code = await authApi.logOut();
   if (code === 0) {
     dispatch(setAuthThunk());
+    dispatch(setFriendsAC([]));
+    dispatch(setProfileAC(null))
     dispatch(toggleLogOutAC(false));
   }
 };

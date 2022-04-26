@@ -1,5 +1,5 @@
 import s from "./Sidebar.module.scss";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Friend from "./Friend";
 import Preloader from "../common/Preloader/Preloader";
 
@@ -10,39 +10,39 @@ const Sidebar = (props) => {
       <ul className={s.list}>
         {props.isAuth && (
           <li className={s.item}>
-            <Link className={s.link} to="profile" onClick={()=> props.toggleSidebar(false)}>
+            <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="profile" onClick={()=> props.toggleSidebar(false)}>
               Profile
-            </Link>
+            </NavLink>
           </li>
         )}
 
         {props.isAuth && (
           <li className={s.item}>
-            <Link className={s.link} to="messages" onClick={()=> props.toggleSidebar(false)}>
+            <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="messages" onClick={()=> props.toggleSidebar(false)}>
               Messages
-            </Link>
+            </NavLink>
           </li>
         )}
         <li className={s.item}>
-          <Link className={s.link} to="users" onClick={()=> props.toggleSidebar(false)}>
+          <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="users" onClick={()=> props.toggleSidebar(false)}>
             Users
-          </Link>
+          </NavLink>
         </li>
         <li className={s.item}>
-          <Link className={s.link} to="music" onClick={()=> props.toggleSidebar(false)}>
+          <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="music" onClick={()=> props.toggleSidebar(false)}>
             Music
-          </Link>
+          </NavLink>
         </li>
         <li className={s.item}>
-          <Link className={s.link} to="news" onClick={()=> props.toggleSidebar(false)}>
+          <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="news" onClick={()=> props.toggleSidebar(false)}>
             News
-          </Link>
+          </NavLink>
         </li>
         {props.isAuth && (
           <li className={s.item}>
-            <Link className={s.link} to="settings" onClick={()=> props.toggleSidebar(false)}>
+            <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="settings" onClick={()=> props.toggleSidebar(false)}>
               Settings
-            </Link>
+            </NavLink>
           </li>
         )}
       </ul>
