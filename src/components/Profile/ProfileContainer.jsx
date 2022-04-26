@@ -43,7 +43,7 @@ const ProfilContainer = (props) => {
       {props.profile && !urlId && (
         <ErrorBoundary>
           <Posts
-            posts={props.posts} // error here
+            posts={props.posts}
             addPost={props.addPost}
             likePost={props.likePost}
           />
