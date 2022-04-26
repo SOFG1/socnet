@@ -4,7 +4,7 @@ import avatar from "../../assets/avatar.png";
 
 const Friend = (props) => {
   return (
-      <Link className={s.friend} to={`profile/${props.friend.id}`}>
+      <Link className={s.friend} to={`profile/${props.friend.id}`} onClick={()=> props.toggleSidebar(false)} >
         <img
           src={props.friend.photos.small ? props.friend.photos.small : avatar}
           alt="User Avavtar"

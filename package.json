@@ -2,7 +2,7 @@
   "name": "socnet",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sofg1.github.io/",
+  "homepage": "https://sofg1.github.io/socnet/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
