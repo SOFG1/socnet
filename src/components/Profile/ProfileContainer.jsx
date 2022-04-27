@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Profile.module.scss";
 import { connect } from "react-redux";
 import Profile from "./Profile";
@@ -12,6 +12,7 @@ import {
   likePostAC as likePost,
   followUserThunk as followUser,
   unfollowUserThunk as unfollowUser,
+  updateAvatarThunk as updateAvatar,
 } from "../../redux/profileReducer";
 import Preloader from "../common/Preloader/Preloader";
 import { useParams } from "react-router-dom";
@@ -26,17 +27,33 @@ const ProfilContainer = (props) => {
       props.setProfile(urlId || props.myId);
     }
   }, [props.myId, urlId]);
+  // Avatar input
+  const [avatarLoading, setLoading] = useState(false);
+  const [avatarError, setError] = useState(false);
+  const updateAvatar = async (image) => {
+    if (image) {
+      setLoading(true);
+      const code = await props.updateAvatar(image);
+      setLoading(false);
+      if (code !== 0) setError(true);
+      if (code === 0) setError(false);
+    }
+  };
   return (
     <div className={s.Profile}>
       {props.isFetching && <Preloader isFetching={props.isFetching} />}
       {props.profile && (
         <Profile
+          avatarLoading={avatarLoading}
+          avatarError={avatarError}
+          owner={!urlId}
           myId={props.myId}
           profile={props.profile}
           changeStatus={props.changeStatus}
           followUser={props.followUser}
           unfollowUser={props.unfollowUser}
           followDisabled={props.followDisabled}
+          updateAvatar={updateAvatar}
         />
       )}
 
@@ -72,5 +89,6 @@ export default compose(
     likePost,
     followUser,
     unfollowUser,
+    updateAvatar,
   })
 )(ProfilContainer);

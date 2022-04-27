@@ -10,7 +10,7 @@ export let initThunk = ()=> async (dispatch)=> {
     await dispatch(setAuthThunk())
     setTimeout(()=> {
         dispatch(toggleInitAC(true));
-    }, 1100)
+    }, 100)
 }
 
 let initialState = {

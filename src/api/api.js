@@ -1,5 +1,6 @@
 const axios = require('axios').default;
 
+
 let instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
     withCredentials: true,
@@ -38,6 +39,13 @@ export const profileApi = {
     },
     setStatus: (status)=> {
         return instance.put(`profile/status`, {status}).then(res => res.data.resultCode)
+    },
+    setAvatar: (image)=> {
+        const formData = new FormData();
+        formData.append('image', image);
+        return instance.put('profile/photo', formData).then(res => {
+            return res.data
+        })
     }
 }
 

@@ -21,7 +21,7 @@
   height: 300px;
   width: 300px;
   object-fit: cover;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
 .name {
@@ -56,6 +56,44 @@
     word-break: break-all;
     font-size: 20px;
     color: #247881;
+  }
+}
+
+.avatarBox {
+  display: flex;
+  align-items: center;
+}
+
+.avatarLabel {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.avatarInput {
+  display: none;
+}
+
+.avatarError {
+  color: red;
+  margin-bottom: 8px;
+}
+
+.preloader {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+  border-right: 2px solid rgb(0, 85, 255);
+  border-radius: 50%;
+  animation: rotate 700ms linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
@@ -196,7 +234,11 @@
     margin-bottom: 10px;
   }
   .avatar {
-    margin-bottom: 10px;
+    margin-bottom: 3px;
+  }
+  .avatarLabel {
+    width: 100%;
+    text-align: center;
   }
   .name {
     text-align: center;
