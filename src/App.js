@@ -56,7 +56,6 @@ const mapStateToProps = (state) => {
   return {
     authData: state.auth,
     isInit: state.app.isInit,
-    sidebar: state.app.sidebarOpened,
   };
 };
 

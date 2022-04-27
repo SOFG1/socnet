@@ -1,6 +1,7 @@
 import s from "./Pagination.module.scss";
 import paginator from "../../../utilites/paginator";
 import { useEffect, useState } from "react";
+import cn from "classnames";
 
 const Pagination = ({ numberOfPages, currentPage, changePage }) => {
   // Position of pagination
@@ -20,6 +21,7 @@ const Pagination = ({ numberOfPages, currentPage, changePage }) => {
   let decrementPosition = () => {
     setPosition(pos => pos - 10 < 0 ? 1 : pos - 10);
   }
+  //page === currentPage ? `${s.page} ${s.active}` : s.page
   return (
     <div className={s.Pagination}>
       {position > 8 && <button onClick={decrementPosition} className={s.btn}>&lt;&lt;</button>}
@@ -29,7 +31,7 @@ const Pagination = ({ numberOfPages, currentPage, changePage }) => {
           <button
             onClick={()=> changePage(page)}
             key={page}
-            className={page === currentPage ? `${s.page} ${s.active}` : s.page}
+            className={cn(s.page, {[s.active]: page === currentPage})}
           >
             {page}
           </button>

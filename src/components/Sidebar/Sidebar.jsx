@@ -2,15 +2,15 @@ import s from "./Sidebar.module.scss";
 import { NavLink } from "react-router-dom";
 import Friend from "./Friend";
 import Preloader from "../common/Preloader/Preloader";
+import cn from "classnames";
 
 const Sidebar = (props) => {
-
   return (
-    <div className={props.sideBar ? s.Sidebar : `${s.Sidebar} ${s.opened}`}>
+    <div className={cn(s.Sidebar, {[s.opened]: !props.sideBar})}>
       <ul className={s.list}>
         {props.isAuth && (
           <li className={s.item}>
-            <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="profile" onClick={()=> props.toggleSidebar(false)}>
+            <NavLink className={({isActive}) => cn(s.link, {[s.active]: isActive})} to="profile" onClick={()=> props.toggleSidebar(false)}>
               Profile
             </NavLink>
           </li>
@@ -18,29 +18,29 @@ const Sidebar = (props) => {
 
         {props.isAuth && (
           <li className={s.item}>
-            <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="messages" onClick={()=> props.toggleSidebar(false)}>
+            <NavLink className={({isActive}) => cn(s.link, {[s.active]: isActive})} to="messages" onClick={()=> props.toggleSidebar(false)}>
               Messages
             </NavLink>
           </li>
         )}
         <li className={s.item}>
-          <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="users" onClick={()=> props.toggleSidebar(false)}>
+          <NavLink className={({isActive}) => cn(s.link, {[s.active]: isActive})} to="users" onClick={()=> props.toggleSidebar(false)}>
             Users
           </NavLink>
         </li>
         <li className={s.item}>
-          <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="music" onClick={()=> props.toggleSidebar(false)}>
+          <NavLink className={({isActive}) => cn(s.link, {[s.active]: isActive})} to="music" onClick={()=> props.toggleSidebar(false)}>
             Music
           </NavLink>
         </li>
         <li className={s.item}>
-          <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="news" onClick={()=> props.toggleSidebar(false)}>
+          <NavLink className={({isActive}) => cn(s.link, {[s.active]: isActive})} to="news" onClick={()=> props.toggleSidebar(false)}>
             News
           </NavLink>
         </li>
         {props.isAuth && (
           <li className={s.item}>
-            <NavLink className={({isActive}) => isActive ? `${s.link} ${s.active}` : s.link} to="settings" onClick={()=> props.toggleSidebar(false)}>
+            <NavLink className={({isActive}) => cn(s.link, {[s.active]: isActive})} to="settings" onClick={()=> props.toggleSidebar(false)}>
               Settings
             </NavLink>
           </li>
@@ -48,7 +48,6 @@ const Sidebar = (props) => {
       </ul>
 
       {props.isAuth && (
-
         <div className={s.friends}>
           <h4 className={s.title}>Friends</h4>
           {(props.friends.length < 1 && !props.isFetching)? (
