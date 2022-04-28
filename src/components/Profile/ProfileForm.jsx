@@ -82,7 +82,6 @@ const ProfileForm = ({ profile, editable, editProfile, setProfileInfo }) => {
       {errors.map(err => {
         return (<div className={s.error}>{err}</div>)
       })}
-      <div className={s.wrapper}>
         <div className={s.box}>
           <p className={s.title}>name: </p>
           {editMode ? (
@@ -178,7 +177,6 @@ const ProfileForm = ({ profile, editable, editProfile, setProfileInfo }) => {
             Save changes
           </button>
         )}
-      </div>
       {!editMode && editable && (
         <button onClick={() => setEditMode(true)} className={s.editEnableBtn}>
           Enable Edit mode

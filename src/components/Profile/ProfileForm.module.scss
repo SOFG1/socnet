@@ -1,15 +1,12 @@
 .Form {
   position: relative;
   margin-bottom: 30px;
+  padding-right: 45px;
+  width: max-content;
 }
 
 .Form:hover .editEnableBtn {
   opacity: 1;
-}
-
-.wrapper {
-  padding-right: 45px;
-  width: max-content;
 }
 
 .box {
