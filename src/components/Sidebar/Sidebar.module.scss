@@ -122,6 +122,7 @@
         left: 0;
         top: 113px;
         bottom: 0;
+        box-shadow: 4px 0 10px #FF8C32;
     }
     &.opened {
         transform: translateX(-100%);

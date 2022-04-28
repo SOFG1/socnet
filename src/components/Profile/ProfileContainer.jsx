@@ -13,6 +13,8 @@ import {
   followUserThunk as followUser,
   unfollowUserThunk as unfollowUser,
   updateAvatarThunk as updateAvatar,
+  editProfileThunk as editProfile,
+  setProfileInfoAC as setProfileInfo,
 } from "../../redux/profileReducer";
 import Preloader from "../common/Preloader/Preloader";
 import { useParams } from "react-router-dom";
@@ -44,6 +46,8 @@ const ProfilContainer = (props) => {
       {props.isFetching && <Preloader isFetching={props.isFetching} />}
       {props.profile && (
         <Profile
+          setProfileInfo={props.setProfileInfo}
+          editProfile={props.editProfile}
           avatarLoading={avatarLoading}
           avatarError={avatarError}
           owner={!urlId}
@@ -83,6 +87,8 @@ let mapStateToProps = (state) => {
 export default compose(
   withRedirect,
   connect(mapStateToProps, {
+    setProfileInfo,
+    editProfile,
     setProfile,
     changeStatus,
     addPost,

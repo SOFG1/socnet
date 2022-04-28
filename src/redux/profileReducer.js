@@ -10,7 +10,8 @@ const SEND_MESSAGE = "profile/SEND MESSAGE";
 const DELETE_PROFILE = "profile/DELETE PROFILE";
 const FOLLOW_DISABLE = "profile/FOLLOW DISABLE";
 const FOLLOW_PROFILE = "profile/FOLLOW PROFILE";
-const SET_PHOTOS = "profile/SET PHOTOS"
+const SET_PHOTOS = "profile/SET PHOTOS";
+const SET_PROFILE_INFO = "profile/SET PROFILE INFO";
 
 export const setProfileAC = (profile) => ({ type: SET_PROFILE, profile });
 export const toggleFetchingAC = (isFetching) => ({
@@ -25,6 +26,7 @@ export const deleteProfileAC = () => ({ type: DELETE_PROFILE });
 export const followDisableAC = () => ({ type: FOLLOW_DISABLE });
 export const followProfileAC = () => ({ type: FOLLOW_PROFILE });
 export const setPhotosAC = (photos) => ({type: SET_PHOTOS, photos});
+export const setProfileInfoAC = (profile)=> ({type: SET_PROFILE_INFO, profile})
 
 //Set Profile Thunk
 export const setProfileThunk = (id) => async (dispatch) => {
@@ -91,6 +93,11 @@ export const followUserThunk = (id) => (dispatch) => {
 export const unfollowUserThunk = (id) => (dispatch) => {
   followingFlow(id, followApi.unfollowUser, dispatch)
 };
+
+//Set Profile Thunk
+export const editProfileThunk = (profile) => (dispatch) => {
+  return profileApi.editProfile(profile);
+}
 
 let initialState = {
   profile: null,
@@ -234,6 +241,14 @@ let profileReducer = (state = initialState, action) => {
         profile: {
           ...state.profile,
           photos: action.photos,
+        }
+      }
+    case SET_PROFILE_INFO:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          ...action.profile,
         }
       }
     default:

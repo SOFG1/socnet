@@ -1,11 +1,10 @@
 .Profile {
   padding: 20px 30px;
-  background-color: #fafdd6;
+  background-color: #FFFBE7;
   min-height: 100%;
 }
 
 //My Profile
-
 .user {
   display: flex;
   gap: 30px;
@@ -15,6 +14,10 @@
 .left {
   display: flex;
   flex-direction: column;
+}
+
+.right {
+  flex-grow: 1;
 }
 
 .avatar {
@@ -37,27 +40,7 @@
   margin-bottom: 15px;
 }
 
-.job {
-  color: green;
-  font-weight: 800;
-  font-size: 18px;
-  font-family: sans-serif;
-  text-shadow: 1px 1px 2px rgb(110, 255, 58);
-  margin-bottom: 20px;
-}
 
-.contact {
-  font-size: 18px;
-  font-weight: 700;
-  font-family: sans-serif;
-  color: #b20600;
-  margin-bottom: 12px;
-  span {
-    word-break: break-all;
-    font-size: 20px;
-    color: #247881;
-  }
-}
 
 .avatarBox {
   display: flex;
@@ -219,14 +202,14 @@
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 780px) {
   .avatar {
     height: 150px;
     width: 150px;
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 565px) {
   .user {
     flex-direction: column;
     align-items: center;

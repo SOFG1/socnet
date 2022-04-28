@@ -1,0 +1,149 @@
+.Form {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.Form:hover .editEnableBtn {
+  opacity: 1;
+}
+
+.wrapper {
+  padding-right: 45px;
+  width: max-content;
+}
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  div {
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: sans-serif;
+  color: #b20600;
+  margin-right: 25px;
+}
+
+.value {
+  width: 200px;
+  word-wrap: break-word;
+  font-size: 20px;
+  color: #247881;
+  text-decoration: none;
+}
+
+.job {
+  color: green;
+  font-weight: 800;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-shadow: 1px 1px 2px rgb(110, 255, 58);
+  margin-bottom: 7px;
+}
+
+.label {
+  cursor: pointer;
+}
+
+.checkbox {
+  cursor: pointer;
+}
+
+.contacts {
+  margin-top: 50px;
+}
+
+.contactsTitle {
+  font-size: 20px;
+  font-weight: 800;
+  text-shadow: 1px 1px 2px #0019fe;
+  margin-bottom: 10px;
+}
+
+.textarea {
+  min-width: 177px;
+  height: 120px;
+  font-family: inherit;
+  resize: none;
+}
+
+.editEnableBtn {
+  opacity: 0;
+  height: 20px;
+  width: 20px;
+  background-image: url(../../assets/edit-icon.svg);
+}
+
+.editDisableBtn {
+  height: 25px;
+  width: 25px;
+  background-image: url(../../assets/close-icon.svg);
+}
+
+.editEnableBtn,
+.editDisableBtn {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  font-size: 0;
+  cursor: pointer;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0;
+  outline: 0;
+  transition: 200ms linear;
+}
+
+.submitBtn {
+  color: #ff5f00;
+  font-size: 16px;
+  padding: 6px 16px;
+  background-color: #96f64d;
+  border: 0;
+  border-radius: 7px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: sans-serif;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px red;
+  transition: 150ms linear;
+  display: block;
+  margin: 0 auto;
+  &:hover,
+  &:active {
+    color: #247881;
+    background-color: white;
+    box-shadow: 1px 1px 3px greenyellow;
+  }
+}
+
+.error {
+  text-align: center;
+  color: red;
+  margin-bottom: 5px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .editEnableBtn {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .Form {
+    margin-bottom: 50px;
+  }
+  .wrapper {
+    width: 100%;
+  }
+  .box {
+    flex-direction: column;
+  }
+}

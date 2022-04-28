@@ -37,7 +37,7 @@ const Status = (props)=> {
       className={
         props.readOnly ? s.statusBox : `${s.statusBox} ${s.editable}`
       }
-      onDoubleClick={toggleEdit}
+      onClick={toggleEdit}
     >
       {editMode ? (
         <input

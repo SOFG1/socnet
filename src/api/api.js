@@ -46,6 +46,9 @@ export const profileApi = {
         return instance.put('profile/photo', formData).then(res => {
             return res.data
         })
+    },
+    editProfile: (profile)=> {
+        return instance.put('profile',profile).then(res => res.data)
     }
 }
 

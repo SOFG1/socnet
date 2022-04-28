@@ -3,7 +3,7 @@
   background-color: rgb(255, 222, 55);
   padding: 13px 80px 13px 13px;
   border-radius: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
   &::after {
     content: "";
     position: absolute;
@@ -40,11 +40,5 @@
 @media screen and (max-width: 620px) {
   .statusBox {
     padding-right: 13px;
-  }
-}
-
-@media screen and (max-width: 430px) {
-  .statusBox {
-    margin-bottom: 5px;
   }
 }
