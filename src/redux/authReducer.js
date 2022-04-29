@@ -40,6 +40,8 @@ export const loginThunk = (data) => async (dispatch) => {
   dispatch(toggleButtonAC());
   dispatch(change("login", "password", ""));
   dispatch(untouch("login", "email"));
+  dispatch(change("login", "captcha", ""));
+  dispatch(untouch("login", "captcha"));
   dispatch(untouch("login", "password"));
   const res = await authApi.login(data);
   if (res.data.resultCode !== 0) {

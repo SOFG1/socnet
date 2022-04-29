@@ -3,6 +3,7 @@
   margin-bottom: 30px;
   padding-right: 45px;
   width: max-content;
+  min-width: 368px;
 }
 
 .Form:hover .editEnableBtn {
@@ -85,8 +86,8 @@
 .editEnableBtn,
 .editDisableBtn {
   position: absolute;
-  right: 2px;
-  top: 2px;
+  right: -2px;
+  top: -2px;
   font-size: 0;
   cursor: pointer;
   background-color: transparent;
@@ -135,6 +136,7 @@
 
 @media screen and (max-width: 440px) {
   .Form {
+    min-width: 245px;
     margin-bottom: 50px;
   }
   .wrapper {
