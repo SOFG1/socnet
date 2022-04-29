@@ -41,6 +41,7 @@ const Status = (props)=> {
     >
       {editMode ? (
         <input
+        className={s.input}
           type="text"
           value={status}
           onChange={onChange}

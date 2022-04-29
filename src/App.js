@@ -28,16 +28,21 @@ const NotFound404 = lazy(() => import("./components/NotFound404/NotFound404"));
 
 function App(props) {
   useEffect(() => {
-    props.initThunk();
     //Catch all unhandled promises
     window.addEventListener("offline", () => props.toggleNetworkError(true));
+    window.addEventListener("unhandledrejection", () => props.toggleNetworkError(true));
     window.addEventListener("online", () => props.toggleNetworkError(false));
+    //Initialize app
+    props.initThunk();
     return () => {
       window.removeEventListener("offline", () =>
         props.toggleNetworkError(true)
       );
       window.removeEventListener("online", () =>
         props.toggleNetworkError(false)
+      );
+      window.removeEventListener("unhandledrejection", () =>
+        props.toggleNetworkError(true)
       );
     };
   }, []);

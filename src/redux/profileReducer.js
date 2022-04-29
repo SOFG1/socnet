@@ -48,11 +48,11 @@ export const setProfileThunk = (id) => async (dispatch) => {
 //Change Status Thunk
 export const changeStatusThunk = (status) => async (dispatch) => {
   try {
-    const code = await profileApi.setStatus(status)
+    const code = await profileApi.setStatus(status);
     if (code === 0) dispatch(setStatusAC(status));
   }
-  catch {
-    console.log('error');
+  catch(e) {
+    console.log(e);
   }
 };
 
