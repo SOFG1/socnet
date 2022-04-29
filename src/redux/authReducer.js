@@ -88,8 +88,8 @@ let initialState = {
   buttonDisabled: false,
   logoutDisabled: false,
   submitError: null,
-  captcha: null,
-  fetchingCaptcha: false,
+  captcha: null, //If null captcha isn't required, here will be captcha's url
+  fetchingCaptcha: false, // captcha is loading
 };
 
 // Reducer

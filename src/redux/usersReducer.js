@@ -53,6 +53,7 @@ export let unfollowThunk = (id) => async (dispatch) => {
   if (code === 0) dispatch(followConditionAC(id));
 };
 
+//State
 let initialState = {
   fetchingFriends: false,
   fetchingUsers: false,
@@ -66,6 +67,7 @@ let initialState = {
   disabledFollow: [],
 };
 
+//Reducer
 let usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_FRIENDS:

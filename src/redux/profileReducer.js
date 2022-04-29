@@ -72,9 +72,7 @@ export const updateAvatarThunk = (image) => async (dispatch) => {
   return data.resultCode
 }
 
-
-// Needs refactoring
-
+//Follow / Unfollow flow
 const followingFlow = async (id, apiMethod, dispatch)=> {
   dispatch(followDisableAC());
   const code = await apiMethod(id)
@@ -99,6 +97,7 @@ export const editProfileThunk = (profile) => (dispatch) => {
   return profileApi.editProfile(profile);
 }
 
+//State
 let initialState = {
   profile: null,
   isFetching: false,
@@ -158,6 +157,7 @@ let initialState = {
   ],
 };
 
+//Reducer
 let profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PROFILE:

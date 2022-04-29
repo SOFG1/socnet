@@ -13,11 +13,13 @@ export let initThunk = ()=> async (dispatch)=> {
     }, 100)
 }
 
+// State
 let initialState = {
     isInit: false,
     sidebarOpened: false,
 }
 
+//Reducer
 let appReducer = (state = initialState, action)=> {
     switch (action.type) {
         case TOGGLE_INIT: 

@@ -5,9 +5,10 @@ import authReducer from './authReducer';
 import thunk from 'redux-thunk';
 import usersReducer from "./usersReducer";
 import profileReducer from './profileReducer';
-import appReducer from './appReducer'
+import appReducer from './appReducer';
+import { compose } from "redux";
 
-let rootReducer = combineReducers({
+const rootReducer = combineReducers({
     auth: authReducer,
     users: usersReducer,
     profile: profileReducer,
@@ -15,6 +16,6 @@ let rootReducer = combineReducers({
     app: appReducer,
 });
 
-let store = createStore(rootReducer,composeWithDevTools( applyMiddleware(thunk)));
+const store = createStore(rootReducer,composeWithDevTools( applyMiddleware(thunk)));
 
 export default store;
