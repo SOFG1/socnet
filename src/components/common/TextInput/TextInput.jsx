@@ -1,7 +1,6 @@
 import s from './TextInput.module.scss';
 
 const TextInput = ({input, meta, ...props})=> {
-    console.log({input, meta, ...props})
     return (
         <div className={s.box}>
             <input {...props} {...input} />

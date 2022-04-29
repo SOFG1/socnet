@@ -1,4 +1,4 @@
-import { authApi } from "../api/api";
+import { authApi, securityApi } from "../api/api";
 import { change, untouch } from "redux-form";
 import { setFriendsAC } from "./usersReducer";
 import { setProfileAC } from "./profileReducer";
@@ -7,8 +7,10 @@ const SET_AUTH = "auth/SET AUTH";
 const TOGGLE_AUTH_FETCHING = "auth/TOGGLE AUTH FETCHING";
 const TOGGLE_LOGIN_BUTTON = "auth/TOGGLE LOGIN BUTTON";
 const TOGGLE_LOGOUT = "auth/TOGGLE LOGOUT";
-const SET_ERROR = "auth/SET_ERROR";
-// SetAuth AC
+const SET_ERROR = "auth/SET ERROR";
+const SET_CAPTCHA = "auth/SET CAPTCHA";
+const SET_FETCHING_CAPTCHA = "auth/SET FETCHING CAPTCHA";
+
 let setAuthAC = (profile, isAuth) => ({ type: SET_AUTH, profile, isAuth });
 let toggleFetchingAC = (isFetching) => ({
   type: TOGGLE_AUTH_FETCHING,
@@ -17,6 +19,8 @@ let toggleFetchingAC = (isFetching) => ({
 let toggleButtonAC = () => ({ type: TOGGLE_LOGIN_BUTTON });
 let toggleLogOutAC = (disabled) => ({ type: TOGGLE_LOGOUT, disabled });
 let setErrorAC = (error)=> ({type: SET_ERROR, error});
+let setCaptchaAC = (captcha)=> ({type: SET_CAPTCHA, captcha});
+let setFetchingCaptchaAC = (isFetching)=> ({type: SET_FETCHING_CAPTCHA, isFetching})
 
 // SetAuth Thunk
 export let setAuthThunk = () => async (dispatch) => {
@@ -47,6 +51,14 @@ export const loginThunk = (data) => async (dispatch) => {
     dispatch(toggleButtonAC());
     dispatch(setAuthThunk());
     dispatch(setErrorAC(null));
+    dispatch(setCaptchaAC(null));
+
+  }
+  if (res.data.resultCode === 10) {
+    dispatch(setFetchingCaptchaAC(true));
+    const captcha = await securityApi.getCaptcha();
+    dispatch(setFetchingCaptchaAC(false));
+    dispatch(setCaptchaAC(captcha));
   }
 };
 
@@ -74,6 +86,8 @@ let initialState = {
   buttonDisabled: false,
   logoutDisabled: false,
   submitError: null,
+  captcha: null,
+  fetchingCaptcha: false,
 };
 
 // Reducer
@@ -104,6 +118,16 @@ let authReducer = (state = initialState, action) => {
         return {
           ...state,
           submitError: action.error,
+        }
+      case SET_CAPTCHA:
+        return {
+          ...state,
+          captcha: action.captcha,
+        }
+      case SET_FETCHING_CAPTCHA:
+        return {
+          ...state,
+          fetchingCaptcha: action.isFetching,
         }
     default:
       return state;

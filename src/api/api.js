@@ -18,7 +18,7 @@ export const authApi = {
     },
     logOut: ()=> {
         return instance.delete('auth/login').then(res => res.data.resultCode);
-    }
+    },
 }
 
 export const usersApi = {
@@ -63,5 +63,11 @@ export const followApi = {
         return instance.get(`follow/${id}`)
         .then(res => res.data)
         .catch(e => {})
+    }
+}
+
+export const securityApi = {
+    getCaptcha: ()=> {
+        return instance.get('/security/get-captcha-url').then(res => res.data.url);
     }
 }

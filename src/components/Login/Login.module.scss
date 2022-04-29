@@ -81,3 +81,10 @@
     color: red;
     margin-bottom: 10px;
 }
+
+.captchaImg {
+  display: block;
+  margin: 0 auto 5px;
+  width: 215px;
+  object-fit: contain;
+}
