@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksocnet=self.webpackChunksocnet||[]).push([[506],{8506:function(n,e,s){s.r(e);var t=s(184);e.default=function(n){return(0,t.jsx)("div",{children:"Oops. Page not found. 404"})}}}]);
+//# sourceMappingURL=506.5801ce04.chunk.js.map

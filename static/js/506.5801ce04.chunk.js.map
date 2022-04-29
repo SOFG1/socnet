@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/506.5801ce04.chunk.js","mappings":"yHAQA,UARoB,SAACA,GACjB,OACI","sources":["components/NotFound404/NotFound404.jsx"],"sourcesContent":["const NotFound404 = (props)=> {\r\n    return (\r\n        <div>\r\n            Oops. Page not found. 404\r\n        </div>\r\n    )\r\n}\r\n\r\nexport default NotFound404"],"names":["props"],"sourceRoot":""}
