@@ -12,6 +12,7 @@ import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import Initializer from "./components/common/Initializer/Initializer";
 import Preloader from "./components/common/Preloader/Preloader";
 import NetworkError from "./components/common/NetworkError/NetworkError";
+import ErrorBoundary from "./components/common/ErrorBoundary/ErrorBoundary";
 // Pages
 const ProfileContainer = lazy(() =>
   import("./components/Profile/ProfileContainer")
@@ -21,7 +22,6 @@ const MessagesContainer = lazy(() =>
 );
 const UsersContainer = lazy(() => import("./components/Users/UsersContainer"));
 const News = lazy(() => import("./components/News/News"));
-const Settings = lazy(() => import("./components/Settings/Settings"));
 const Music = lazy(() => import("./components/Music/Music"));
 const LoginContainer = lazy(() => import("./components/Login/LoginContainer"));
 const NotFound404 = lazy(() => import("./components/NotFound404/NotFound404"));
@@ -30,7 +30,9 @@ function App(props) {
   useEffect(() => {
     //Catch all unhandled promises
     window.addEventListener("offline", () => props.toggleNetworkError(true));
-    window.addEventListener("unhandledrejection", () => props.toggleNetworkError(true));
+    window.addEventListener("unhandledrejection", () =>
+      props.toggleNetworkError(true)
+    );
     window.addEventListener("online", () => props.toggleNetworkError(false));
     //Initialize app
     props.initThunk();
@@ -52,6 +54,7 @@ function App(props) {
       <HeaderContainer />
       <SidebarContainer />
       <div className="content" onClick={() => props.toggleSidebar(false)}>
+        <ErrorBoundary>
         <Suspense fallback={<Preloader isFetching={true} />}>
           <Routes>
             <Route path="/" element={<Navigate to="/profile" />} />
@@ -60,15 +63,18 @@ function App(props) {
             <Route path="/users/*" element={<UsersContainer />} />
             <Route path="/news/*" element={<News />} />
             <Route path="/music/*" element={<Music />} />
-            <Route path="/settings/*" element={<Settings />} />
             <Route path="/login/*" element={<LoginContainer />} />
             <Route path="*" element={<NotFound404 />} />
           </Routes>
         </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   ) : (
-    <Initializer />
+    <>
+      <Initializer />
+      <NetworkError hasError={props.networkError} />
+    </>
   );
 }
 

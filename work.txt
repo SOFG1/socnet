@@ -1,5 +1,0 @@
-1) Fix set userId unavailability
-
-2) Make profile info responsive
-
-3) editProfile preloader, errors handling

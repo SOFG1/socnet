@@ -38,13 +38,6 @@ const Sidebar = (props) => {
             News
           </NavLink>
         </li>
-        {props.isAuth && (
-          <li className={s.item}>
-            <NavLink className={({isActive}) => cn(s.link, {[s.active]: isActive})} to="settings" onClick={()=> props.toggleSidebar(false)}>
-              Settings
-            </NavLink>
-          </li>
-        )}
       </ul>
 
       {props.isAuth && (
