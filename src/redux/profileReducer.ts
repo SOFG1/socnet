@@ -13,20 +13,132 @@ const FOLLOW_PROFILE = "profile/FOLLOW PROFILE";
 const SET_PHOTOS = "profile/SET PHOTOS";
 const SET_PROFILE_INFO = "profile/SET PROFILE INFO";
 
-export const setProfileAC = (profile) => ({ type: SET_PROFILE, profile });
-export const toggleFetchingAC = (isFetching) => ({
+//Set Profile AC
+type SetProfileActionType = {
+  type: typeof SET_PROFILE;
+  profile: UserProfileType;
+};
+
+type UserProfileType = {
+  aboutMe: string;
+  contacts: UserProfileContactsType;
+  followed: boolean;
+  fullName: string;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  photos: UserProfilePhotosType;
+  status: string;
+  userId: number;
+};
+
+type UserProfileContactsType = {
+  facebook: string;
+  github: string;
+  instagram: string;
+  mainLink: string;
+  twitter: string;
+  vk: string;
+  website: string;
+  youtube: string;
+};
+export type UserProfilePhotosType = {
+  large: string;
+  small: string;
+};
+export const setProfileAC = (
+  profile: UserProfileType
+): SetProfileActionType => ({ type: SET_PROFILE, profile });
+
+//Toggle Fetching AC
+type ToggleFetchingActionType = {
+  type: typeof TOGGLE_PROF_FETCHING;
+  isFetching: boolean;
+};
+export const toggleFetchingAC = (
+  isFetching: boolean
+): ToggleFetchingActionType => ({
   type: TOGGLE_PROF_FETCHING,
   isFetching,
 });
-export const setStatusAC = (status) => ({ type: SET_STATUS, status });
-export const addPostAC = (text) => ({ type: ADD_POST, text });
-export const likePostAC = (id) => ({ type: LIKE_POST, id });
-export const sendMessageAC = (text) => ({ type: SEND_MESSAGE, text });
-export const deleteProfileAC = () => ({ type: DELETE_PROFILE });
-export const followDisableAC = () => ({ type: FOLLOW_DISABLE });
-export const followProfileAC = () => ({ type: FOLLOW_PROFILE });
-export const setPhotosAC = (photos) => ({type: SET_PHOTOS, photos});
-export const setProfileInfoAC = (profile)=> ({type: SET_PROFILE_INFO, profile})
+
+// Set Status AC
+type SetStatusActionType = {
+  type: typeof SET_STATUS;
+  status: string;
+};
+export const setStatusAC = (status: string): SetStatusActionType => ({
+  type: SET_STATUS,
+  status,
+});
+
+// Add Post AC
+type AddPostActionType = {
+  type: typeof ADD_POST;
+  text: string;
+};
+export const addPostAC = (text: string): AddPostActionType => ({
+  type: ADD_POST,
+  text,
+});
+
+// Like Post AC
+type LikePostActionType = {
+  type: typeof LIKE_POST;
+  id: number;
+};
+export const likePostAC = (id: number): LikePostActionType => ({
+  type: LIKE_POST,
+  id,
+});
+
+// Send Message AC
+type SendMessageActionType = {
+  type: typeof LIKE_POST;
+  text: string;
+};
+export const sendMessageAC = (text: string): SendMessageActionType => ({
+  type: SEND_MESSAGE,
+  text,
+});
+
+// Delete Profile AC
+export const deleteProfileAC = (): { type: typeof DELETE_PROFILE } => ({
+  type: DELETE_PROFILE,
+});
+
+// Follow Disable AC
+export const followDisableAC = (): { type: typeof FOLLOW_DISABLE } => ({
+  type: FOLLOW_DISABLE,
+});
+
+// Follow Profile AC
+export const followProfileAC = (): { type: typeof FOLLOW_PROFILE } => ({
+  type: FOLLOW_PROFILE,
+});
+
+// SetPhotos AC
+type SetPhotosActionType = {
+  type: typeof SET_PHOTOS,
+  photos: UserProfilePhotosType
+}
+export const setPhotosAC = (photos: UserProfilePhotosType):SetPhotosActionType => ({ type: SET_PHOTOS, photos });
+
+// SetProfileInfo AC
+type SetProfileInfoActionType = {
+  type: typeof SET_PROFILE_INFO,
+  profile: ProfileInfoType
+}
+type ProfileInfoType = {
+  aboutMe: string
+  contacts: UserProfileContactsType,
+  fullName: string,
+  lookingForAJob: boolean
+  lookingForAJobDescription: string
+}
+export const setProfileInfoAC = (profile:ProfileInfoType):SetProfileInfoActionType => ({
+  type: SET_PROFILE_INFO,
+  profile,
+});
 
 //Set Profile Thunk
 export const setProfileThunk = (id) => async (dispatch) => {
@@ -36,7 +148,7 @@ export const setProfileThunk = (id) => async (dispatch) => {
     profileApi.getProfile(id),
     profileApi.getStatus(id),
     followApi.getFollowed(id),
-  ])
+  ]);
   let profile = res[0];
   profile.status = res[1];
   profile.followed = res[2];
@@ -50,8 +162,7 @@ export const changeStatusThunk = (status) => async (dispatch) => {
   try {
     const code = await profileApi.setStatus(status);
     if (code === 0) dispatch(setStatusAC(status));
-  }
-  catch(e) {
+  } catch (e) {
     console.log(e);
   }
 };
@@ -74,36 +185,58 @@ export const sendMessageThunk = (text) => (dispatch) => {
 export const updateAvatarThunk = (image) => async (dispatch) => {
   const data = await profileApi.setAvatar(image);
   if (data.resultCode === 0) dispatch(setPhotosAC(data.data.photos));
-  return data.resultCode
-}
+  return data.resultCode;
+};
 
 //Follow / Unfollow flow
-const followingFlow = async (id, apiMethod, dispatch)=> {
+const followingFlow = async (id, apiMethod, dispatch) => {
   dispatch(followDisableAC());
-  const code = await apiMethod(id)
+  const code = await apiMethod(id);
   if (code === 0) {
     dispatch(followProfileAC());
     dispatch(followDisableAC());
   }
-}
+};
 
 //Follow User Thunk
 export const followUserThunk = (id) => (dispatch) => {
-  followingFlow(id, followApi.followUser, dispatch)
+  followingFlow(id, followApi.followUser, dispatch);
 };
 
 //Unfollow User Thunk
 export const unfollowUserThunk = (id) => (dispatch) => {
-  followingFlow(id, followApi.unfollowUser, dispatch)
+  followingFlow(id, followApi.unfollowUser, dispatch);
 };
 
 //Set Profile Thunk
 export const editProfileThunk = (profile) => (dispatch) => {
   return profileApi.editProfile(profile);
-}
+};
 
 //State
-let initialState = {
+type InitialStateType = {
+  profile: UserProfileType
+  isFetching: boolean
+  followDisabled: boolean
+  posts: PostType[] | []
+  messages: MessageType[] | []
+
+}
+
+type PostType = {
+  id: number
+  text: string
+  likes: number
+  likedByMe: boolean
+}
+
+type MessageType = {
+  id: number
+  text: string
+  date: string
+}
+
+let initialState:InitialStateType = {
   profile: null,
   isFetching: false,
   followDisabled: false,
@@ -163,7 +296,7 @@ let initialState = {
 };
 
 //Reducer
-let profileReducer = (state = initialState, action) => {
+let profileReducer = (state:InitialStateType = initialState, action:any):InitialStateType => {
   switch (action.type) {
     case SET_PROFILE:
       return {
@@ -246,16 +379,17 @@ let profileReducer = (state = initialState, action) => {
         profile: {
           ...state.profile,
           photos: action.photos,
-        }
-      }
+        },
+      };
     case SET_PROFILE_INFO:
+      console.log(action.profile)
       return {
         ...state,
         profile: {
           ...state.profile,
           ...action.profile,
-        }
-      }
+        },
+      };
     default:
       return state;
   }

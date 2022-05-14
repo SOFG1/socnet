@@ -1,7 +1,7 @@
 import { authApi, securityApi } from "../api/api";
 import { change, untouch } from "redux-form";
-import { setFriendsAC } from "./usersReducer";
-import { setProfileAC } from "./profileReducer";
+import { setFriendsAC } from "./usersReducer.ts";
+import { setProfileAC } from "./profileReducer.ts";
 
 const SET_AUTH = "auth/SET AUTH";
 const TOGGLE_AUTH_FETCHING = "auth/TOGGLE AUTH FETCHING";
@@ -11,16 +11,53 @@ const SET_ERROR = "auth/SET ERROR";
 const SET_CAPTCHA = "auth/SET CAPTCHA";
 const SET_FETCHING_CAPTCHA = "auth/SET FETCHING CAPTCHA";
 
-let setAuthAC = (profile, isAuth) => ({ type: SET_AUTH, profile, isAuth });
-let toggleFetchingAC = (isFetching) => ({
+type SetAuthProfileType = {
+  email: string
+  id: number
+  login: string
+}
+
+let setAuthAC: (
+  profile: SetAuthProfileType,
+  isAuth: boolean
+) => { type: typeof SET_AUTH; profile: Object; isAuth: boolean } = (
+  profile,
+  isAuth
+) => ({ type: SET_AUTH, profile, isAuth });
+
+let toggleFetchingAC: (isFetching: boolean) => {
+  type: typeof TOGGLE_AUTH_FETCHING;
+  isFetching: boolean;
+} = (isFetching) => ({
   type: TOGGLE_AUTH_FETCHING,
   isFetching,
 });
-let toggleButtonAC = () => ({ type: TOGGLE_LOGIN_BUTTON });
-let toggleLogOutAC = (disabled) => ({ type: TOGGLE_LOGOUT, disabled });
-let setErrorAC = (error)=> ({type: SET_ERROR, error});
-let setCaptchaAC = (captcha)=> ({type: SET_CAPTCHA, captcha});
-let setFetchingCaptchaAC = (isFetching)=> ({type: SET_FETCHING_CAPTCHA, isFetching})
+
+let toggleButtonAC: () => { type: typeof TOGGLE_LOGIN_BUTTON } = () => ({
+  type: TOGGLE_LOGIN_BUTTON,
+});
+
+let toggleLogOutAC: (disabled: boolean) => {
+  type: typeof TOGGLE_LOGOUT;
+  disabled: boolean;
+} = (disabled) => ({ type: TOGGLE_LOGOUT, disabled });
+
+let setErrorAC: (error) => { type: typeof SET_ERROR; error: boolean } = (
+  error
+) => ({ type: SET_ERROR, error });
+
+let setCaptchaAC: (captcha: string) => {
+  type: typeof SET_CAPTCHA;
+  captcha: string;
+} = (captcha) => ({ type: SET_CAPTCHA, captcha });
+
+let setFetchingCaptchaAC: (isFetching: boolean) => {
+  type: typeof SET_FETCHING_CAPTCHA;
+  isFetching: boolean;
+} = (isFetching) => ({
+  type: SET_FETCHING_CAPTCHA,
+  isFetching,
+});
 
 // SetAuth Thunk
 export let setAuthThunk = () => async (dispatch) => {
@@ -46,7 +83,11 @@ export const loginThunk = (data) => async (dispatch) => {
   const res = await authApi.login(data);
   if (res.data.resultCode !== 0) {
     dispatch(toggleButtonAC());
-    dispatch(setErrorAC(res.data.messages ? res.data.messages[0] : "Something went wrong"))
+    dispatch(
+      setErrorAC(
+        res.data.messages ? res.data.messages[0] : "Something went wrong"
+      )
+    );
   }
   if (res.data.resultCode === 0) {
     dispatch(change("login", "email", ""));
@@ -54,7 +95,6 @@ export const loginThunk = (data) => async (dispatch) => {
     dispatch(setAuthThunk());
     dispatch(setErrorAC(null));
     dispatch(setCaptchaAC(null));
-
   }
   if (res.data.resultCode === 10) {
     dispatch(setFetchingCaptchaAC(true));
@@ -71,13 +111,30 @@ export const logOutThunk = () => async (dispatch) => {
   if (code === 0) {
     dispatch(setAuthThunk());
     dispatch(setFriendsAC([]));
-    dispatch(setProfileAC(null))
+    dispatch(setProfileAC(null));
     dispatch(toggleLogOutAC(false));
   }
 };
 
 //State
-let initialState = {
+export type InitialStateType = {
+  profile: ProfileType
+  isAuth: null | boolean
+  isFetching: boolean
+  buttonDisabled: boolean
+  logoutDisabled: boolean
+  submitError: any,
+  captcha: null | string
+  fetchingCaptcha: boolean
+}
+
+type ProfileType = {
+  id: null | number,
+  email: null | string,
+  login: null | string,
+}
+
+let initialState: InitialStateType = {
   profile: {
     id: null,
     email: null,
@@ -93,7 +150,7 @@ let initialState = {
 };
 
 // Reducer
-let authReducer = (state = initialState, action) => {
+let authReducer = (state:InitialStateType = initialState, action: any):InitialStateType =>  {
   switch (action.type) {
     case SET_AUTH:
       return {
@@ -116,21 +173,21 @@ let authReducer = (state = initialState, action) => {
         ...state,
         logoutDisabled: action.disabled,
       };
-      case SET_ERROR:
-        return {
-          ...state,
-          submitError: action.error,
-        }
-      case SET_CAPTCHA:
-        return {
-          ...state,
-          captcha: action.captcha,
-        }
-      case SET_FETCHING_CAPTCHA:
-        return {
-          ...state,
-          fetchingCaptcha: action.isFetching,
-        }
+    case SET_ERROR:
+      return {
+        ...state,
+        submitError: action.error,
+      };
+    case SET_CAPTCHA:
+      return {
+        ...state,
+        captcha: action.captcha,
+      };
+    case SET_FETCHING_CAPTCHA:
+      return {
+        ...state,
+        fetchingCaptcha: action.isFetching,
+      };
     default:
       return state;
   }

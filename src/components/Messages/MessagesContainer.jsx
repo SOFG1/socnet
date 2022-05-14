@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import withRedirect from "../../hoc/withAuth";
 import Messages from "./Messages";
-import {sendMessageThunk as sendMessage} from '../../redux/profileReducer'
+import {sendMessageThunk as sendMessage} from '../../redux/profileReducer.ts'
 
 class MessagesContainer extends React.Component {
     render() {

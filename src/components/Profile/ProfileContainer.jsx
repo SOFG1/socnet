@@ -15,7 +15,7 @@ import {
   updateAvatarThunk as updateAvatar,
   editProfileThunk as editProfile,
   setProfileInfoAC as setProfileInfo,
-} from "../../redux/profileReducer";
+} from "../../redux/profileReducer.ts";
 import Preloader from "../common/Preloader/Preloader";
 import { useParams } from "react-router-dom";
 import ErrorBoundary from "../common/ErrorBoundary/ErrorBoundary";

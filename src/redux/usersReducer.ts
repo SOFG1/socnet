@@ -1,4 +1,5 @@
 import { usersApi, followApi } from "../api/api";
+import {UserProfilePhotosType} from './profileReducer'
 
 const SET_FRIENDS = "users/SET FRIENDS"; 
 const SET_USERS = "users/SET USERS";
@@ -7,19 +8,67 @@ const TOGGLE_USERS_FETCHING = "users/TOGGLE USERS FETCHING";
 const FOLLOW_CONDITION = "users/FOLLOW CONDITION";
 const FOLLOW_USER = "users/FOLLOW USER";
 
-//Action Creators
-export const setFriendsAC = (friends) => ({ type: SET_FRIENDS, friends });
-export const toggleFriendsFetchingAC = (isFetching) => ({
+//Set Friends AC
+type SendFriendsActionType = {
+  type: typeof SET_FRIENDS,
+  friends: UserType[] | []
+}
+type UserType = {
+  followed: boolean
+  id: number
+  name: string
+  photos: UserProfilePhotosType
+  status: string
+  uniqueUrlName: null | string
+}
+export const setFriendsAC = (friends:UserType[] | []):SendFriendsActionType => ({ type: SET_FRIENDS, friends });
+
+// Toggle Friends Fetching AC
+type ToogleFriendsFetchingActionType = {
+  type: typeof TOGGLE_FRIENDS_FETCHING
+  isFetching: boolean
+}
+export const toggleFriendsFetchingAC = (isFetching:boolean):ToogleFriendsFetchingActionType => ({
   type: TOGGLE_FRIENDS_FETCHING,
   isFetching,
 });
-export const toggleUsersFetchingAC = (isFetching) => ({
+
+//ToggleUsersFetchingAC
+type ToggleUsersFetchingActionType = {
+  type: typeof TOGGLE_USERS_FETCHING
+  isFetching: boolean
+}
+export const toggleUsersFetchingAC = (isFetching:boolean):ToggleUsersFetchingActionType => ({
   type: TOGGLE_USERS_FETCHING,
   isFetching,
 });
-export const setUsersAC = (data) => ({ type: SET_USERS, data });
-export const followConditionAC = (id) => ({ type: FOLLOW_CONDITION, id });
-export const followUserAC = (id) => ({ type: FOLLOW_USER, id });
+
+//Set Users AC
+type SetUsersActionType = {
+  type: typeof SET_USERS
+  data: SetUsersActionDataType
+}
+type SetUsersActionDataType = {
+  error: any,
+  items: [UserType]
+  page: number
+  totalCount: number
+}
+export const setUsersAC = (data: SetUsersActionDataType):SetUsersActionType => ({ type: SET_USERS, data });
+
+//Follow Condition AC
+type FollowConditionActionType = {
+  type: typeof FOLLOW_CONDITION
+  id: number
+}
+export const followConditionAC = (id: number):FollowConditionActionType => ({ type: FOLLOW_CONDITION, id });
+
+//Follow User AC
+type FollowUserActionType = {
+  type: typeof FOLLOW_USER,
+  id: number
+}
+export const followUserAC = (id: number):FollowUserActionType => ({ type: FOLLOW_USER, id });
 
 // Set Friends Thunk
 export let setFriendsThunk = ()=> async (dispatch) => {
@@ -54,7 +103,20 @@ export let unfollowThunk = (id) => async (dispatch) => {
 };
 
 //State
-let initialState = {
+type InitialStateType = {
+  fetchingFriends: boolean
+  fetchingUsers: boolean
+  defaultCount: number
+  defaultPage: number
+  numberOfPages: number
+  totalCount: number
+  currentPage: number | null
+  friends: UserType[] | []
+  users: UserType[] | []
+  disabledFollow: number[] | []
+}
+
+let initialState: InitialStateType = {
   fetchingFriends: false,
   fetchingUsers: false,
   defaultCount: 60,
@@ -68,7 +130,7 @@ let initialState = {
 };
 
 //Reducer
-let usersReducer = (state = initialState, action) => {
+let usersReducer = (state:InitialStateType = initialState, action:any): InitialStateType => {
   switch (action.type) {
     case SET_FRIENDS:
       return {
@@ -86,6 +148,7 @@ let usersReducer = (state = initialState, action) => {
         fetchingUsers: action.isFetching,
       };
     case SET_USERS:
+      console.log(action.data)
       return {
         ...state,
         users: action.data.items,

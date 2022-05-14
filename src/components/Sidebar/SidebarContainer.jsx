@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { connect } from "react-redux";
-import { setFriendsThunk as setFriends } from "../../redux/usersReducer";
-import { toggleSidebarAC as toggleSidebar } from "../../redux/appReducer";
+import { setFriendsThunk as setFriends } from "../../redux/usersReducer.ts";
+import { toggleSidebarAC as toggleSidebar } from "../../redux/appReducer.ts";
 
 const SidebarContainer = (props) => {
   useEffect(() => {

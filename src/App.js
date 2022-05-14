@@ -5,7 +5,7 @@ import {
   initThunk,
   toggleSidebarAC as toggleSidebar,
   toggleNetworkErrorAC as toggleNetworkError,
-} from "./redux/appReducer";
+} from "./redux/appReducer.ts";
 import { Routes, Route, Navigate } from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";

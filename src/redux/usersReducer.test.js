@@ -1,4 +1,4 @@
-import usersReducer, { followConditionAC } from "./usersReducer";
+import usersReducer, { followConditionAC } from "./usersReducer.ts";
 
 test("Test following condition toggle", () => {
   // Initial data

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Users from "./Users";
 import { connect } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { setUsersThunk as setUsers, followThunk as followUser, unfollowThunk as unfollowUser } from "../../redux/usersReducer";
+import { setUsersThunk as setUsers, followThunk as followUser, unfollowThunk as unfollowUser } from "../../redux/usersReducer.ts";
 import { getCurrent} from "../../redux/users-selectors";
 
 const UsersContainer = (props)=> {
