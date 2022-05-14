@@ -93,7 +93,7 @@ export const likePostAC = (id: number): LikePostActionType => ({
 
 // Send Message AC
 type SendMessageActionType = {
-  type: typeof LIKE_POST;
+  type: typeof SEND_MESSAGE;
   text: string;
 };
 export const sendMessageAC = (text: string): SendMessageActionType => ({
@@ -325,6 +325,7 @@ let profileReducer = (state:InitialStateType = initialState, action:any):Initial
             id: state.posts.length + 1,
             text: action.text,
             likes: 0,
+            likedByMe: false,
           },
         ],
       };

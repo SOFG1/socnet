@@ -60,7 +60,7 @@ let setFetchingCaptchaAC: (isFetching: boolean) => {
 });
 
 // SetAuth Thunk
-export let setAuthThunk = () => async (dispatch) => {
+export let setAuthThunk = () => async (dispatch:any) => {
   dispatch(toggleFetchingAC(true));
   const data = await authApi.auth();
   if (data.resultCode === 0) {
@@ -73,7 +73,13 @@ export let setAuthThunk = () => async (dispatch) => {
 };
 
 //Login Thunk
-export const loginThunk = (data) => async (dispatch) => {
+type LoginDataType = {
+  email: string
+  password: string
+  captcha?: string
+}
+
+export const loginThunk = (data:LoginDataType) => async (dispatch:any) => {
   dispatch(toggleButtonAC());
   dispatch(change("login", "password", ""));
   dispatch(untouch("login", "email"));
@@ -117,37 +123,22 @@ export const logOutThunk = () => async (dispatch) => {
 };
 
 //State
-export type InitialStateType = {
-  profile: ProfileType
-  isAuth: null | boolean
-  isFetching: boolean
-  buttonDisabled: boolean
-  logoutDisabled: boolean
-  submitError: any,
-  captcha: null | string
-  fetchingCaptcha: boolean
-}
-
-type ProfileType = {
-  id: null | number,
-  email: null | string,
-  login: null | string,
-}
-
-let initialState: InitialStateType = {
+let initialState = {
   profile: {
-    id: null,
-    email: null,
-    login: null,
+    id: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
   },
-  isAuth: null,
+  isAuth: null as boolean | null,
   isFetching: false,
   buttonDisabled: false,
   logoutDisabled: false,
-  submitError: null,
-  captcha: null, //If null captcha isn't required, here will be captcha's url
+  submitError: null as any,
+  captcha: null as null | string, //If null captcha isn't required, here will be captcha's url
   fetchingCaptcha: false, // captcha is loading
 };
+
+type InitialStateType = typeof initialState
 
 // Reducer
 let authReducer = (state:InitialStateType = initialState, action: any):InitialStateType =>  {
