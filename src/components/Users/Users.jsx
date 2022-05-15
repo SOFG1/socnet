@@ -1,6 +1,6 @@
 import s from "./Users.module.scss";
 import Preloader from "../common/Preloader/Preloader";
-import Pagination from "../common/Pagination/Pagination";
+import Pagination from "../common/Pagination/Pagination.tsx";
 import User from "./User";
 
 const Users = (props) => {

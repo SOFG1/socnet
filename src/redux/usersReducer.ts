@@ -1,5 +1,5 @@
 import { usersApi, followApi } from "../api/api";
-import {UserProfilePhotosType} from './profileReducer'
+import { UserProfilePhotosType } from "../types/types";
 
 const SET_FRIENDS = "users/SET FRIENDS"; 
 const SET_USERS = "users/SET USERS";
@@ -148,7 +148,6 @@ let usersReducer = (state:InitialStateType = initialState, action:any): InitialS
         fetchingUsers: action.isFetching,
       };
     case SET_USERS:
-      console.log(action.data)
       return {
         ...state,
         users: action.data.items,

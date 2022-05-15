@@ -1,5 +1,6 @@
 import { profileApi, followApi } from "../api/api";
 import { change, untouch } from "redux-form";
+import { UserProfileType, UserProfileContactsType, UserProfilePhotosType } from "../types/types";
 
 const SET_PROFILE = "profile/SET PROFILE";
 const SET_STATUS = "profile/SET STATUS";
@@ -19,32 +20,9 @@ type SetProfileActionType = {
   profile: UserProfileType;
 };
 
-type UserProfileType = {
-  aboutMe: string;
-  contacts: UserProfileContactsType;
-  followed: boolean;
-  fullName: string;
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
-  photos: UserProfilePhotosType;
-  status: string;
-  userId: number;
-};
 
-type UserProfileContactsType = {
-  facebook: string;
-  github: string;
-  instagram: string;
-  mainLink: string;
-  twitter: string;
-  vk: string;
-  website: string;
-  youtube: string;
-};
-export type UserProfilePhotosType = {
-  large: string;
-  small: string;
-};
+
+
 export const setProfileAC = (
   profile: UserProfileType
 ): SetProfileActionType => ({ type: SET_PROFILE, profile });

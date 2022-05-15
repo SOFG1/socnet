@@ -17,13 +17,13 @@ type SetAuthProfileType = {
   login: string
 }
 
-let setAuthAC: (
+type SetAuthActionType = {
+  type: typeof SET_AUTH,
   profile: SetAuthProfileType,
   isAuth: boolean
-) => { type: typeof SET_AUTH; profile: Object; isAuth: boolean } = (
-  profile,
-  isAuth
-) => ({ type: SET_AUTH, profile, isAuth });
+}
+
+let setAuthAC = ( profile: SetAuthProfileType, isAuth: boolean):SetAuthActionType => ({ type: SET_AUTH, profile, isAuth });
 
 let toggleFetchingAC: (isFetching: boolean) => {
   type: typeof TOGGLE_AUTH_FETCHING;
