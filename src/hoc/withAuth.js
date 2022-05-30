@@ -10,7 +10,7 @@ const withAuth = (Component)=> {
                 return <Navigate to="/login" />
             }
             return(
-                <Component {...this.props} />
+                <Component  />
             )
         }
     }

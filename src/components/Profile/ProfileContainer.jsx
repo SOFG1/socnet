@@ -16,9 +16,9 @@ import {
   editProfileThunk as editProfile,
   setProfileInfoAC as setProfileInfo,
 } from "../../redux/profileReducer.ts";
-import Preloader from "../common/Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader.tsx";
 import { useParams } from "react-router-dom";
-import ErrorBoundary from "../common/ErrorBoundary/ErrorBoundary";
+import ErrorBoundary from "../common/ErrorBoundary/ErrorBoundary.tsx";
 
 const ProfilContainer = (props) => {
   const urlId = parseInt(useParams()["*"], 10);

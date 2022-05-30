@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import s from "./ProfileForm.module.scss";
 import cn from "classnames";
-import Preloader from "../common/Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader.tsx";
 
 // Contact Field
 const ContactField = ({ contactTitle, contactValue, editMode}) => {

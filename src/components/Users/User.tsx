@@ -1,8 +1,18 @@
 import s from "./Users.module.scss";
 import { Link } from "react-router-dom";
 import avatar from "../../assets/avatar.png";
+import { UserType } from "../../types/types";
 
-const User = ({ user, ...props }) => {
+type PropsType = {
+  user:UserType
+  key: number
+  isAuth: boolean
+  unfollowUser: Function
+  disabled: number[] | []
+  followUser: Function
+}
+
+const User:React.FC<PropsType> = ({ user, ...props }) => {
   return (
     <div className={s.user}>
       <div className={s.left}>

@@ -1,7 +1,8 @@
 import s from "./Header.module.scss";
 import Logo from "../../assets/header-logo.svg";
 import { Link } from "react-router-dom";
-import Preloader from "../common/Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader.tsx";
+
 
 const Header = (props) => {
   return (

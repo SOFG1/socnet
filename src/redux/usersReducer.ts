@@ -1,5 +1,5 @@
 import { usersApi, followApi } from "../api/api";
-import { UserProfilePhotosType } from "../types/types";
+import { UserType } from "../types/types";
 
 const SET_FRIENDS = "users/SET FRIENDS"; 
 const SET_USERS = "users/SET USERS";
@@ -13,14 +13,7 @@ type SendFriendsActionType = {
   type: typeof SET_FRIENDS,
   friends: UserType[] | []
 }
-type UserType = {
-  followed: boolean
-  id: number
-  name: string
-  photos: UserProfilePhotosType
-  status: string
-  uniqueUrlName: null | string
-}
+
 export const setFriendsAC = (friends:UserType[] | []):SendFriendsActionType => ({ type: SET_FRIENDS, friends });
 
 // Toggle Friends Fetching AC

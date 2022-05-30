@@ -1,7 +1,7 @@
 import s from "./Profile.module.scss";
 import ProfileForm from "./ProfileForm";
 import avatar from "../../assets/avatar.png";
-import Status from "../common/Status/Status";
+import Status from "../common/Status/Status.tsx";
 
 const Profile = (props) => {
   return (

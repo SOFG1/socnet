@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "./Login";
+import Login from "./Login.tsx";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { loginThunk as login } from "../../redux/authReducer.ts";

@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header";
+import Header from "./Header.tsx";
 import { connect } from "react-redux";
 import {logOutThunk as logOut} from "../../redux/authReducer.ts";
 

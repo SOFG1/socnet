@@ -1,12 +1,20 @@
 import React from "react";
 import s from "./withErrorBoundary.module.scss";
 
-class ErrorBoundary extends React.Component {
+type StateType = {
+  hasError: boolean
+}
+
+type PropsType = {
+  children: any
+}
+
+class ErrorBoundary extends React.Component<PropsType, StateType> {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
   }
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error:any) {
     return { hasError: true };
   }
   render() {

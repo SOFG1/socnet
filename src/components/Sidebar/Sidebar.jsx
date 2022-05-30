@@ -1,7 +1,7 @@
 import s from "./Sidebar.module.scss";
 import { NavLink } from "react-router-dom";
 import Friend from "./Friend";
-import Preloader from "../common/Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader.tsx";
 import cn from "classnames";
 
 const Sidebar = (props) => {

@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { statusValidator } from "../../../utilites/validators";
 import s from "./Status.module.scss";
 
-const Status = (props)=> {
+type PropsType = {
+  status: string
+  readOnly: boolean
+  changeStatus: (status:string)=> void
+}
+
+const Status = (props:PropsType)=> {
   const [status, setStatus] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState(false);

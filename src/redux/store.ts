@@ -15,6 +15,8 @@ const rootReducer = combineReducers({
     app: appReducer,
 });
 
+type RootReducerType = typeof rootReducer
+
 const store = createStore(rootReducer,composeWithDevTools( applyMiddleware(thunk)));
 
 export default store;

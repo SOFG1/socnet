@@ -1,6 +1,6 @@
 import s from './Messages.module.scss';
 import { reduxForm, Field } from 'redux-form';
-import TextArea from '../common/Textarea/Textarea';
+import TextArea from '../common/Textarea/Textarea.tsx';
 import { textValidator } from '../../utilites/validators';
 const textValidator300 = textValidator(300)
 

@@ -25,3 +25,18 @@ export type UserProfilePhotosType = {
   large: string;
   small: string;
 };
+
+export type UserType = {
+  followed: boolean
+  id: number
+  name: string
+  photos: UserProfilePhotosType
+  status: string
+  uniqueUrlName: null | string
+}
+
+export type MessageType = {
+  date: string
+  id: number
+  text: string
+}

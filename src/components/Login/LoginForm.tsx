@@ -1,13 +1,13 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 import s from "./Login.module.scss";
-import TextInput from "../common/TextInput/TextInput";
+import TextInput from "../common/TextInput/TextInput.tsx";
 import {
   authValidator,
   emailValidator,
   textValidator,
 } from "../../utilites/validators";
-import Preloader from "../common/Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader.tsx";
 
 const textValidator16 = textValidator(16);
 const LoginForm = React.memo((props) => {

@@ -1,5 +1,5 @@
 import s from './Login.module.scss';
-import LoginForm from './LoginForm';
+import LoginForm from './LoginForm.tsx';
 
 const Login = (props)=> {
     return(

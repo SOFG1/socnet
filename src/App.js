@@ -7,23 +7,23 @@ import {
   toggleNetworkErrorAC as toggleNetworkError,
 } from "./redux/appReducer.ts";
 import { Routes, Route, Navigate } from "react-router-dom";
-import HeaderContainer from "./components/Header/HeaderContainer";
+import HeaderContainer from "./components/Header/HeaderContainer.tsx";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
-import Initializer from "./components/common/Initializer/Initializer";
-import Preloader from "./components/common/Preloader/Preloader";
-import NetworkError from "./components/common/NetworkError/NetworkError";
-import ErrorBoundary from "./components/common/ErrorBoundary/ErrorBoundary";
+import Initializer from "./components/common/Initializer/Initializer.tsx";
+import Preloader from "./components/common/Preloader/Preloader.tsx";
+import NetworkError from "./components/common/NetworkError/NetworkError.tsx";
+import ErrorBoundary from "./components/common/ErrorBoundary/ErrorBoundary.tsx";
 // Pages
 const ProfileContainer = lazy(() =>
   import("./components/Profile/ProfileContainer")
 );
 const MessagesContainer = lazy(() =>
-  import("./components/Messages/MessagesContainer")
+  import("./components/Messages/MessagesContainer.tsx")
 );
-const UsersContainer = lazy(() => import("./components/Users/UsersContainer"));
+const UsersContainer = lazy(() => import("./components/Users/UsersContainer.tsx"));
 const News = lazy(() => import("./components/News/News"));
 const Music = lazy(() => import("./components/Music/Music"));
-const LoginContainer = lazy(() => import("./components/Login/LoginContainer"));
+const LoginContainer = lazy(() => import("./components/Login/LoginContainer.tsx"));
 const NotFound404 = lazy(() => import("./components/NotFound404/NotFound404"));
 
 function App(props) {

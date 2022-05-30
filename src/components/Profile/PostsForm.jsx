@@ -1,7 +1,7 @@
 import s from "./Profile.module.scss";
 import { reduxForm, Field } from "redux-form";
 
-import Textarea from "../common/Textarea/Textarea";
+import Textarea from "../common/Textarea/Textarea.tsx";
 import { textValidator } from "../../utilites/validators";
 
 const textValidator500 = textValidator(500);
