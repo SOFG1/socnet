@@ -5,6 +5,7 @@ import {
   UserProfileContactsType,
   UserProfilePhotosType,
 } from "../types/types";
+import { Dispatch } from "redux";
 
 const SET_PROFILE = "profile/SET PROFILE";
 const SET_STATUS = "profile/SET STATUS";
@@ -125,21 +126,11 @@ export const setProfileInfoAC = (
   profile,
 });
 
-type ProfileActionType =
-  | SetProfileInfoActionType
-  | SetPhotosActionType
-  | FollowProfileActionType
-  | FollowDisableActionType
-  | DeleteProfileActionType
-  | SendMessageActionType
-  | LikePostActionType
-  | AddPostActionType
-  | SetStatusActionType
-  | ToggleFetchingActionType
-  | SetProfileActionType
+
+
 
 //Set Profile Thunk
-export const setProfileThunk = (id) => async (dispatch) => {
+export const setProfileThunk = (id:number) => async (dispatch: Dispatch<ProfileActionType>) => {
   dispatch(deleteProfileAC());
   dispatch(toggleFetchingAC(true));
   const res = await Promise.all([
@@ -156,7 +147,7 @@ export const setProfileThunk = (id) => async (dispatch) => {
 };
 
 //Change Status Thunk
-export const changeStatusThunk = (status) => async (dispatch) => {
+export const changeStatusThunk = (status: string) => async (dispatch: Dispatch<ProfileActionType>) => {
   try {
     const code = await profileApi.setStatus(status);
     if (code === 0) dispatch(setStatusAC(status));
@@ -166,28 +157,29 @@ export const changeStatusThunk = (status) => async (dispatch) => {
 };
 
 //Add Post Thunk
-export const addPostThunk = (text) => (dispatch) => {
+export const addPostThunk = (text: string) => (dispatch: Dispatch<ProfileActionType>) => {
   dispatch(addPostAC(text));
   dispatch(change("posts", "post", ""));
   dispatch(untouch("posts", "post"));
 };
 
 //Send Message Thunk
-export const sendMessageThunk = (text) => (dispatch) => {
+export const sendMessageThunk = (text: string) => (dispatch: Dispatch<ProfileActionType>) => {
   dispatch(sendMessageAC(text));
   dispatch(change("messages", "message", ""));
   dispatch(untouch("messages", "message"));
 };
 
 //Update Avatar Thunk
-export const updateAvatarThunk = (image) => async (dispatch) => {
+export const updateAvatarThunk = (image: any) => async (dispatch: Dispatch<ProfileActionType>) => {
   const data = await profileApi.setAvatar(image);
   if (data.resultCode === 0) dispatch(setPhotosAC(data.data.photos));
   return data.resultCode;
 };
 
 //Follow / Unfollow flow
-const followingFlow = async (id, apiMethod, dispatch) => {
+type ApiMethodType = (id: number) => Promise<number>
+const followingFlow = async (id: number, apiMethod: ApiMethodType, dispatch: Dispatch<ProfileActionType>) => {
   dispatch(followDisableAC());
   const code = await apiMethod(id);
   if (code === 0) {
@@ -197,17 +189,17 @@ const followingFlow = async (id, apiMethod, dispatch) => {
 };
 
 //Follow User Thunk
-export const followUserThunk = (id) => (dispatch) => {
+export const followUserThunk = (id: number) => (dispatch: Dispatch<ProfileActionType>) => {
   followingFlow(id, followApi.followUser, dispatch);
 };
 
 //Unfollow User Thunk
-export const unfollowUserThunk = (id) => (dispatch) => {
+export const unfollowUserThunk = (id: number) => (dispatch: Dispatch<ProfileActionType>) => {
   followingFlow(id, followApi.unfollowUser, dispatch);
 };
 
 //Set Profile Thunk
-export const editProfileThunk = (profile) => (dispatch) => {
+export const editProfileThunk = (profile: UserProfileType) => () => {
   return profileApi.editProfile(profile);
 };
 
@@ -291,6 +283,19 @@ let initialState: InitialStateType = {
     },
   ],
 };
+
+type ProfileActionType =
+  | SetProfileInfoActionType
+  | SetPhotosActionType
+  | FollowProfileActionType
+  | FollowDisableActionType
+  | DeleteProfileActionType
+  | SendMessageActionType
+  | LikePostActionType
+  | AddPostActionType
+  | SetStatusActionType
+  | ToggleFetchingActionType
+  | SetProfileActionType
 
 //Reducer
 let profileReducer = (
