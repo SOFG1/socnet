@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 import { usersApi, followApi } from "../api/api";
 import { UserType } from "../types/types";
 
@@ -64,7 +65,7 @@ export const followUserAC = (id: number):FollowUserActionType => ({ type: FOLLOW
 
 
 // Set Friends Thunk
-export let setFriendsThunk = ()=> async (dispatch) => {
+export let setFriendsThunk = ()=> async (dispatch: Dispatch<ActionType>) => {
   dispatch(toggleFriendsFetchingAC(true));
   const friends = await usersApi.getFriends(20)
   dispatch(setFriendsAC(friends));
@@ -72,7 +73,7 @@ export let setFriendsThunk = ()=> async (dispatch) => {
 };
 
 // Set Users Thunk
-export let setUsersThunk = (page, count) => async (dispatch) => {
+export let setUsersThunk = (page: number, count: number) => async (dispatch: Dispatch<ActionType>) => {
   dispatch(toggleUsersFetchingAC(true));
   const data = await usersApi.getUsers(page, count)
   dispatch(setUsersAC({ ...data, page }));
@@ -80,7 +81,7 @@ export let setUsersThunk = (page, count) => async (dispatch) => {
 };
 
 // Follow Thunk
-export let followThunk = (id) => async (dispatch) => {
+export let followThunk = (id: number) => async (dispatch: Dispatch<ActionType>) => {
   dispatch(followConditionAC(id));
   dispatch(followUserAC(id));
   const code = await followApi.followUser(id);
@@ -88,7 +89,7 @@ export let followThunk = (id) => async (dispatch) => {
 };
 
 // Unfollow Thunk
-export let unfollowThunk = (id) => async (dispatch) => {
+export let unfollowThunk = (id: number) => async (dispatch: Dispatch<ActionType>) => {
   dispatch(followConditionAC(id));
   dispatch(followUserAC(id));
   const code = await followApi.unfollowUser(id);
