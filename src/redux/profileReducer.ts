@@ -1,6 +1,10 @@
 import { profileApi, followApi } from "../api/api";
 import { change, untouch } from "redux-form";
-import { UserProfileType, UserProfileContactsType, UserProfilePhotosType } from "../types/types";
+import {
+  UserProfileType,
+  UserProfileContactsType,
+  UserProfilePhotosType,
+} from "../types/types";
 
 const SET_PROFILE = "profile/SET PROFILE";
 const SET_STATUS = "profile/SET STATUS";
@@ -19,10 +23,6 @@ type SetProfileActionType = {
   type: typeof SET_PROFILE;
   profile: UserProfileType;
 };
-
-
-
-
 export const setProfileAC = (
   profile: UserProfileType
 ): SetProfileActionType => ({ type: SET_PROFILE, profile });
@@ -80,43 +80,63 @@ export const sendMessageAC = (text: string): SendMessageActionType => ({
 });
 
 // Delete Profile AC
-export const deleteProfileAC = (): { type: typeof DELETE_PROFILE } => ({
+type DeleteProfileActionType = { type: typeof DELETE_PROFILE };
+export const deleteProfileAC = (): DeleteProfileActionType => ({
   type: DELETE_PROFILE,
 });
 
 // Follow Disable AC
-export const followDisableAC = (): { type: typeof FOLLOW_DISABLE } => ({
+type FollowDisableActionType = { type: typeof FOLLOW_DISABLE };
+export const followDisableAC = (): FollowDisableActionType => ({
   type: FOLLOW_DISABLE,
 });
 
 // Follow Profile AC
-export const followProfileAC = (): { type: typeof FOLLOW_PROFILE } => ({
+type FollowProfileActionType = { type: typeof FOLLOW_PROFILE };
+export const followProfileAC = (): FollowProfileActionType => ({
   type: FOLLOW_PROFILE,
 });
 
 // SetPhotos AC
 type SetPhotosActionType = {
-  type: typeof SET_PHOTOS,
+  type: typeof SET_PHOTOS;
+  photos: UserProfilePhotosType;
+};
+export const setPhotosAC = (
   photos: UserProfilePhotosType
-}
-export const setPhotosAC = (photos: UserProfilePhotosType):SetPhotosActionType => ({ type: SET_PHOTOS, photos });
+): SetPhotosActionType => ({ type: SET_PHOTOS, photos });
 
 // SetProfileInfo AC
 type SetProfileInfoActionType = {
-  type: typeof SET_PROFILE_INFO,
-  profile: ProfileInfoType
-}
+  type: typeof SET_PROFILE_INFO;
+  profile: ProfileInfoType;
+};
 type ProfileInfoType = {
-  aboutMe: string
-  contacts: UserProfileContactsType,
-  fullName: string,
-  lookingForAJob: boolean
-  lookingForAJobDescription: string
-}
-export const setProfileInfoAC = (profile:ProfileInfoType):SetProfileInfoActionType => ({
+  aboutMe: string;
+  contacts: UserProfileContactsType;
+  fullName: string;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+};
+export const setProfileInfoAC = (
+  profile: ProfileInfoType
+): SetProfileInfoActionType => ({
   type: SET_PROFILE_INFO,
   profile,
 });
+
+type ProfileActionType =
+  | SetProfileInfoActionType
+  | SetPhotosActionType
+  | FollowProfileActionType
+  | FollowDisableActionType
+  | DeleteProfileActionType
+  | SendMessageActionType
+  | LikePostActionType
+  | AddPostActionType
+  | SetStatusActionType
+  | ToggleFetchingActionType
+  | SetProfileActionType
 
 //Set Profile Thunk
 export const setProfileThunk = (id) => async (dispatch) => {
@@ -193,28 +213,27 @@ export const editProfileThunk = (profile) => (dispatch) => {
 
 //State
 type InitialStateType = {
-  profile: UserProfileType
-  isFetching: boolean
-  followDisabled: boolean
-  posts: PostType[] | []
-  messages: MessageType[] | []
-
-}
+  profile: UserProfileType;
+  isFetching: boolean;
+  followDisabled: boolean;
+  posts: PostType[] | [];
+  messages: MessageType[] | [];
+};
 
 type PostType = {
-  id: number
-  text: string
-  likes: number
-  likedByMe: boolean
-}
+  id: number;
+  text: string;
+  likes: number;
+  likedByMe: boolean;
+};
 
 type MessageType = {
-  id: number
-  text: string
-  date: string
-}
+  id: number;
+  text: string;
+  date: string;
+};
 
-let initialState:InitialStateType = {
+let initialState: InitialStateType = {
   profile: null,
   isFetching: false,
   followDisabled: false,
@@ -274,7 +293,10 @@ let initialState:InitialStateType = {
 };
 
 //Reducer
-let profileReducer = (state:InitialStateType = initialState, action:any):InitialStateType => {
+let profileReducer = (
+  state: InitialStateType = initialState,
+  action: ProfileActionType
+): InitialStateType => {
   switch (action.type) {
     case SET_PROFILE:
       return {
@@ -361,7 +383,7 @@ let profileReducer = (state:InitialStateType = initialState, action:any):Initial
         },
       };
     case SET_PROFILE_INFO:
-      console.log(action.profile)
+      console.log(action.profile);
       return {
         ...state,
         profile: {

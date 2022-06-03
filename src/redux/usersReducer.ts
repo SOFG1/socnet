@@ -9,12 +9,11 @@ const FOLLOW_CONDITION = "users/FOLLOW CONDITION";
 const FOLLOW_USER = "users/FOLLOW USER";
 
 //Set Friends AC
-type SendFriendsActionType = {
+type SetFriendsActionType = {
   type: typeof SET_FRIENDS,
   friends: UserType[] | []
 }
-
-export const setFriendsAC = (friends:UserType[] | []):SendFriendsActionType => ({ type: SET_FRIENDS, friends });
+export const setFriendsAC = (friends:UserType[] | []):SetFriendsActionType => ({ type: SET_FRIENDS, friends });
 
 // Toggle Friends Fetching AC
 type ToogleFriendsFetchingActionType = {
@@ -62,6 +61,7 @@ type FollowUserActionType = {
   id: number
 }
 export const followUserAC = (id: number):FollowUserActionType => ({ type: FOLLOW_USER, id });
+
 
 // Set Friends Thunk
 export let setFriendsThunk = ()=> async (dispatch) => {
@@ -122,8 +122,17 @@ let initialState: InitialStateType = {
   disabledFollow: [],
 };
 
+// Common Action Type
+type ActionType = 
+FollowUserActionType
+| FollowConditionActionType
+| SetUsersActionType
+| ToggleUsersFetchingActionType
+| ToogleFriendsFetchingActionType
+| SetFriendsActionType
+
 //Reducer
-let usersReducer = (state:InitialStateType = initialState, action:any): InitialStateType => {
+let usersReducer = (state:InitialStateType = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
     case SET_FRIENDS:
       return {

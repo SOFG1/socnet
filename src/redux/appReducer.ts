@@ -3,15 +3,19 @@ const TOGGLE_INIT = "app/TOGGLE INIT";
 const TOGGLE_SIDEBAR = "app/TOGGLE SIDEBAR";
 const TOGGLE_NETWORK_ERROR = "app/TOGGLE NETWORK ERROR";
 
-export const toggleInitAC: (isInit: boolean) => {
+
+type ToggleInitActionType = {
   type: typeof TOGGLE_INIT;
   isInit: boolean;
-} = (isInit) => ({ type: TOGGLE_INIT, isInit });
+}
+export const toggleInitAC = (isInit: boolean): ToggleInitActionType => ({ type: TOGGLE_INIT, isInit });
 
-export const toggleSidebarAC: (opened: boolean) => {
+
+type ToggleSidebarActionType = {
   type: typeof TOGGLE_SIDEBAR;
   opened: boolean;
-} = (opened) => ({ type: TOGGLE_SIDEBAR, opened });
+}
+export const toggleSidebarAC = (opened: boolean): ToggleSidebarActionType => ({ type: TOGGLE_SIDEBAR, opened });
 
 export const toggleNetworkErrorAC: (hasError: boolean) => {
   type: typeof TOGGLE_NETWORK_ERROR;
