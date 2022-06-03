@@ -10,7 +10,7 @@ type PropsType = {
 }
 
 class ErrorBoundary extends React.Component<PropsType, StateType> {
-  constructor(props) {
+  constructor(props: PropsType) {
     super(props);
     this.state = { hasError: false };
   }

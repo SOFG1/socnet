@@ -1,10 +1,11 @@
+import React from 'react'
 import s from "./Header.module.scss";
 import Logo from "../../assets/header-logo.svg";
 import { Link } from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader.tsx";
 
 
-const Header = (props) => {
+const Header :React.FC<any> = (props) => {
   return (
     <header className={s.header}>
       <Link to="/">

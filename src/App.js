@@ -20,10 +20,14 @@ const ProfileContainer = lazy(() =>
 const MessagesContainer = lazy(() =>
   import("./components/Messages/MessagesContainer.tsx")
 );
-const UsersContainer = lazy(() => import("./components/Users/UsersContainer.tsx"));
+const UsersContainer = lazy(() =>
+  import("./components/Users/UsersContainer.tsx")
+);
 const News = lazy(() => import("./components/News/News"));
 const Music = lazy(() => import("./components/Music/Music"));
-const LoginContainer = lazy(() => import("./components/Login/LoginContainer.tsx"));
+const LoginContainer = lazy(() =>
+  import("./components/Login/LoginContainer.tsx")
+);
 const NotFound404 = lazy(() => import("./components/NotFound404/NotFound404"));
 
 function App(props) {
@@ -49,27 +53,27 @@ function App(props) {
     };
   }, []);
   return props.isInit ? (
-    <div className="App">
-      <NetworkError hasError={props.networkError} />
-      <HeaderContainer />
-      <SidebarContainer />
-      <div className="content" onClick={() => props.toggleSidebar(false)}>
-        <ErrorBoundary>
-        <Suspense fallback={<Preloader isFetching={true} />}>
-          <Routes>
-            <Route path="/" element={<Navigate to="/profile" />} />
-            <Route path="/profile/*" element={<ProfileContainer />} />
-            <Route path="/messages/*" element={<MessagesContainer />} />
-            <Route path="/users/*" element={<UsersContainer />} />
-            <Route path="/news/*" element={<News />} />
-            <Route path="/music/*" element={<Music />} />
-            <Route path="/login/*" element={<LoginContainer />} />
-            <Route path="*" element={<NotFound404 />} />
-          </Routes>
-        </Suspense>
-        </ErrorBoundary>
+      <div className="App">
+        <NetworkError hasError={props.networkError} />
+        <HeaderContainer />
+        <SidebarContainer />
+        <div className="content" onClick={() => props.toggleSidebar(false)}>
+          <ErrorBoundary>
+            <Suspense fallback={<Preloader isFetching={true} />}>
+              <Routes>
+                <Route path="/" element={<Navigate to="/profile" />} />
+                <Route path="/profile/*" element={<ProfileContainer />} />
+                <Route path="/messages/*" element={<MessagesContainer />} />
+                <Route path="/users/*" element={<UsersContainer />} />
+                <Route path="/news/*" element={<News />} />
+                <Route path="/music/*" element={<Music />} />
+                <Route path="/login/*" element={<LoginContainer />} />
+                <Route path="*" element={<NotFound404 />} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
+        </div>
       </div>
-    </div>
   ) : (
     <>
       <Initializer />

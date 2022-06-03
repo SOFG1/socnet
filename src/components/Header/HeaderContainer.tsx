@@ -3,7 +3,7 @@ import Header from "./Header.tsx";
 import { connect } from "react-redux";
 import {logOutThunk as logOut} from "../../redux/authReducer.ts";
 
-const HeaderContainer = (props)=> {
+const HeaderContainer :React.FC<any> = (props)=> {
     return (
       <Header
         {...props.authData}

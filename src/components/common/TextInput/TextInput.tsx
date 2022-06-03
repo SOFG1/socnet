@@ -1,6 +1,7 @@
+import React from 'react';
 import s from './TextInput.module.scss';
 
-const TextInput = ({input, meta, ...props})=> {
+const TextInput :React.FC = ({input, meta, ...props}: any)=> {
     return (
         <div className={s.box}>
             <input {...props} {...input} />

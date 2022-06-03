@@ -8,14 +8,14 @@ type PropsType = {
   changeStatus: (status:string)=> void
 }
 
-const Status = (props:PropsType)=> {
+const Status: React.FC<PropsType> = (props)=> {
   const [status, setStatus] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState(false);
   useEffect(()=> {
     setStatus(props.status)
   }, [props])
-  let onChange= (e)=> {
+  let onChange= (e: React.SyntheticEvent)=> {
     setStatus(e.target.value);
     setError(!statusValidator(e.target.value));
   }
@@ -24,7 +24,7 @@ const Status = (props:PropsType)=> {
       setEditMode(mode => !mode)
     }
   }
-  let onBlur = (e)=> {
+  let onBlur = (e: React.SyntheticEvent)=> {
     const valid = statusValidator(e.target.value);
     if (valid) {
       setStatus(props.status);

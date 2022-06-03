@@ -1,7 +1,9 @@
 import s from './Initializer.module.scss';
 import React from 'react';
 
-const Initializer:React.FC = (props:{})=> {
+type PropsType = {}
+
+const Initializer:React.FC = (props: PropsType)=> {
     return (
         <div className={s.Initializer}>
             <div className={s.circle}></div>
