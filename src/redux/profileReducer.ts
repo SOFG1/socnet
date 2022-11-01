@@ -1,4 +1,4 @@
-import { profileApi, followApi } from "../api/api";
+import { profileApi, followApi } from "../api/api.ts";
 import { change, untouch } from "redux-form";
 import {
   UserProfileType,
@@ -6,6 +6,7 @@ import {
   UserProfilePhotosType,
 } from "../types/types";
 import { Dispatch } from "redux";
+import {ThunkAction} from 'redux-thunk';
 
 const SET_PROFILE = "profile/SET PROFILE";
 const SET_STATUS = "profile/SET STATUS";
@@ -127,10 +128,10 @@ export const setProfileInfoAC = (
 });
 
 
-
+type ThunkType = ThunkAction<Promise<void>, any, unknown, ProfileActionType>
 
 //Set Profile Thunk
-export const setProfileThunk = (id:number) => async (dispatch: Dispatch<ProfileActionType>) => {
+export const setProfileThunk = (id:number): ThunkType => async (dispatch: Dispatch<ProfileActionType>) => {
   dispatch(deleteProfileAC());
   dispatch(toggleFetchingAC(true));
   const res = await Promise.all([
@@ -147,7 +148,7 @@ export const setProfileThunk = (id:number) => async (dispatch: Dispatch<ProfileA
 };
 
 //Change Status Thunk
-export const changeStatusThunk = (status: string) => async (dispatch: Dispatch<ProfileActionType>) => {
+export const changeStatusThunk = (status: string): ThunkType => async (dispatch: Dispatch<ProfileActionType>) => {
   try {
     const code = await profileApi.setStatus(status);
     if (code === 0) dispatch(setStatusAC(status));
@@ -157,21 +158,21 @@ export const changeStatusThunk = (status: string) => async (dispatch: Dispatch<P
 };
 
 //Add Post Thunk
-export const addPostThunk = (text: string) => (dispatch: Dispatch<ProfileActionType>) => {
+export const addPostThunk = (text: string): ThunkAction<any, any, unknown, ProfileActionType> => (dispatch: Dispatch<ProfileActionType>) => {
   dispatch(addPostAC(text));
   dispatch(change("posts", "post", ""));
   dispatch(untouch("posts", "post"));
 };
 
 //Send Message Thunk
-export const sendMessageThunk = (text: string) => (dispatch: Dispatch<ProfileActionType>) => {
+export const sendMessageThunk = (text: string): ThunkAction<any, any, unknown, ProfileActionType> => (dispatch: Dispatch<ProfileActionType>) => {
   dispatch(sendMessageAC(text));
   dispatch(change("messages", "message", ""));
   dispatch(untouch("messages", "message"));
 };
 
 //Update Avatar Thunk
-export const updateAvatarThunk = (image: any) => async (dispatch: Dispatch<ProfileActionType>) => {
+export const updateAvatarThunk = (image: any): ThunkType => async (dispatch: Dispatch<ProfileActionType>) => {
   const data = await profileApi.setAvatar(image);
   if (data.resultCode === 0) dispatch(setPhotosAC(data.data.photos));
   return data.resultCode;
@@ -179,7 +180,7 @@ export const updateAvatarThunk = (image: any) => async (dispatch: Dispatch<Profi
 
 //Follow / Unfollow flow
 type ApiMethodType = (id: number) => Promise<number>
-const followingFlow = async (id: number, apiMethod: ApiMethodType, dispatch: Dispatch<ProfileActionType>) => {
+const _followFlow = async (id: number, apiMethod: ApiMethodType, dispatch: Dispatch<ProfileActionType>) => {
   dispatch(followDisableAC());
   const code = await apiMethod(id);
   if (code === 0) {
@@ -190,16 +191,16 @@ const followingFlow = async (id: number, apiMethod: ApiMethodType, dispatch: Dis
 
 //Follow User Thunk
 export const followUserThunk = (id: number) => (dispatch: Dispatch<ProfileActionType>) => {
-  followingFlow(id, followApi.followUser, dispatch);
+  _followFlow(id, followApi.followUser, dispatch);
 };
 
 //Unfollow User Thunk
 export const unfollowUserThunk = (id: number) => (dispatch: Dispatch<ProfileActionType>) => {
-  followingFlow(id, followApi.unfollowUser, dispatch);
+  _followFlow(id, followApi.unfollowUser, dispatch);
 };
 
 //Set Profile Thunk
-export const editProfileThunk = (profile: UserProfileType) => () => {
+export const editProfileThunk = (profile: UserProfileType): ThunkType => () => {
   return profileApi.editProfile(profile);
 };
 
@@ -388,7 +389,6 @@ let profileReducer = (
         },
       };
     case SET_PROFILE_INFO:
-      console.log(action.profile);
       return {
         ...state,
         profile: {

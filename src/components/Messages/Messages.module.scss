@@ -12,9 +12,22 @@
 }
 
 .messages {
+
     flex-grow: 1;
     flex-shrink: 1;
     padding: 5px;
+}
+
+.messagesBox {
+    height: 500px;
+    padding: 10px;
+    overflow-y: auto;
+    margin-bottom: 40px;
+}
+
+.messageAvatar {
+    height: 75px;
+    width: 75px;
 }
 
 .friend {
@@ -63,8 +76,14 @@
     word-break: break-all;
 }
 
+.messageBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
 .messageDate {
-    margin-left: 20px;
     white-space: nowrap;
 }
 

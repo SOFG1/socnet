@@ -1,7 +1,7 @@
 import profileReducer from "./profileReducer";
 import { likePostAC } from "./profileReducer";
 
-test("4'th post's likes should be incremented", () => {
+test("Profile reducer - likes increment", () => {
   //Initial data
   let initialState = {
     profile: null,

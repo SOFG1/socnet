@@ -1,4 +1,4 @@
-import { authApi, securityApi } from "../api/api";
+import { authApi, securityApi } from "../api/api.ts";
 import { change, untouch } from "redux-form";
 import { setFriendsAC } from "./usersReducer.ts";
 import { setProfileAC } from "./profileReducer.ts";

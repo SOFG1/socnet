@@ -61,14 +61,12 @@ const ProfileForm = ({ profile, editable, editProfile, setProfileInfo }) => {
     setFetching(false);
     if (data.resultCode === 0) {
       setErrors([]);
-    setEditMode(false);
+      setEditMode(false);
       setProfileInfo(profile);
     }
     if(data.resultCode !== 0) {
       setErrors(data.messages);
     }
-    console.log(profile);
-    console.log(data);
   };
 
   return (

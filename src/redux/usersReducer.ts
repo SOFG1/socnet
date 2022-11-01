@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { usersApi, followApi } from "../api/api";
+import { usersApi, followApi } from "../api/api.ts";
 import { UserType } from "../types/types";
 
 const SET_FRIENDS = "users/SET FRIENDS"; 
@@ -80,13 +80,21 @@ export let setUsersThunk = (page: number, count: number) => async (dispatch: Dis
   dispatch(toggleUsersFetchingAC(false));
 };
 
+
+
+
+
 // Follow Thunk
 export let followThunk = (id: number) => async (dispatch: Dispatch<ActionType>) => {
   dispatch(followConditionAC(id));
   dispatch(followUserAC(id));
   const code = await followApi.followUser(id);
   if (code === 0) dispatch(followConditionAC(id));
-};
+}
+
+
+
+
 
 // Unfollow Thunk
 export let unfollowThunk = (id: number) => async (dispatch: Dispatch<ActionType>) => {
@@ -133,7 +141,7 @@ FollowUserActionType
 | SetFriendsActionType
 
 //Reducer
-let usersReducer = (state:InitialStateType = initialState, action: ActionType): InitialStateType => {
+let usersReducer = (state:InitialStateType = initialState, action: ActionType) => {
   switch (action.type) {
     case SET_FRIENDS:
       return {
