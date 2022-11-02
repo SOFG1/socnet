@@ -3,7 +3,7 @@ import { followApi } from "../api/api.ts";
 jest.mock('../api/api.ts')
 
 
-followApi.followUser = () => Promise.resolve(0)
+followApi.followUser = () => Promise.resolve(1)
 
 test("follow thunk test", async  () => {
     //state
@@ -15,5 +15,5 @@ test("follow thunk test", async  () => {
 
 
     //result
-    expect(dispatchMock).toBeCalledTimes(3)
+    expect(dispatchMock).toBeCalledTimes(2)
 })
